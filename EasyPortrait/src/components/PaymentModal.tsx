@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Lock, Check, CreditCard } from 'lucide-react';
+import { X, Lock, Check } from 'lucide-react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 interface PaymentModalProps {
@@ -91,106 +91,76 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
           {/* PayPal Buttons */}
           <div className="space-y-3">
-            <PayPalScriptProvider
-              options={{
-                clientId: PAYPAL_CLIENT_ID,
-                currency: 'EUR',
-                intent: 'capture',
-              }}
-            >
-              <PayPalButtons
-                style={{
-                  layout: 'vertical',
-                  color: 'gold',
-                  shape: 'rect',
-                  label: 'paypal',
+            {PAYPAL_CLIENT_ID === 'test' ? (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                <p className="text-sm text-red-800 font-semibold mb-2">PayPal Not Configured</p>
+                <p className="text-xs text-red-700">
+                  Please set REACT_APP_PAYPAL_CLIENT_ID environment variable to enable payments.
+                </p>
+              </div>
+            ) : (
+              <PayPalScriptProvider
+                options={{
+                  clientId: PAYPAL_CLIENT_ID,
+                  currency: 'EUR',
+                  intent: 'capture',
                 }}
-                createOrder={(data, actions) => {
-                  return actions.order.create({
-                    intent: 'CAPTURE',
-                    purchase_units: [
-                      {
-                        description: itemDescription,
-                        amount: {
-                          currency_code: 'EUR',
-                          value: amount.toFixed(2),
-                        },
-                      },
-                    ],
-                  });
-                }}
-                onApprove={async (data, actions) => {
-                  setIsProcessing(true);
-                  try {
-                    if (!actions.order) {
-                      throw new Error('Order actions not available');
-                    }
-                    const details = await actions.order.capture();
-                    console.log('Payment successful:', details);
-                    
-                    // Mark payment as successful in session storage
-                    sessionStorage.setItem('easyportrait_payment_status', 'paid');
-                    sessionStorage.setItem('easyportrait_payment_timestamp', Date.now().toString());
-                    sessionStorage.setItem('easyportrait_payment_id', details.id || '');
-                    
-                    onPaymentSuccess();
-                  } catch (err) {
-                    console.error('Payment capture error:', err);
-                    setError('Payment processing failed. Please try again.');
-                    setIsProcessing(false);
-                  }
-                }}
-                onError={(err) => {
-                  console.error('PayPal error:', err);
-                  setError('Payment failed. Please try again.');
-                  setIsProcessing(false);
-                }}
-                onCancel={() => {
-                  setError('Payment was cancelled.');
-                  setIsProcessing(false);
-                }}
-              />
-            </PayPalScriptProvider>
-          </div>
-
-          {/* Alternative: Test Mode Button (for development) */}
-          {PAYPAL_CLIENT_ID === 'test' && (
-            <div className="border-t pt-4">
-              <p className="text-xs text-gray-500 mb-3 text-center">
-                Test Mode: PayPal not configured. Click below to simulate payment.
-              </p>
-              <button
-                onClick={async () => {
-                  setIsProcessing(true);
-                  setError('');
-                  try {
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    sessionStorage.setItem('easyportrait_payment_status', 'paid');
-                    sessionStorage.setItem('easyportrait_payment_timestamp', Date.now().toString());
-                    onPaymentSuccess();
-                  } catch (err) {
-                    setError('Payment failed. Please try again.');
-                  } finally {
-                    setIsProcessing(false);
-                  }
-                }}
-                disabled={isProcessing}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isProcessing ? (
-                  <>
-                    <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
-                    <span>Processing...</span>
-                  </>
-                ) : (
-                  <>
-                    <CreditCard className="h-5 w-5" />
-                    <span>Simulate Payment (Test Mode)</span>
-                  </>
-                )}
-              </button>
-            </div>
-          )}
+                <PayPalButtons
+                  style={{
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal',
+                  }}
+                  createOrder={(data, actions) => {
+                    return actions.order.create({
+                      intent: 'CAPTURE',
+                      purchase_units: [
+                        {
+                          description: itemDescription,
+                          amount: {
+                            currency_code: 'EUR',
+                            value: amount.toFixed(2),
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                  onApprove={async (data, actions) => {
+                    setIsProcessing(true);
+                    try {
+                      if (!actions.order) {
+                        throw new Error('Order actions not available');
+                      }
+                      const details = await actions.order.capture();
+                      console.log('Payment successful:', details);
+                      
+                      // Mark payment as successful in session storage
+                      sessionStorage.setItem('easyportrait_payment_status', 'paid');
+                      sessionStorage.setItem('easyportrait_payment_timestamp', Date.now().toString());
+                      sessionStorage.setItem('easyportrait_payment_id', details.id || '');
+                      
+                      onPaymentSuccess();
+                    } catch (err) {
+                      console.error('Payment capture error:', err);
+                      setError('Payment processing failed. Please try again.');
+                      setIsProcessing(false);
+                    }
+                  }}
+                  onError={(err) => {
+                    console.error('PayPal error:', err);
+                    setError('Payment failed. Please try again.');
+                    setIsProcessing(false);
+                  }}
+                  onCancel={() => {
+                    setError('Payment was cancelled.');
+                    setIsProcessing(false);
+                  }}
+                />
+              </PayPalScriptProvider>
+            )}
+          </div>
 
           {/* Cancel */}
           <button
