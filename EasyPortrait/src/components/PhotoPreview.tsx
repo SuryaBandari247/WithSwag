@@ -179,7 +179,7 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
           className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-primary hover:bg-blue-600 text-white rounded-lg font-medium disabled:opacity-50"
         >
           <Download className="h-4 w-4" />
-          Download PNG
+          <span>Download PNG</span>
         </button>
         <button
           onClick={() => handleDownload('jpg')}
@@ -187,8 +187,16 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
           className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-secondary hover:bg-purple-600 text-white rounded-lg font-medium disabled:opacity-50"
         >
           <Download className="h-4 w-4" />
-          Download JPG
+          <span>Download JPG</span>
         </button>
+      </div>
+      
+      {/* Payment Info */}
+      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-3 text-center">
+        <p className="text-sm text-gray-700">
+          <span className="font-semibold text-indigo-700">€5.00</span> for high-quality download
+        </p>
+        <p className="text-xs text-gray-600 mt-1">One-time payment • Valid for 24 hours</p>
       </div>
     </div>
   );

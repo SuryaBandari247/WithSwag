@@ -8,10 +8,12 @@ import { ImageCropper } from '../components/ImageCropper';
 import { PhotoPreview } from '../components/PhotoPreview';
 import { PassportSizeSelect } from '../components/PassportSizeSelect';
 import { EditorControls } from '../components/EditorControls';
+import { PaymentModal } from '../components/PaymentModal';
 import { validateImageFile, fileToDataUrl } from '../utils/imageProcessing';
 import { getTransparentImage, compositeWithBackground, clearBgRemovalCache } from '../utils/backgroundRemoval';
+import { checkPaymentStatus, getPaymentAmount, getPaymentDescription } from '../utils/payment';
 import { saveAs } from 'file-saver';
-import { ChevronLeft, AlertCircle } from 'lucide-react';
+import { ChevronLeft, AlertCircle, Download } from 'lucide-react';
 
 type EditorStep = 'upload' | 'crop' | 'background' | 'layout' | 'preview';
 
@@ -34,6 +36,8 @@ export const EditorPage: React.FC = () => {
   const [bgRemovalProgress, setBgRemovalProgress] = useState(0);
   const [transparentBlobUrl, setTransparentBlobUrl] = useState<string>('');
   const [processedImageUrl, setProcessedImageUrl] = useState<string>('');
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [pendingDownload, setPendingDownload] = useState<{ canvas: HTMLCanvasElement; format: 'png' | 'jpg' } | null>(null);
 
   const BG_COLORS = [
     { id: 'none', label: 'Original', color: 'transparent', preview: 'bg-gray-200 bg-[url("data:image/svg+xml,%3Csvg width=\'10\' height=\'10\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect width=\'5\' height=\'5\' fill=\'%23ccc\'/%3E%3Crect x=\'5\' y=\'5\' width=\'5\' height=\'5\' fill=\'%23ccc\'/%3E%3C/svg%3E")]' },
@@ -114,6 +118,19 @@ export const EditorPage: React.FC = () => {
   };
 
   const handleDownload = (canvas: HTMLCanvasElement, format: 'png' | 'jpg') => {
+    // Check if payment has been made
+    if (!checkPaymentStatus()) {
+      // Store pending download and show payment modal
+      setPendingDownload({ canvas, format });
+      setShowPaymentModal(true);
+      return;
+    }
+    
+    // Payment verified, proceed with download
+    executeDownload(canvas, format);
+  };
+
+  const executeDownload = (canvas: HTMLCanvasElement, format: 'png' | 'jpg') => {
     const filename = `passport-${passportSize.id}-${Date.now()}.${format}`;
     const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
     const quality = format === 'jpg' ? 0.95 : undefined;
@@ -311,14 +328,42 @@ export const EditorPage: React.FC = () => {
 
   const handleCollageDownload = (format: 'png' | 'jpg') => {
     if (!collageCanvas) return;
+    
+    // Check if payment has been made
+    if (!checkPaymentStatus()) {
+      // Store pending download and show payment modal
+      setPendingDownload({ canvas: collageCanvas, format });
+      setShowPaymentModal(true);
+      return;
+    }
+    
+    // Payment verified, proceed with download
+    executeCollageDownload(collageCanvas, format);
+  };
+
+  const executeCollageDownload = (canvas: HTMLCanvasElement, format: 'png' | 'jpg') => {
     const filename = `collage-${passportSize.id}-${numPhotos}x-${Date.now()}.${format}`;
     const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
     const quality = format === 'jpg' ? 0.95 : undefined;
-    collageCanvas.toBlob(
+    canvas.toBlob(
       (blob) => { if (blob) saveAs(blob, filename); },
       mimeType,
       quality
     );
+  };
+
+  const handlePaymentSuccess = () => {
+    setShowPaymentModal(false);
+    
+    // Execute the pending download
+    if (pendingDownload) {
+      if (isCollage) {
+        executeCollageDownload(pendingDownload.canvas, pendingDownload.format);
+      } else {
+        executeDownload(pendingDownload.canvas, pendingDownload.format);
+      }
+      setPendingDownload(null);
+    }
   };
 
   // Progress bar steps
@@ -834,11 +879,22 @@ export const EditorPage: React.FC = () => {
                       className="w-full border border-gray-300 rounded"
                     />
                   </div>
+                  
+                  {/* Payment Info */}
+                  <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-4 text-center">
+                    <p className="text-sm text-gray-700">
+                      <span className="font-semibold text-indigo-700">€8.00</span> for high-quality collage download
+                    </p>
+                    <p className="text-xs text-gray-600 mt-1">{numPhotos} photos • One-time payment • Valid for 24 hours</p>
+                  </div>
+                  
                   <div className="grid grid-cols-2 gap-4">
-                    <button onClick={() => handleCollageDownload('png')} className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 font-medium transition">
+                    <button onClick={() => handleCollageDownload('png')} className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 font-medium transition">
+                      <Download className="h-4 w-4" />
                       Download PNG
                     </button>
-                    <button onClick={() => handleCollageDownload('jpg')} className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 font-medium transition">
+                    <button onClick={() => handleCollageDownload('jpg')} className="flex items-center justify-center gap-2 px-4 py-3 bg-secondary text-white rounded-lg hover:bg-secondary/90 font-medium transition">
+                      <Download className="h-4 w-4" />
                       Download JPG
                     </button>
                   </div>
@@ -867,6 +923,18 @@ export const EditorPage: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Payment Modal */}
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => {
+          setShowPaymentModal(false);
+          setPendingDownload(null);
+        }}
+        onPaymentSuccess={handlePaymentSuccess}
+        amount={getPaymentAmount(isCollage, numPhotos)}
+        itemDescription={getPaymentDescription(isCollage, numPhotos, passportSize.name)}
+      />
     </div>
   );
 };
