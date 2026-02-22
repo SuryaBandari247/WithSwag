@@ -23,13 +23,16 @@
       "dest": "/srt-editor/$1"
     },
     {
-      "src": "/(.*\\.(png|jpg|jpeg|gif|svg|css|js|ico|xml|txt|html))",
+      "src": "/srt-editor",
+      "dest": "/srt-editor/index.html"
+    },
+    {
+      "src": "/(logo\\.png|ads\\.txt|robots\\.txt|sitemap\\.xml|google.*\\.html|privacy\\.html)",
       "dest": "/$1"
     },
     {
       "src": "/",
       "dest": "/index.html"
     }
-  ],
-  "outputDirectory": "EasyPortrait/dist"
+  ]
 }
