@@ -366,28 +366,9 @@ export const LandingPage: React.FC = () => {
       {/* Features Section */}
       <section id="features" className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 text-center md:text-left">
-              Powerful Features
-            </h2>
-            {/* Collage Preview */}
-            <div className="flex items-center gap-4 bg-gray-50 rounded-xl px-5 py-3 border border-gray-200">
-              <div className="grid grid-cols-2 gap-1.5">
-                {[samplePhoto1, samplePhoto2, samplePhoto3, samplePhoto4].map((photo, i) => (
-                  <div key={i} className="w-14 h-[72px] rounded-md overflow-hidden border border-gray-200 shadow-sm">
-                    <img src={photo} alt={`Passport photo ${i + 1}`} className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-semibold text-gray-900">Print-ready Collage</span>
-                <span className="text-xs text-gray-500">A4 / 4×6" / 5×7" sheets</span>
-                <Link to="/editor/collage" className="inline-flex items-center gap-1 text-xs font-semibold text-secondary hover:text-purple-700 mt-1">
-                  Try it <ArrowRight className="h-3 w-3" />
-                </Link>
-              </div>
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            Powerful Features
+          </h2>
 
           <div className="grid md:grid-cols-4 gap-6">
             {[
@@ -430,6 +411,65 @@ export const LandingPage: React.FC = () => {
                 <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
+          </div>
+
+          {/* Print-Ready Collage Showcase - Big and Prominent */}
+          <div className="mt-16 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-purple-200">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              {/* Collage Visual */}
+              <div className="flex justify-center">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary rounded-2xl opacity-20 blur-2xl" />
+                  <div className="relative bg-white rounded-2xl p-6 shadow-2xl">
+                    <div className="grid grid-cols-2 gap-3">
+                      {[samplePhoto1, samplePhoto2, samplePhoto3, samplePhoto4].map((photo, i) => (
+                        <div key={i} className="w-32 h-40 rounded-lg overflow-hidden border-2 border-gray-200 shadow-md hover:scale-105 transition-transform">
+                          <img src={photo} alt={`Passport photo ${i + 1}`} className="w-full h-full object-cover" />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4 text-center">
+                      <span className="inline-block px-4 py-2 bg-secondary text-white text-sm font-bold rounded-full">
+                        4 Photos on A4 Sheet
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div>
+                <div className="inline-block px-3 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded-full mb-4">
+                  BEST VALUE
+                </div>
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">Print-Ready Collage</h3>
+                <p className="text-lg text-gray-700 mb-6">
+                  Create professional collage sheets with multiple passport photos. Perfect for printing at home or at a photo shop.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    'Multiple photos on one sheet',
+                    'A4, 4×6", or 5×7" paper sizes',
+                    'Customizable photo count',
+                    'Save money vs individual prints',
+                    'High-resolution 300 DPI output'
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-gray-700">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link 
+                  to="/editor/collage" 
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-secondary hover:bg-purple-700 text-white rounded-lg font-semibold text-lg transition shadow-lg hover:shadow-xl"
+                >
+                  <Grid3x3 className="h-5 w-5" />
+                  Create Collage Now
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </div>
+            </div>
           </div>
 
           <div className="mt-12 grid md:grid-cols-2 gap-8">
