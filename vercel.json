@@ -5,7 +5,7 @@
       "src": "EasyPortrait/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "EasyPortrait/dist"
+        "distDir": "dist"
       }
     }
   ],
@@ -30,5 +30,6 @@
       "src": "/",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "outputDirectory": "EasyPortrait/dist"
 }
