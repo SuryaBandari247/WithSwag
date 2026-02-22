@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "EasyPortrait/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "EasyPortrait/dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/portrait/(.*)",
+      "dest": "/EasyPortrait/dist/$1"
+    },
+    {
+      "src": "/portrait",
+      "dest": "/EasyPortrait/dist/index.html"
+    },
+    {
+      "src": "/srt-editor/(.*)",
+      "dest": "/srt-editor/$1"
+    },
+    {
+      "src": "/(.*\\.(png|jpg|jpeg|gif|svg|css|js|ico|xml|txt|html))",
+      "dest": "/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
+  ]
+}
