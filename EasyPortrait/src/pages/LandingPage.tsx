@@ -72,29 +72,33 @@ export const LandingPage: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Auto-animate before/after adjustment slider (3s ping-pong cycle)
+  // Sync adjustment pill cycling with before/after slider animation
   useEffect(() => {
+    const CYCLE_MS = 2000; // 2s per adjustment
     let frame: number;
-    let start: number | null = null;
-    const duration = 3000;
+    let cycleStart = performance.now();
+    let currentIndex = 0;
+
     const animate = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const elapsed = (timestamp - start) % duration;
-      const progress = elapsed / duration;
-      const pos = progress < 0.5 ? progress * 2 * 100 : (1 - (progress - 0.5) * 2) * 100;
-      setAdjustSliderPos(pos);
+      const elapsed = timestamp - cycleStart;
+      
+      if (elapsed >= CYCLE_MS) {
+        // Move to next pill
+        currentIndex = (currentIndex + 1) % ADJUST_DEMO_ITEMS.length;
+        setActiveAdjustIndex(currentIndex);
+        cycleStart = timestamp;
+        setAdjustSliderPos(0);
+      } else {
+        // Animate slider from 0 to 100 within the cycle
+        const progress = elapsed / CYCLE_MS;
+        setAdjustSliderPos(progress * 100);
+      }
+      
       frame = requestAnimationFrame(animate);
     };
+    
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, []);
-
-  // Auto-cycle adjustment pill buttons (2s interval)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveAdjustIndex((prev) => (prev + 1) % ADJUST_DEMO_ITEMS.length);
-    }, 2000);
-    return () => clearInterval(interval);
   }, []);
 
   // Process background removal on mount — with localStorage cache
@@ -409,7 +413,7 @@ export const LandingPage: React.FC = () => {
                     <img src={samplePhoto4} alt="Before adjustments" className="absolute inset-0 w-full h-full object-cover" />
                     {/* Adjusted image (clipped) */}
                     <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - adjustSliderPos}% 0 0)` }}>
-                      <img src={samplePhoto4} alt="After adjustments" className="w-full h-full object-cover" style={{ filter: 'brightness(1.15) contrast(1.1) saturate(1.2)' }} />
+                      <img src={samplePhoto4} alt="After adjustments" className="w-full h-full object-cover" style={{ filter: activeAdjustIndex === 0 ? 'brightness(1.3)' : activeAdjustIndex === 1 ? 'contrast(1.4)' : 'saturate(1.5)' }} />
                     </div>
                     {/* Slider line */}
                     <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-md transition-all duration-100" style={{ left: `${adjustSliderPos}%` }} />
@@ -508,11 +512,7 @@ export const LandingPage: React.FC = () => {
                         </div>
                       ))}
                     </div>
-                    <div className="mt-4 text-center">
-                      <span className="inline-block px-4 py-2 bg-secondary text-white text-sm font-bold rounded-full">
-                        4 Photos on A4 Sheet
-                      </span>
-                    </div>
+
                   </div>
                 </div>
               </div>
