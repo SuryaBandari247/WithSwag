@@ -8,6 +8,8 @@ interface AdjustmentPanelProps {
   imageSrc: string;
   cropArea: { x: number; y: number; width: number; height: number };
   processedImageUrl: string;
+  transparentBlobUrl?: string;
+  bgColor?: string;
   adjustmentValues: AdjustmentValues;
   onAdjustmentChange: (values: AdjustmentValues) => void;
 }
@@ -16,6 +18,8 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
   imageSrc,
   cropArea,
   processedImageUrl,
+  transparentBlobUrl,
+  bgColor,
   adjustmentValues,
   onAdjustmentChange,
 }) => {
@@ -35,14 +39,15 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
     img.onerror = () => {
       setError('Failed to load image');
     };
-    img.src = processedImageUrl || imageSrc;
+    // Prefer transparent image for foreground-only adjustments
+    img.src = transparentBlobUrl || processedImageUrl || imageSrc;
 
     return () => {
       img.onload = null;
       img.onerror = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [processedImageUrl, imageSrc]);
+  }, [transparentBlobUrl, processedImageUrl, imageSrc]);
 
   const drawPreview = useCallback(
     (values: AdjustmentValues) => {
@@ -59,7 +64,7 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
 
         // Determine source dimensions
         let sx = 0, sy = 0, sw = img.naturalWidth, sh = img.naturalHeight;
-        if (!processedImageUrl && cropArea) {
+        if (!processedImageUrl && !transparentBlobUrl && cropArea) {
           sx = cropArea.x;
           sy = cropArea.y;
           sw = cropArea.width;
@@ -81,24 +86,56 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
         canvas.width = cw;
         canvas.height = ch;
 
-        // Draw source image onto canvas
-        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+        if (transparentBlobUrl && bgColor && bgColor !== 'none') {
+          // Background was replaced — apply adjustments only to foreground pixels
+          ctx.clearRect(0, 0, cw, ch);
+          ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+          const imageData = ctx.getImageData(0, 0, cw, ch);
 
-        // Extract pixel data and apply adjustments
-        const imageData = ctx.getImageData(0, 0, cw, ch);
-        const adjusted = applyAdjustments(imageData, values);
-        ctx.putImageData(adjusted, 0, 0);
+          // Save original alpha values before adjustment
+          const origAlpha = new Uint8ClampedArray(cw * ch);
+          for (let i = 0; i < origAlpha.length; i++) {
+            origAlpha[i] = imageData.data[i * 4 + 3];
+          }
+
+          // Apply adjustments (engine works on all pixels)
+          const adjusted = applyAdjustments(imageData, values);
+
+          // Restore original alpha so transparency is preserved
+          for (let i = 0; i < origAlpha.length; i++) {
+            adjusted.data[i * 4 + 3] = origAlpha[i];
+          }
+
+          // Composite: background color first, then adjusted foreground on top
+          const tempCanvas = document.createElement('canvas');
+          tempCanvas.width = cw;
+          tempCanvas.height = ch;
+          const tempCtx = tempCanvas.getContext('2d');
+          if (tempCtx) {
+            tempCtx.putImageData(adjusted, 0, 0);
+
+            ctx.clearRect(0, 0, cw, ch);
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, cw, ch);
+            ctx.drawImage(tempCanvas, 0, 0);
+          }
+        } else {
+          // No background replacement — apply adjustments to entire image
+          ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+          const imageData = ctx.getImageData(0, 0, cw, ch);
+          const adjusted = applyAdjustments(imageData, values);
+          ctx.putImageData(adjusted, 0, 0);
+        }
 
         setError(null);
       } catch (err) {
         console.error('AdjustmentPanel: preview error', err);
         setError('Adjustments could not be applied');
-        // Show unadjusted image as fallback
         const canvas2 = canvasRef.current;
         const ctx2 = canvas2?.getContext('2d');
         if (ctx2 && img) {
           let sx2 = 0, sy2 = 0, sw2 = img.naturalWidth, sh2 = img.naturalHeight;
-          if (!processedImageUrl && cropArea) {
+          if (!processedImageUrl && !transparentBlobUrl && cropArea) {
             sx2 = cropArea.x;
             sy2 = cropArea.y;
             sw2 = cropArea.width;
@@ -108,7 +145,7 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
         }
       }
     },
-    [processedImageUrl, cropArea]
+    [processedImageUrl, transparentBlobUrl, bgColor, cropArea]
   );
 
   // Debounced redraw when adjustment values change

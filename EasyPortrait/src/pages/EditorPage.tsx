@@ -14,7 +14,7 @@ import AppSwitcher from '../components/AppSwitcher';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { validateImageFile, fileToDataUrl } from '../utils/imageProcessing';
 import { getTransparentImage, compositeWithBackground, clearBgRemovalCache } from '../utils/backgroundRemoval';
-import { applyAdjustmentsToCanvas } from '../utils/adjustmentEngine';
+import { applyAdjustments, applyAdjustmentsToCanvas } from '../utils/adjustmentEngine';
 import { checkPaymentStatus, getPaymentAmount, getPaymentDescription } from '../utils/payment';
 import { saveAs } from 'file-saver';
 import { ChevronLeft, AlertCircle, Download } from 'lucide-react';
@@ -322,17 +322,62 @@ export const EditorPage: React.FC = () => {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, paperW, paperH);
 
-    const imgEl = new Image();
-    imgEl.onload = () => {
-      // Create a single adjusted tile source at full tile resolution, then reuse it for all positions
-      let tileSource: HTMLCanvasElement | HTMLImageElement = imgEl;
+    const hasAdjustments =
+      adjustmentValues.brightness !== 0 ||
+      adjustmentValues.contrast !== 0 ||
+      adjustmentValues.saturation !== 0 ||
+      adjustmentValues.exposure !== 0 ||
+      adjustmentValues.warmth !== 0 ||
+      adjustmentValues.sharpness !== 0 ||
+      adjustmentValues.faceLighting !== 0;
 
+    const selectedBgColor = bgColor !== 'none' ? BG_COLORS.find(b => b.id === bgColor)?.color : undefined;
+    const useTransparent = transparentBlobUrl && selectedBgColor && selectedBgColor !== 'transparent';
+
+    const buildTile = (imgEl: HTMLImageElement, transparentImgEl?: HTMLImageElement) => {
       // Build a full-resolution tile canvas from the source image
       const tileCanvas = document.createElement('canvas');
       tileCanvas.width = photoW;
       tileCanvas.height = photoH;
       const tileCtx = tileCanvas.getContext('2d');
-      if (tileCtx) {
+      if (!tileCtx) return imgEl as HTMLCanvasElement | HTMLImageElement;
+
+      let tileSource: HTMLCanvasElement | HTMLImageElement;
+
+      if (useTransparent && transparentImgEl && hasAdjustments) {
+        // Foreground-only adjustments: draw transparent image, adjust, composite onto bg
+        tileCtx.clearRect(0, 0, photoW, photoH);
+        tileCtx.drawImage(transparentImgEl, 0, 0, transparentImgEl.naturalWidth, transparentImgEl.naturalHeight, 0, 0, photoW, photoH);
+        const imageData = tileCtx.getImageData(0, 0, photoW, photoH);
+
+        // Save original alpha
+        const origAlpha = new Uint8ClampedArray(photoW * photoH);
+        for (let i = 0; i < origAlpha.length; i++) {
+          origAlpha[i] = imageData.data[i * 4 + 3];
+        }
+
+        const adjusted = applyAdjustments(imageData, adjustmentValues);
+
+        // Restore alpha
+        for (let i = 0; i < origAlpha.length; i++) {
+          adjusted.data[i * 4 + 3] = origAlpha[i];
+        }
+
+        // Composite: bg color + adjusted foreground
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = photoW;
+        tempCanvas.height = photoH;
+        const tempCtx = tempCanvas.getContext('2d');
+        if (tempCtx) {
+          tempCtx.putImageData(adjusted, 0, 0);
+          tileCtx.clearRect(0, 0, photoW, photoH);
+          tileCtx.fillStyle = selectedBgColor!;
+          tileCtx.fillRect(0, 0, photoW, photoH);
+          tileCtx.drawImage(tempCanvas, 0, 0);
+        }
+        tileSource = tileCanvas;
+      } else {
+        // No foreground separation needed — apply adjustments to entire composited image
         if (processedImageUrl) {
           tileCtx.drawImage(imgEl, 0, 0, imgEl.naturalWidth, imgEl.naturalHeight, 0, 0, photoW, photoH);
         } else {
@@ -343,16 +388,6 @@ export const EditorPage: React.FC = () => {
           );
         }
 
-        // Apply adjustments if any are non-default
-        const hasAdjustments =
-          adjustmentValues.brightness !== 0 ||
-          adjustmentValues.contrast !== 0 ||
-          adjustmentValues.saturation !== 0 ||
-          adjustmentValues.exposure !== 0 ||
-          adjustmentValues.warmth !== 0 ||
-          adjustmentValues.sharpness !== 0 ||
-          adjustmentValues.faceLighting !== 0;
-
         if (hasAdjustments) {
           tileSource = applyAdjustmentsToCanvas(tileCanvas, adjustmentValues);
         } else {
@@ -360,6 +395,10 @@ export const EditorPage: React.FC = () => {
         }
       }
 
+      return tileSource;
+    };
+
+    const drawTiles = (tileSource: HTMLCanvasElement | HTMLImageElement) => {
       for (let i = 0; i < numPhotos; i++) {
         const row = Math.floor(i / photosPerRow);
         const col = i % photosPerRow;
@@ -373,7 +412,32 @@ export const EditorPage: React.FC = () => {
       setCollageCanvas(canvas);
       setStep('preview');
     };
-    imgEl.src = processedImageUrl || imageSrc;
+
+    if (useTransparent) {
+      // Load both the composited image and the transparent image
+      const imgEl = new Image();
+      imgEl.onload = () => {
+        const transparentImgEl = new Image();
+        transparentImgEl.onload = () => {
+          const tileSource = buildTile(imgEl, transparentImgEl);
+          drawTiles(tileSource);
+        };
+        transparentImgEl.onerror = () => {
+          // Fallback: use composited image without foreground separation
+          const tileSource = buildTile(imgEl);
+          drawTiles(tileSource);
+        };
+        transparentImgEl.src = transparentBlobUrl!;
+      };
+      imgEl.src = processedImageUrl || imageSrc;
+    } else {
+      const imgEl = new Image();
+      imgEl.onload = () => {
+        const tileSource = buildTile(imgEl);
+        drawTiles(tileSource);
+      };
+      imgEl.src = processedImageUrl || imageSrc;
+    }
   };
 
   const handleCollageDownload = (format: 'png' | 'jpg') => {
@@ -739,6 +803,8 @@ export const EditorPage: React.FC = () => {
                   imageSrc={imageSrc}
                   cropArea={cropArea}
                   processedImageUrl={processedImageUrl || ''}
+                  transparentBlobUrl={transparentBlobUrl || undefined}
+                  bgColor={bgColor !== 'none' ? BG_COLORS.find(b => b.id === bgColor)?.color : undefined}
                   adjustmentValues={adjustmentValues}
                   onAdjustmentChange={setAdjustmentValues}
                 />
@@ -962,6 +1028,9 @@ export const EditorPage: React.FC = () => {
                     dpi={dpi}
                     imageFile={imageFile!}
                     processedSrc={processedImageUrl || undefined}
+                    transparentSrc={transparentBlobUrl || undefined}
+                    bgColor={bgColor !== 'none' ? BG_COLORS.find(b => b.id === bgColor)?.color : undefined}
+                    adjustmentValues={adjustmentValues}
                     onDownload={handleDownload}
                   />
                 </div>
