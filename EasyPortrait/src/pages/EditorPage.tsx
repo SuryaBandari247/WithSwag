@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Area } from 'react-easy-crop';
-import { PassportSize } from '../types';
-import { DEFAULT_DPI, PASSPORT_SIZES, PAPER_SIZES } from '../constants';
+import { PassportSize, AdjustmentValues } from '../types';
+import { DEFAULT_DPI, PASSPORT_SIZES, PAPER_SIZES, DEFAULT_ADJUSTMENT_VALUES } from '../constants';
 import { ImageUpload } from '../components/ImageUpload';
 import { ImageCropper } from '../components/ImageCropper';
 import { PhotoPreview } from '../components/PhotoPreview';
 import { PassportSizeSelect } from '../components/PassportSizeSelect';
 import { EditorControls } from '../components/EditorControls';
 import { PaymentModal } from '../components/PaymentModal';
+import AdjustmentPanel from '../components/AdjustmentPanel';
+import AppSwitcher from '../components/AppSwitcher';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { validateImageFile, fileToDataUrl } from '../utils/imageProcessing';
 import { getTransparentImage, compositeWithBackground, clearBgRemovalCache } from '../utils/backgroundRemoval';
+import { applyAdjustmentsToCanvas } from '../utils/adjustmentEngine';
 import { checkPaymentStatus, getPaymentAmount, getPaymentDescription } from '../utils/payment';
 import { saveAs } from 'file-saver';
 import { ChevronLeft, AlertCircle, Download } from 'lucide-react';
 
-type EditorStep = 'upload' | 'crop' | 'background' | 'layout' | 'preview';
+type EditorStep = 'upload' | 'crop' | 'background' | 'adjust' | 'layout' | 'preview';
 
 export const EditorPage: React.FC = () => {
   const navigate = useNavigate();
@@ -38,6 +42,8 @@ export const EditorPage: React.FC = () => {
   const [processedImageUrl, setProcessedImageUrl] = useState<string>('');
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [pendingDownload, setPendingDownload] = useState<{ canvas: HTMLCanvasElement; format: 'png' | 'jpg' } | null>(null);
+  const [adjustmentValues, setAdjustmentValues] = useState<AdjustmentValues>({...DEFAULT_ADJUSTMENT_VALUES});
+  const [canvasSupported, setCanvasSupported] = useState(true);
 
   const BG_COLORS = [
     { id: 'none', label: 'Original', color: 'transparent', preview: 'bg-gray-200 bg-[url("data:image/svg+xml,%3Csvg width=\'10\' height=\'10\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect width=\'5\' height=\'5\' fill=\'%23ccc\'/%3E%3Crect x=\'5\' y=\'5\' width=\'5\' height=\'5\' fill=\'%23ccc\'/%3E%3C/svg%3E")]' },
@@ -50,6 +56,21 @@ export const EditorPage: React.FC = () => {
 
   // Collage-specific state
   const [numPhotos, setNumPhotos] = useState(4);
+
+  // Check Canvas API support for adjust step (Req 8.3)
+  useEffect(() => {
+    try {
+      const testCanvas = document.createElement('canvas');
+      testCanvas.width = 1;
+      testCanvas.height = 1;
+      const ctx = testCanvas.getContext('2d');
+      if (!ctx || typeof ctx.getImageData !== 'function' || typeof ctx.putImageData !== 'function') {
+        setCanvasSupported(false);
+      }
+    } catch {
+      setCanvasSupported(false);
+    }
+  }, []);
   const [paperSize, setPaperSize] = useState<'a4' | '4x6' | '5x7' | 'custom'>('a4');
   const [customSheetW, setCustomSheetW] = useState(150);
   const [customSheetH, setCustomSheetH] = useState(100);
@@ -148,10 +169,12 @@ export const EditorPage: React.FC = () => {
       setImageFile(null);
     } else if (step === 'background') {
       setStep('crop');
-    } else if (step === 'layout') {
+    } else if (step === 'adjust') {
       setStep('background');
+    } else if (step === 'layout') {
+      setStep(canvasSupported ? 'adjust' : 'background');
     } else if (step === 'preview') {
-      setStep(isCollage ? 'layout' : 'background');
+      setStep(isCollage ? 'layout' : (canvasSupported ? 'adjust' : 'background'));
     }
   };
 
@@ -301,21 +324,48 @@ export const EditorPage: React.FC = () => {
 
     const imgEl = new Image();
     imgEl.onload = () => {
+      // Create a single adjusted tile source at full tile resolution, then reuse it for all positions
+      let tileSource: HTMLCanvasElement | HTMLImageElement = imgEl;
+
+      // Build a full-resolution tile canvas from the source image
+      const tileCanvas = document.createElement('canvas');
+      tileCanvas.width = photoW;
+      tileCanvas.height = photoH;
+      const tileCtx = tileCanvas.getContext('2d');
+      if (tileCtx) {
+        if (processedImageUrl) {
+          tileCtx.drawImage(imgEl, 0, 0, imgEl.naturalWidth, imgEl.naturalHeight, 0, 0, photoW, photoH);
+        } else {
+          tileCtx.drawImage(
+            imgEl,
+            cropArea.x, cropArea.y, cropArea.width, cropArea.height,
+            0, 0, photoW, photoH
+          );
+        }
+
+        // Apply adjustments if any are non-default
+        const hasAdjustments =
+          adjustmentValues.brightness !== 0 ||
+          adjustmentValues.contrast !== 0 ||
+          adjustmentValues.saturation !== 0 ||
+          adjustmentValues.exposure !== 0 ||
+          adjustmentValues.warmth !== 0 ||
+          adjustmentValues.sharpness !== 0 ||
+          adjustmentValues.faceLighting !== 0;
+
+        if (hasAdjustments) {
+          tileSource = applyAdjustmentsToCanvas(tileCanvas, adjustmentValues);
+        } else {
+          tileSource = tileCanvas;
+        }
+      }
+
       for (let i = 0; i < numPhotos; i++) {
         const row = Math.floor(i / photosPerRow);
         const col = i % photosPerRow;
         const x = col * photoW;
         const y = row * photoH;
-        if (processedImageUrl) {
-          // Draw processed image (already cropped + bg replaced)
-          ctx.drawImage(imgEl, 0, 0, imgEl.naturalWidth, imgEl.naturalHeight, x, y, photoW, photoH);
-        } else {
-          ctx.drawImage(
-            imgEl,
-            cropArea.x, cropArea.y, cropArea.width, cropArea.height,
-            x, y, photoW, photoH
-          );
-        }
+        ctx.drawImage(tileSource, 0, 0, photoW, photoH, x, y, photoW, photoH);
         ctx.strokeStyle = '#ccc';
         ctx.lineWidth = 1;
         ctx.strokeRect(x, y, photoW, photoH);
@@ -368,15 +418,25 @@ export const EditorPage: React.FC = () => {
 
   // Progress bar steps
   const stepLabels = isCollage
-    ? ['Upload', 'Crop', 'Background', 'Layout', 'Download']
-    : ['Upload', 'Crop', 'Background', 'Download'];
-  const stepMap = isCollage
-    ? { upload: 0, crop: 1, background: 2, layout: 3, preview: 4 }
-    : { upload: 0, crop: 1, background: 2, layout: -1, preview: 3 };
+    ? (canvasSupported
+      ? ['Upload', 'Crop', 'Background', 'Adjust', 'Layout', 'Download']
+      : ['Upload', 'Crop', 'Background', 'Layout', 'Download'])
+    : (canvasSupported
+      ? ['Upload', 'Crop', 'Background', 'Adjust', 'Download']
+      : ['Upload', 'Crop', 'Background', 'Download']);
+  const stepMap: Record<EditorStep, number> = isCollage
+    ? (canvasSupported
+      ? { upload: 0, crop: 1, background: 2, adjust: 3, layout: 4, preview: 5 }
+      : { upload: 0, crop: 1, background: 2, adjust: -1, layout: 3, preview: 4 })
+    : (canvasSupported
+      ? { upload: 0, crop: 1, background: 2, adjust: 3, layout: -1, preview: 4 }
+      : { upload: 0, crop: 1, background: 2, adjust: -1, layout: -1, preview: 3 });
   const currentStepIndex = stepMap[step];
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <AppSwitcher />
+
       {/* Header */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -400,6 +460,8 @@ export const EditorPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <Breadcrumbs toolName="Portrait Photo" currentStep={stepLabels[currentStepIndex]} />
 
       {/* Main Content — identical sidebar+main layout for both single & collage */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -455,6 +517,26 @@ export const EditorPage: React.FC = () => {
                     ← Back to Crop
                   </button>
                 </>
+              )}
+
+              {/* Adjust step sidebar — sliders are in the main AdjustmentPanel component */}
+              {step === 'adjust' && (
+                <div className="space-y-3">
+                  <div className="bg-white p-4 rounded-lg border border-gray-200">
+                    <h3 className="font-semibold text-gray-900 mb-3">Settings</h3>
+                    <div className="space-y-2 text-sm">
+                      <p><span className="text-gray-600">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
+                      <p><span className="text-gray-600">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
+                      <p><span className="text-gray-600">Background:</span> <span className="font-medium">{BG_COLORS.find(b => b.id === bgColor)?.label || 'Original'}</span></p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleBack}
+                    className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition text-sm"
+                  >
+                    ← Back to Background
+                  </button>
+                </div>
               )}
 
               {/* Collage layout controls — layout step (controls in main area) */}
@@ -550,7 +632,7 @@ export const EditorPage: React.FC = () => {
                   )}
                   <div className="flex flex-col gap-2">
                     <button onClick={handleBack} className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition">
-                      {isCollage ? 'Edit Layout' : 'Edit Background'}
+                      {isCollage ? 'Edit Layout' : (canvasSupported ? 'Edit Adjustments' : 'Edit Background')}
                     </button>
                     <button onClick={handleNewPhoto} className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition">
                       New Photo
@@ -636,12 +718,45 @@ export const EditorPage: React.FC = () => {
                 </div>
 
                 <button
-                  onClick={() => setStep(isCollage ? 'layout' : 'preview')}
+                  onClick={() => setStep(canvasSupported ? 'adjust' : (isCollage ? 'layout' : 'preview'))}
                   disabled={isRemovingBg}
                   className="w-full px-4 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
                 >
-                  {isCollage ? 'Next: Configure Layout' : 'Next: Preview & Download'} →
+                  {canvasSupported ? 'Next: Adjust Photo' : (isCollage ? 'Next: Configure Layout' : 'Next: Preview & Download')} →
                 </button>
+              </div>
+            )}
+
+            {/* ADJUST — photo adjustments */}
+            {step === 'adjust' && imageSrc && cropArea && (
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Adjust Photo</h2>
+                  <p className="text-gray-600">Fine-tune brightness, contrast, and more</p>
+                </div>
+
+                <AdjustmentPanel
+                  imageSrc={imageSrc}
+                  cropArea={cropArea}
+                  processedImageUrl={processedImageUrl || ''}
+                  adjustmentValues={adjustmentValues}
+                  onAdjustmentChange={setAdjustmentValues}
+                />
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleBack}
+                    className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold rounded-lg transition"
+                  >
+                    ← Back to Background
+                  </button>
+                  <button
+                    onClick={() => setStep(isCollage ? 'layout' : 'preview')}
+                    className="flex-1 px-4 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition"
+                  >
+                    {isCollage ? 'Next: Configure Layout' : 'Next: Preview & Download'} →
+                  </button>
+                </div>
               </div>
             )}
 
@@ -822,7 +937,7 @@ export const EditorPage: React.FC = () => {
                     onClick={handleBack}
                     className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold rounded-lg transition"
                   >
-                    ← Back to Background
+                    {canvasSupported ? '← Back to Adjust' : '← Back to Background'}
                   </button>
                   <button
                     onClick={handleGenerateCollage}

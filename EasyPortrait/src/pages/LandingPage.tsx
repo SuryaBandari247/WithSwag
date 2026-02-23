@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText } from 'lucide-react';
+import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Home, Sun, Contrast as ContrastIcon, Palette } from 'lucide-react';
 import { removeBackground } from '@imgly/background-removal';
+import AppSwitcher from '../components/AppSwitcher';
+import Breadcrumbs from '../components/Breadcrumbs';
 import samplePhoto1 from '../resources/Gemini_Generated_Image_29o95h29o95h29o9.jpeg';
 import samplePhoto2 from '../resources/Gemini_Generated_Image_2ff4mq2ff4mq2ff4.jpeg';
 import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.jpeg';
@@ -20,10 +22,18 @@ const SHEET_SIZES = [
   { label: '5×7"', dims: '127×178mm', w: 127, h: 178, cols: 2, rows: 4 },
 ];
 
+const ADJUST_DEMO_ITEMS = [
+  { icon: Sun, label: 'Brightness' },
+  { icon: ContrastIcon, label: 'Contrast' },
+  { icon: Palette, label: 'Saturation' },
+];
+
 export const LandingPage: React.FC = () => {
   const [activeBgIndex, setActiveBgIndex] = useState(0);
   const [activeCropIndex, setActiveCropIndex] = useState(0);
   const [activeSheetIndex, setActiveSheetIndex] = useState(0);
+  const [adjustSliderPos, setAdjustSliderPos] = useState(0);
+  const [activeAdjustIndex, setActiveAdjustIndex] = useState(0);
 
   const CROP_SIZES = [
     { name: 'US / India', dims: '2×2″', w: 1, h: 1, flag: '🇺🇸' },
@@ -59,6 +69,31 @@ export const LandingPage: React.FC = () => {
     const interval = setInterval(() => {
       setActiveSheetIndex((prev) => (prev + 1) % SHEET_SIZES.length);
     }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-animate before/after adjustment slider (3s ping-pong cycle)
+  useEffect(() => {
+    let frame: number;
+    let start: number | null = null;
+    const duration = 3000;
+    const animate = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const elapsed = (timestamp - start) % duration;
+      const progress = elapsed / duration;
+      const pos = progress < 0.5 ? progress * 2 * 100 : (1 - (progress - 0.5) * 2) * 100;
+      setAdjustSliderPos(pos);
+      frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  // Auto-cycle adjustment pill buttons (2s interval)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveAdjustIndex((prev) => (prev + 1) % ADJUST_DEMO_ITEMS.length);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
@@ -119,9 +154,11 @@ export const LandingPage: React.FC = () => {
   }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <AppSwitcher />
+
       {/* Home Button */}
       <a href="/" className="fixed top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105 text-gray-700 hover:text-indigo-600 font-medium">
-        <span className="text-xl">🏠</span>
+        <Home className="h-5 w-5" />
         <span className="hidden sm:inline">Home</span>
       </a>
       
@@ -142,6 +179,8 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </nav>
+
+      <Breadcrumbs toolName="Portrait Photo" />
 
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -359,6 +398,47 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
 
+            {/* Card 4: Photo Adjustments */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-xl opacity-15 blur-lg" />
+              <div className="relative bg-white rounded-xl shadow-lg px-6 py-5">
+                <div className="flex items-center gap-4">
+                  {/* Before/After slider visual */}
+                  <div className="relative w-28 h-28 rounded-lg overflow-hidden shadow-inner flex-shrink-0">
+                    {/* Original image (full) */}
+                    <img src={samplePhoto4} alt="Before adjustments" className="absolute inset-0 w-full h-full object-cover" />
+                    {/* Adjusted image (clipped) */}
+                    <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - adjustSliderPos}% 0 0)` }}>
+                      <img src={samplePhoto4} alt="After adjustments" className="w-full h-full object-cover" style={{ filter: 'brightness(1.15) contrast(1.1) saturate(1.2)' }} />
+                    </div>
+                    {/* Slider line */}
+                    <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-md transition-all duration-100" style={{ left: `${adjustSliderPos}%` }} />
+                  </div>
+                  {/* Adjustment name pills */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap gap-1.5">
+                      {ADJUST_DEMO_ITEMS.map((item, i) => (
+                        <button
+                          key={i}
+                          className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium transition-all ${
+                            i === activeAdjustIndex ? 'bg-amber-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                          }`}
+                        >
+                          <item.icon className="h-3 w-3" />
+                          <span>{item.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center gap-1.5 mt-3">
+                  <Sun className="h-3 w-3 text-amber-500" />
+                  <span className="text-[10px] font-semibold text-amber-500">Photo Adjustments — Fine-Tune Your Look</span>
+                  <span className="px-1.5 py-0.5 bg-amber-500 text-white text-[8px] font-bold rounded-full">NEW</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -494,13 +574,14 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">How It Works</h2>
 
-          <div className="grid md:grid-cols-5 gap-6">
+          <div className="grid md:grid-cols-6 gap-6">
             {[
               { step: '1', title: 'Upload', desc: 'Select your photo' },
               { step: '2', title: 'Crop', desc: 'Adjust the frame' },
               { step: '3', title: 'Background', desc: 'AI removes & replaces' },
-              { step: '4', title: 'Choose Size', desc: 'Pick your country' },
-              { step: '5', title: 'Download', desc: 'Get your photo' },
+              { step: '4', title: 'Adjust', desc: 'Fine-tune brightness & more' },
+              { step: '5', title: 'Choose Size', desc: 'Pick your country' },
+              { step: '6', title: 'Download', desc: 'Get your photo' },
             ].map((item, idx) => (
               <div key={idx}>
                 <div className="flex flex-col items-center text-center">
@@ -510,7 +591,7 @@ export const LandingPage: React.FC = () => {
                   <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-sm text-gray-600">{item.desc}</p>
                 </div>
-                {idx < 4 && (
+                {idx < 5 && (
                   <div className="hidden md:flex justify-center mt-6">
                     <ArrowRight className="h-6 w-6 text-gray-400 rotate-90 md:rotate-0" />
                   </div>

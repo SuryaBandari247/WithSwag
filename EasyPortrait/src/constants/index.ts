@@ -1,4 +1,5 @@
-import { PassportSize } from '../types';
+import { PassportSize, AdjustmentValues, AdjustmentSliderConfig } from '../types';
+import { Sun, Contrast, Palette, Aperture, Thermometer, Focus, Lightbulb } from 'lucide-react';
 
 export const PASSPORT_SIZES: PassportSize[] = [
   {
@@ -82,3 +83,25 @@ export const MM_TO_PX = (mm: number, dpi: number = DEFAULT_DPI) => {
 export const PX_TO_MM = (px: number, dpi: number = DEFAULT_DPI) => {
   return px * MM_TO_INCH * (72 / dpi);
 };
+
+export const DEFAULT_ADJUSTMENT_VALUES: AdjustmentValues = {
+  brightness: 0,
+  contrast: 0,
+  saturation: 0,
+  exposure: 0,
+  warmth: 0,
+  sharpness: 0,
+  faceLighting: 0,
+};
+
+export const ADJUSTMENT_SLIDERS: AdjustmentSliderConfig[] = [
+  { key: 'brightness',   label: 'Brightness',    min: -100, max: 100, step: 1, defaultValue: 0, icon: Sun },
+  { key: 'contrast',     label: 'Contrast',      min: -100, max: 100, step: 1, defaultValue: 0, icon: Contrast },
+  { key: 'saturation',   label: 'Saturation',    min: -100, max: 100, step: 1, defaultValue: 0, icon: Palette },
+  { key: 'exposure',     label: 'Exposure',      min: -100, max: 100, step: 1, defaultValue: 0, icon: Aperture },
+  { key: 'warmth',       label: 'Warmth',        min: -100, max: 100, step: 1, defaultValue: 0, icon: Thermometer },
+  { key: 'sharpness',    label: 'Sharpness',     min: 0,    max: 100, step: 1, defaultValue: 0, icon: Focus },
+  { key: 'faceLighting', label: 'Face Lighting',  min: 0,    max: 100, step: 1, defaultValue: 0, icon: Lightbulb },
+];
+
+export const ADJUSTMENT_DEBOUNCE_MS = 150;

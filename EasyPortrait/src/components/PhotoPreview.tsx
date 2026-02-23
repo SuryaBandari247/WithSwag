@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Area } from 'react-easy-crop';
-import { PassportSize } from '../types';
-import { MM_TO_PX, DEFAULT_DPI } from '../constants';
+import { PassportSize, AdjustmentValues } from '../types';
+import { MM_TO_PX, DEFAULT_DPI, DEFAULT_ADJUSTMENT_VALUES } from '../constants';
 import { cropAndResizeImage, fileToDataUrl } from '../utils/imageProcessing';
+import { applyAdjustmentsToCanvas } from '../utils/adjustmentEngine';
 import { Download, AlertTriangle } from 'lucide-react';
 import { saveAs } from 'file-saver';
 
@@ -13,7 +14,23 @@ interface PreviewProps {
   dpi: number;
   imageFile: File;
   processedSrc?: string;
+  adjustmentValues?: AdjustmentValues;
   onDownload: (canvas: HTMLCanvasElement, format: 'png' | 'jpg') => void;
+}
+
+/**
+ * Check whether adjustment values differ from defaults (i.e. user made changes).
+ */
+function hasNonDefaultAdjustments(values: AdjustmentValues): boolean {
+  return (
+    values.brightness !== 0 ||
+    values.contrast !== 0 ||
+    values.saturation !== 0 ||
+    values.exposure !== 0 ||
+    values.warmth !== 0 ||
+    values.sharpness !== 0 ||
+    values.faceLighting !== 0
+  );
 }
 
 export const PhotoPreview: React.FC<PreviewProps> = ({
@@ -23,6 +40,7 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
   dpi,
   imageFile,
   processedSrc,
+  adjustmentValues,
   onDownload,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -63,6 +81,17 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
             );
           }
 
+          // Apply photo adjustments at full resolution if provided
+          let finalCanvas: HTMLCanvasElement = canvas;
+          if (adjustmentValues && hasNonDefaultAdjustments(adjustmentValues)) {
+            try {
+              finalCanvas = applyAdjustmentsToCanvas(canvas, adjustmentValues);
+            } catch (error) {
+              console.error('PhotoPreview: Failed to apply adjustments during preview, using unadjusted image', error);
+              finalCanvas = canvas;
+            }
+          }
+
           if (canvasRef.current) {
             const previewCtx = canvasRef.current.getContext('2d');
             if (previewCtx) {
@@ -71,7 +100,7 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
               const scale = Math.min(maxDim / targetWidth, maxDim / targetHeight);
               canvasRef.current.width = targetWidth * scale;
               canvasRef.current.height = targetHeight * scale;
-              previewCtx.drawImage(canvas, 0, 0, targetWidth * scale, targetHeight * scale);
+              previewCtx.drawImage(finalCanvas, 0, 0, targetWidth * scale, targetHeight * scale);
             }
           }
 
@@ -97,7 +126,7 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
     };
 
     renderPreview();
-  }, [imageSrc, cropArea, passportSize, dpi, processedSrc]);
+  }, [imageSrc, cropArea, passportSize, dpi, processedSrc, adjustmentValues]);
 
   const handleDownload = async (format: 'png' | 'jpg') => {
     setIsProcessing(true);
@@ -130,7 +159,18 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
           );
         }
 
-        onDownload(canvas, format);
+        // Apply photo adjustments at full output resolution before download
+        let finalCanvas: HTMLCanvasElement = canvas;
+        if (adjustmentValues && hasNonDefaultAdjustments(adjustmentValues)) {
+          try {
+            finalCanvas = applyAdjustmentsToCanvas(canvas, adjustmentValues);
+          } catch (error) {
+            console.error('PhotoPreview: Failed to apply adjustments during download, using unadjusted canvas', error);
+            finalCanvas = canvas;
+          }
+        }
+
+        onDownload(finalCanvas, format);
       };
       img.src = processedSrc || imageSrc;
     } finally {
