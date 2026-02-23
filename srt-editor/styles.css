@@ -107,7 +107,6 @@ header::after {
     display: flex;
     gap: 12px;
     align-items: center;
-    margin-right: 48px;
 }
 
 .premium-btn {

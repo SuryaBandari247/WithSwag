@@ -45,9 +45,7 @@
     <!-- WithSwag Navigation Styles -->
     <style>
         .ws-app-switcher {
-            position: fixed;
-            top: 16px;
-            right: 16px;
+            position: relative;
             z-index: 1000;
         }
         .ws-app-switcher-btn {
@@ -182,21 +180,6 @@
     </script>
 </head>
 <body>
-    <!-- WithSwag Navigation -->
-    <div class="ws-app-switcher" id="appSwitcher">
-        <button class="ws-app-switcher-btn" id="appSwitcherBtn" aria-label="Open app switcher" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/>
-                <rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/>
-            </svg>
-        </button>
-        <div class="ws-app-switcher-dropdown" id="appSwitcherDropdown" hidden>
-            <div class="ws-app-switcher-header">WithSwag Tools</div>
-            <div class="ws-app-switcher-list" id="appSwitcherList"></div>
-        </div>
-    </div>
-
     <div class="container">
         <header>
             <div class="header-content">
@@ -223,6 +206,19 @@
                     <button id="upgradeBtn" class="premium-btn hidden">⭐ Upgrade to Pro</button>
                     <button id="loginBtn" class="premium-btn">Login</button>
                     <button id="logoutBtn" class="premium-btn hidden">Logout</button>
+                    <div class="ws-app-switcher" id="appSwitcher">
+                        <button class="ws-app-switcher-btn" id="appSwitcherBtn" aria-label="Open app switcher" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/>
+                                <rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/>
+                            </svg>
+                        </button>
+                        <div class="ws-app-switcher-dropdown" id="appSwitcherDropdown" hidden>
+                            <div class="ws-app-switcher-header">WithSwag Tools</div>
+                            <div class="ws-app-switcher-list" id="appSwitcherList"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
