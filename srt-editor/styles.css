@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+    background: linear-gradient(to bottom right, #eff6ff, #f5f3ff);
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -15,39 +15,27 @@ body {
 .container {
     min-height: 100vh;
     margin: 0;
-    background: white;
-    border: 8px solid transparent;
-    border-image: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%) 1;
+    background: transparent;
 }
 
 header {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-    color: white;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #111827;
     padding: 20px 30px;
-    position: relative;
-    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    border-radius: 50%;
+    display: none;
 }
 
 header::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -5%;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-    border-radius: 50%;
+    display: none;
 }
 
 .header-content {
@@ -62,13 +50,13 @@ header::after {
 .header-title h1 {
     font-size: 24px;
     font-weight: 700;
-    color: white;
+    color: #111827;
     margin-bottom: 4px;
 }
 
 .header-tagline {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.9);
+    color: #6b7280;
     margin: 0;
     font-weight: 400;
 }
@@ -86,13 +74,13 @@ header::after {
 .stat-number {
     font-size: 20px;
     font-weight: 700;
-    color: white;
+    color: #6366f1;
     display: block;
 }
 
 .stat-label {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.8);
+    color: #6b7280;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -110,33 +98,34 @@ header::after {
 }
 
 .premium-btn {
-    background: rgba(255,255,255,0.2);
-    color: white;
-    border: 2px solid white;
+    background: white;
+    color: #6366f1;
+    border: 2px solid #6366f1;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
+    transition: all 0.2s;
 }
 
 .premium-btn:hover {
-    background: white;
-    color: #667eea;
+    background: #6366f1;
+    color: white;
 }
 
 .mode-selector {
     display: flex;
-    background: white;
+    background: transparent;
     padding: 0;
     gap: 0;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .mode-btn {
     flex: 1;
     padding: 14px 24px;
-    background: white;
+    background: transparent;
     border: none;
     cursor: pointer;
     font-size: 15px;
@@ -152,10 +141,10 @@ header::after {
 }
 
 .mode-btn.active {
-    color: #667eea;
-    border-bottom-color: #667eea;
+    color: #6366f1;
+    border-bottom-color: #6366f1;
     font-weight: 600;
-    background: white;
+    background: transparent;
 }
 
 /* Main Content Layout */
@@ -164,7 +153,7 @@ header::after {
     padding: 20px 10%;
     max-width: 1000px;
     margin: 0 auto;
-    background: white;
+    background: transparent;
 }
 
 .mode-content.active {
@@ -180,10 +169,11 @@ header::after {
 
 /* Import Area */
 .import-area {
-    background: #fafafa;
+    background: white;
     padding: 24px;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .import-area textarea {
@@ -218,8 +208,7 @@ header::after {
 /* Tools Section - Always visible */
 .tools-section {
     padding: 20px 10%;
-    background: #f8f9fa;
-    border-top: 1px solid #e0e0e0;
+    background: transparent;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -259,10 +248,11 @@ header::after {
 .tool-card {
     background: white;
     padding: 20px;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
     text-align: center;
     transition: all 0.2s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .tool-card:has(button:not(:disabled)) {
@@ -414,10 +404,11 @@ header::after {
 }
 
 .manual-form {
-    background: #fafafa;
+    background: white;
     padding: 24px;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .auto-increment-control {
@@ -586,7 +577,7 @@ header::after {
 
 .editor-section {
     padding: 20px 10%;
-    background: #f8f9fa;
+    background: transparent;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -617,9 +608,10 @@ header::after {
 
 .subtitle-item {
     background: white;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
     padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .subtitle-item:hover {
@@ -726,9 +718,10 @@ header::after {
 .seo-content {
     padding: 80px 10%;
     background: white;
-    border-top: 1px solid #e0e0e0;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 /* Pro Banner */
@@ -787,14 +780,13 @@ header::after {
 
 /* Features Highlight */
 .features-highlight {
-    background: white;
+    background: transparent;
     padding: 12px 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
     flex-wrap: wrap;
-    border-bottom: 1px solid #e0e0e0;
 }
 
 .feature-item {
@@ -1123,7 +1115,7 @@ header::after {
 }
 
 .user-email {
-    color: white;
+    color: #374151;
     margin-right: 15px;
     font-size: 14px;
 }
@@ -1272,9 +1264,9 @@ header::after {
 
 /* Ad Container Styles */
 .ad-container {
-    background: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
     padding: 20px;
     margin: 20px auto;
     max-width: 1400px;
@@ -1283,6 +1275,7 @@ header::after {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .ad-in-content {
