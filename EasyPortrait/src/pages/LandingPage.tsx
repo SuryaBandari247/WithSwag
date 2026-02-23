@@ -4,7 +4,7 @@ import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Home, Sun, C
 import { removeBackground } from '@imgly/background-removal';
 import AppSwitcher from '../components/AppSwitcher';
 import Breadcrumbs from '../components/Breadcrumbs';
-import samplePhoto1 from '../resources/Gemini_Generated_Image_29o95h29o95h29o9.jpeg';
+import samplePhoto1 from '../resources/Gemini_Generated_Image_29o95h29o95h29o9_1.jpeg';
 import samplePhoto2 from '../resources/Gemini_Generated_Image_2ff4mq2ff4mq2ff4.jpeg';
 import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.jpeg';
 import samplePhoto4 from '../resources/Gemini_Generated_Image_n0jv12n0jv12n0jv.jpeg';
@@ -106,7 +106,7 @@ export const LandingPage: React.FC = () => {
     if (hasStartedProcessing.current) return;
     hasStartedProcessing.current = true;
 
-    const CACHE_KEY = 'easyportrait_transparent_v1';
+    const CACHE_KEY = 'easyportrait_transparent_v2';
 
     const processImage = async () => {
       // 1. Try loading from cache first (instant)
