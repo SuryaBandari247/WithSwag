@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Home, Sun, Contrast as ContrastIcon, Palette } from 'lucide-react';
+import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Sun, Contrast as ContrastIcon, Palette } from 'lucide-react';
 import { removeBackground } from '@imgly/background-removal';
 import AppSwitcher from '../components/AppSwitcher';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -161,12 +161,6 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
       <AppSwitcher />
 
-      {/* Home Button */}
-      <a href="/" className="fixed top-4 left-4 z-50 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105 text-gray-700 hover:text-indigo-600 font-medium">
-        <Home className="h-5 w-5" />
-        <span className="hidden sm:inline">Home</span>
-      </a>
-      
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
