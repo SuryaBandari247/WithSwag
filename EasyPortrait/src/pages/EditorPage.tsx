@@ -45,8 +45,7 @@ export const EditorPage: React.FC = () => {
   const [adjustmentValues, setAdjustmentValues] = useState<AdjustmentValues>({...DEFAULT_ADJUSTMENT_VALUES});
   const [canvasSupported, setCanvasSupported] = useState(true);
   const [customColor, setCustomColor] = useState('#FF6B00');
-  const customColorRef = useRef<HTMLInputElement>(null);
-  const customColorSidebarRef = useRef<HTMLInputElement>(null);
+  const [showColorPicker, setShowColorPicker] = useState(false);
 
   const BG_COLORS = [
     { id: 'none', label: 'Original', color: 'transparent', preview: 'bg-gray-200 bg-[url("data:image/svg+xml,%3Csvg width=\'10\' height=\'10\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect width=\'5\' height=\'5\' fill=\'%23ccc\'/%3E%3Crect x=\'5\' y=\'5\' width=\'5\' height=\'5\' fill=\'%23ccc\'/%3E%3C/svg%3E")]' },
@@ -505,6 +504,45 @@ export const EditorPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <AppSwitcher />
 
+      {/* Custom Color Picker Modal */}
+      {showColorPicker && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowColorPicker(false)}>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 w-80" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 text-center">Pick a Color</h3>
+            <div className="flex justify-center mb-4">
+              <input
+                type="color"
+                value={customColor}
+                onChange={(e) => setCustomColor(e.target.value)}
+                className="w-48 h-48 rounded-lg border-0 cursor-pointer p-0"
+                style={{ WebkitAppearance: 'none', border: 'none' }}
+              />
+            </div>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-full border border-gray-300" style={{ background: customColor }} />
+              <span className="text-sm font-mono text-gray-600 dark:text-slate-400">{customColor}</span>
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowColorPicker(false)}
+                className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-700 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  setShowColorPicker(false);
+                  handleBgColorChange('custom', customColor);
+                }}
+                className="flex-1 px-4 py-2.5 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition"
+              >
+                Apply
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-white border-b border-gray-200 dark:bg-slate-800 dark:border-slate-700 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -566,7 +604,7 @@ export const EditorPage: React.FC = () => {
                           key={bg.id}
                           onClick={() => {
                             if (bg.id === 'custom') {
-                              customColorSidebarRef.current?.click();
+                              setShowColorPicker(true);
                             } else {
                               handleBgColorChange(bg.id);
                             }
@@ -587,17 +625,6 @@ export const EditorPage: React.FC = () => {
                         </button>
                       ))}
                     </div>
-                    <input
-                      ref={customColorSidebarRef}
-                      type="color"
-                      value={customColor}
-                      onChange={(e) => {
-                        const newColor = e.target.value;
-                        setCustomColor(newColor);
-                        handleBgColorChange('custom', newColor);
-                      }}
-                      className="sr-only"
-                    />
                   </div>
                   <button
                     onClick={handleBack}
@@ -789,7 +816,7 @@ export const EditorPage: React.FC = () => {
                           key={bg.id}
                           onClick={() => {
                             if (bg.id === 'custom') {
-                              customColorRef.current?.click();
+                              setShowColorPicker(true);
                             } else {
                               handleBgColorChange(bg.id);
                             }
@@ -810,17 +837,6 @@ export const EditorPage: React.FC = () => {
                         </button>
                       ))}
                     </div>
-                    <input
-                      ref={customColorRef}
-                      type="color"
-                      value={customColor}
-                      onChange={(e) => {
-                        const newColor = e.target.value;
-                        setCustomColor(newColor);
-                        handleBgColorChange('custom', newColor);
-                      }}
-                      className="sr-only"
-                    />
                     {bgColor !== 'none' && (
                       <p className="text-xs text-green-600 text-center mt-3">✓ Background changed to {BG_COLORS.find(b => b.id === bgColor)?.label}</p>
                     )}
