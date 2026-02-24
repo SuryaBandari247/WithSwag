@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Sun, Contrast as ContrastIcon, Palette, Globe, Shield, ChevronDown, Lightbulb, Lock, Eye, Zap, Monitor } from 'lucide-react';
+import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Sun, Contrast as ContrastIcon, Palette, Globe, Shield, ChevronDown, ChevronRight, Lightbulb, Lock, Eye, Zap, Monitor } from 'lucide-react';
 import { removeBackground } from '@imgly/background-removal';
 import AppSwitcher from '../components/AppSwitcher';
-import Breadcrumbs from '../components/Breadcrumbs';
 import samplePhoto1 from '../resources/Gemini_Generated_Image_29o95h29o95h29o9_1.jpeg';
 import samplePhoto2 from '../resources/Gemini_Generated_Image_2ff4mq2ff4mq2ff4.jpeg';
 import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.jpeg';
@@ -209,31 +208,36 @@ export const LandingPage: React.FC = () => {
             <span className="hidden sm:inline text-xs text-gray-500 dark:text-slate-400 font-medium">50+ countries supported</span>
           </div>
         </div>
-        {/* Bottom row: Nav links */}
-        <div className="hidden md:block border-t border-gray-100 dark:border-slate-700/50">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-center gap-3">
-            {[
-              { label: 'Features', href: '#features' },
-              { label: 'Country Guide', href: '#country-guide' },
-              { label: 'Compliance', href: '#compliance' },
-              { label: 'Privacy', href: '#privacy' },
-              { label: 'How-To', href: '#home-photo' },
-              { label: 'FAQ', href: '#faq' },
-              { label: 'Pricing', href: '#pricing' },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="px-4 py-1.5 text-xs font-semibold rounded-md bg-primary/10 text-primary dark:bg-indigo-900/30 dark:text-indigo-300 border border-primary/20 dark:border-indigo-700/40 hover:bg-primary hover:text-white dark:hover:bg-indigo-600 dark:hover:text-white transition-all"
-              >
-                {item.label}
-              </a>
-            ))}
+        {/* Bottom row: Breadcrumbs + Nav links */}
+        <div className="border-t border-gray-100 dark:border-slate-700/50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-4">
+            <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-slate-400 font-medium flex-shrink-0">
+              <a href="/" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">WithSwag</a>
+              <ChevronRight size={14} className="text-gray-400 dark:text-slate-600" />
+              <span className="text-gray-900 dark:text-slate-100">Portrait Photo</span>
+            </nav>
+            <div className="hidden md:flex items-center gap-2">
+              {[
+                { label: 'Features', href: '#features' },
+                { label: 'Country Guide', href: '#country-guide' },
+                { label: 'Compliance', href: '#compliance' },
+                { label: 'Privacy', href: '#privacy' },
+                { label: 'How-To', href: '#home-photo' },
+                { label: 'FAQ', href: '#faq' },
+                { label: 'Pricing', href: '#pricing' },
+              ].map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="px-3 py-1.5 text-xs font-semibold rounded-md bg-primary/10 text-primary dark:bg-indigo-900/30 dark:text-indigo-300 border border-primary/20 dark:border-indigo-700/40 hover:bg-primary hover:text-white dark:hover:bg-indigo-600 dark:hover:text-white transition-all"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
-
-      <Breadcrumbs toolName="Portrait Photo" />
 
       {/* Hero Section */}
       <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
