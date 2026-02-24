@@ -41,6 +41,14 @@
       "dest": "/EasyPortrait/dist/index.html"
     },
     {
+      "src": "/guides/(.*)",
+      "dest": "/guides/$1"
+    },
+    {
+      "src": "/guides",
+      "dest": "/guides/index.html"
+    },
+    {
       "src": "/srt-editor/(.*)",
       "dest": "/srt-editor/$1"
     },
