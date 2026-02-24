@@ -320,18 +320,22 @@ export const LandingPage: React.FC = () => {
             </h1>
             <div className="flex flex-wrap justify-center gap-2 mb-6">
               {[
-                'Instant Passport Photo',
-                'Printer-Compatible Sizes',
-                'AI Background Removal',
-                '50+ Country Standards',
-                '100% Private',
+                { label: 'Instant Passport Photo', href: '#how-it-works' },
+                { label: 'Printer-Compatible Sizes', href: '#features' },
+                { label: 'AI Background Removal', href: '#features' },
+                { label: '50+ Country Standards', href: '#country-guide' },
+                { label: 'Compliance Guaranteed', href: '#compliance' },
+                { label: '100% Private', href: '#privacy' },
+                { label: 'How-To Guide', href: '#home-photo' },
+                { label: 'FAQ', href: '#faq' },
               ].map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary dark:bg-indigo-900/30 dark:text-indigo-300 border border-primary/20 dark:border-indigo-700/40"
+                <a
+                  key={tag.label}
+                  href={tag.href}
+                  className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary dark:bg-indigo-900/30 dark:text-indigo-300 border border-primary/20 dark:border-indigo-700/40 hover:bg-primary/20 dark:hover:bg-indigo-900/50 transition-colors"
                 >
-                  {tag}
-                </span>
+                  {tag.label}
+                </a>
               ))}
             </div>
             <p className="text-xl text-gray-600 dark:text-slate-400 mb-8">
@@ -469,7 +473,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Country-Specific Passport Photo Guide */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
+      <section id="country-guide" className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Globe className="h-10 w-10 text-primary mx-auto mb-4" />
@@ -523,7 +527,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Compliance Standards */}
-      <section className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
+      <section id="compliance" className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Shield className="h-10 w-10 text-green-600 mx-auto mb-4" />
@@ -677,7 +681,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* How It Works */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
+      <section id="how-it-works" className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-12 text-center">How It Works</h2>
 
@@ -710,7 +714,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
+      <section id="pricing" className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4 text-center">Simple, Transparent Pricing</h2>
           <p className="text-gray-600 dark:text-slate-400 text-center mb-12">No subscriptions. Pay only for what you need.</p>
@@ -774,7 +778,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* How to Take a Passport Photo at Home */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
+      <section id="home-photo" className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Lightbulb className="h-10 w-10 text-amber-500 mx-auto mb-4" />
@@ -823,7 +827,7 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
+      <section id="faq" className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4 text-center">Frequently Asked Questions</h2>
           <p className="text-gray-600 dark:text-slate-400 text-center mb-10">Everything you need to know about passport photos and EasyPortrait.</p>
