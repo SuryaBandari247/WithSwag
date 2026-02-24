@@ -200,11 +200,11 @@ export const LandingPage: React.FC = () => {
       <Breadcrumbs toolName="Portrait Photo" />
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid md:grid-cols-3 gap-8 items-center">
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid md:grid-cols-[1fr_auto_1fr] gap-12 items-center">
 
           {/* Left Column: Cards 1 & 2 */}
-          <div className="hidden md:flex flex-col gap-5 order-1">
+          <div className="hidden md:flex flex-col gap-6 order-1 min-w-[380px]">
             {/* Card 1: AI Background Removal */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-15 blur-lg" />
@@ -314,8 +314,8 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Center Column: Text Block */}
-          <div className="order-first md:order-2 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-6">
+          <div className="order-first md:order-2 text-center max-w-lg mx-auto px-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-slate-100 mb-6 leading-tight">
               Create Professional Passport Photos
             </h1>
             <p className="text-xl text-gray-600 dark:text-slate-400 mb-8">
@@ -340,7 +340,7 @@ export const LandingPage: React.FC = () => {
           </div>
 
           {/* Right Column: Cards 3 & 4 */}
-          <div className="hidden md:flex flex-col gap-5 order-3">
+          <div className="hidden md:flex flex-col gap-6 order-3 min-w-[380px]">
             {/* Card 3: Sheet Sizes */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-primary rounded-2xl opacity-15 blur-lg" />
