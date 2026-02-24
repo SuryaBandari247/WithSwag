@@ -318,6 +318,22 @@ export const LandingPage: React.FC = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-slate-100 mb-6 leading-tight">
               Create Professional Passport Photos
             </h1>
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              {[
+                'Instant Passport Photo',
+                'Printer-Compatible Sizes',
+                'AI Background Removal',
+                '50+ Country Standards',
+                '100% Private',
+              ].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary dark:bg-indigo-900/30 dark:text-indigo-300 border border-primary/20 dark:border-indigo-700/40"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
             <p className="text-xl text-gray-600 dark:text-slate-400 mb-8">
               Resize, crop, and create passport-sized photos meeting international standards. All processing happens on your device.
             </p>
