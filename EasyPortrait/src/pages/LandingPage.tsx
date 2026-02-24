@@ -10,6 +10,16 @@ import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.j
 import samplePhoto4 from '../resources/Gemini_Generated_Image_n0jv12n0jv12n0jv.jpeg';
 import collagePhoto from '../resources/abced.jpeg';
 import homePhotoGuide from '../resources/B476E3CC-E517-4909-B143-9F3118F22DEF_1_201_a.jpeg';
+import passportUSA from '../resources/USA.png';
+import passportIndia from '../resources/india.png';
+import passportCanada from '../resources/canada.png';
+import passportAustralia from '../resources/australian.png';
+import passportChina from '../resources/china.png';
+import passportFrance from '../resources/france.png';
+import passportGermany from '../resources/german.png';
+import passportNetherlands from '../resources/netherlands.png';
+import passportNorway from '../resources/norway.png';
+import passportSwitzerland from '../resources/swiss.png';
 
 const BG_DEMO_COLORS = [
   { color: '#FFFFFF', label: 'White' },
@@ -666,34 +676,51 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Globe className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">Passport Photo Sizes by Country</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">Passport Photo Requirements by Country</h2>
             <p className="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Every country has specific photo requirements for passports and visas. We support 50+ standards so your photo is accepted the first time.
+              Each country enforces strict photo standards. A wrong size, background, or head position means rejection. Here are the exact specs you need.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
-              { country: 'United States', size: '2 × 2 in (51 × 51 mm)', bg: 'White', flag: '🇺🇸' },
-              { country: 'European Union', size: '35 × 45 mm', bg: 'White / Light Gray', flag: '🇪🇺' },
-              { country: 'United Kingdom', size: '35 × 45 mm', bg: 'Plain Light Gray', flag: '🇬🇧' },
-              { country: 'India', size: '2 × 2 in (51 × 51 mm)', bg: 'White', flag: '🇮🇳' },
-              { country: 'Canada', size: '50 × 70 mm', bg: 'White / Light', flag: '🇨🇦' },
-              { country: 'Australia', size: '35 × 45 mm', bg: 'Plain White', flag: '🇦🇺' },
-              { country: 'China', size: '33 × 48 mm', bg: 'White', flag: '🇨🇳' },
-              { country: 'Malaysia', size: '35 × 50 mm', bg: 'White', flag: '🇲🇾' },
+              { country: 'United States', flag: '🇺🇸', img: passportUSA, size: '2 × 2 in (51 × 51 mm)', head: 'Head height: 25–35 mm', bg: 'Plain white', extra: 'No glasses since 2016. Head must be centered. Taken within last 6 months.' },
+              { country: 'India', flag: '🇮🇳', img: passportIndia, size: '2 × 2 in (51 × 51 mm)', head: 'Face covers 70–80% of frame', bg: 'Plain white', extra: 'Ears must be visible. No border. Matte or glossy finish accepted.' },
+              { country: 'Canada', flag: '🇨🇦', img: passportCanada, size: '50 × 70 mm', head: 'Face height: 31–36 mm', bg: 'Plain white or light gray', extra: 'Neutral expression, mouth closed. Crown to chin must be 31–36 mm. Taken within 12 months.' },
+              { country: 'Australia', flag: '🇦🇺', img: passportAustralia, size: '35 × 45 mm', head: 'Head height: 32–36 mm', bg: 'Plain white', extra: 'No head tilt. Chin to crown 32–36 mm. Photo must be less than 6 months old. No digital alterations.' },
+              { country: 'China', flag: '🇨🇳', img: passportChina, size: '33 × 48 mm', head: 'Head height: 28–33 mm', bg: 'Plain white', extra: 'Both ears visible. No hair covering forehead. Head width 15–22 mm. Taken within 6 months.' },
+              { country: 'France', flag: '🇫🇷', img: passportFrance, size: '35 × 45 mm', head: 'Face height: 32–36 mm', bg: 'Plain light gray or light blue', extra: 'Mouth closed, no smile. Face must be 70–80% of photo. No glasses. ISO/IEC 19794-5 compliant.' },
+              { country: 'Germany', flag: '🇩🇪', img: passportGermany, size: '35 × 45 mm', head: 'Face height: 32–36 mm', bg: 'Plain light gray', extra: 'Biometric standard required. Neutral expression. Eyes open, looking straight at camera. Sharp focus, no shadows.' },
+              { country: 'Netherlands', flag: '🇳🇱', img: passportNetherlands, size: '35 × 45 mm', head: 'Face height: 26–30 mm', bg: 'Plain light gray', extra: 'No glasses. Both ears visible. Uniform lighting, no shadows on face or background. Recent photo (< 6 months).' },
+              { country: 'Norway', flag: '🇳🇴', img: passportNorway, size: '35 × 45 mm', head: 'Face height: 30–36 mm', bg: 'Plain light gray', extra: 'Straight-on view, neutral expression. No head coverings except religious. High resolution, no pixelation.' },
+              { country: 'Switzerland', flag: '🇨🇭', img: passportSwitzerland, size: '35 × 45 mm', head: 'Face height: 30–36 mm', bg: 'Plain light gray', extra: 'ICAO compliant. Eyes clearly visible. No reflections on skin. Taken within 12 months. Print on photo-quality paper.' },
             ].map((item, i) => (
-              <div key={i} className="bg-white dark:bg-slate-800 rounded-xl p-5 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-indigo-500 transition hover:shadow-md">
-                <div className="text-3xl mb-2">{item.flag}</div>
-                <h3 className="font-semibold text-gray-900 dark:text-slate-100 text-sm mb-1">{item.country}</h3>
-                <p className="text-xs text-primary font-medium mb-1">{item.size}</p>
-                <p className="text-xs text-gray-500 dark:text-slate-400">Background: {item.bg}</p>
+              <div key={i} className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-indigo-500 transition hover:shadow-lg group">
+                <div className="aspect-[3/4] bg-gray-100 dark:bg-slate-700 overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={`${item.country} passport photo example`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl">{item.flag}</span>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100 text-sm">{item.country}</h3>
+                  </div>
+                  <div className="space-y-1 mb-3">
+                    <p className="text-xs text-primary font-semibold">{item.size}</p>
+                    <p className="text-xs text-gray-600 dark:text-slate-400">{item.head}</p>
+                    <p className="text-xs text-gray-600 dark:text-slate-400">Background: {item.bg}</p>
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{item.extra}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          <p className="text-center text-sm text-gray-500 dark:text-slate-400 mt-6">
-            Plus Singapore, Japan, South Korea, Brazil, Mexico, and many more.
+          <p className="text-center text-sm text-gray-500 dark:text-slate-400 mt-8">
+            Also supports Singapore, Malaysia, Japan, South Korea, Brazil, Mexico, UK, and 40+ more countries.
           </p>
         </div>
       </section>
