@@ -158,21 +158,21 @@ export const LandingPage: React.FC = () => {
     processImage();
   }, []);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:bg-slate-900 dark:from-slate-900 dark:to-slate-900">
       <AppSwitcher />
 
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 dark:bg-slate-900/80 dark:border-slate-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Camera className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-gray-900">EasyPortrait</span>
+            <span className="text-xl font-bold text-gray-900 dark:text-slate-100">EasyPortrait</span>
           </div>
           <div className="flex items-center gap-4">
-            <a href="#features" className="text-sm text-gray-600 hover:text-gray-900">
+            <a href="#features" className="text-sm text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100">
               Features
             </a>
-            <a href="#privacy" className="text-sm text-gray-600 hover:text-gray-900">
+            <a href="#privacy" className="text-sm text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100">
               Privacy
             </a>
           </div>
@@ -190,10 +190,10 @@ export const LandingPage: React.FC = () => {
             {/* Card 1: AI Background Removal */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-xl opacity-15 blur-lg" />
-              <div className="relative bg-white rounded-xl shadow-lg px-6 py-5">
+              <div className="relative bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg px-6 py-5">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <div className="w-[52px] h-[68px] rounded-md overflow-hidden shadow-sm border border-gray-200">
+                    <div className="w-[52px] h-[68px] rounded-md overflow-hidden shadow-sm border border-gray-200 dark:border-slate-700">
                       <img src={samplePhoto1} alt="Original" className="w-full h-full object-cover" />
                     </div>
                     <ArrowRight className="h-3 w-3 text-primary flex-shrink-0" />
@@ -222,7 +222,7 @@ export const LandingPage: React.FC = () => {
                           className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium transition-all ${
                             i === activeBgIndex
                               ? 'bg-primary text-white shadow-sm'
-                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                              : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
                           }`}
                         >
                           <div
@@ -246,9 +246,9 @@ export const LandingPage: React.FC = () => {
             {/* Card 2: Smart Crop */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary rounded-xl opacity-15 blur-lg" />
-              <div className="relative bg-white rounded-xl shadow-lg px-6 py-5">
+              <div className="relative bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg px-6 py-5">
                 <div className="flex items-center gap-4">
-                  <div className="relative w-28 h-28 bg-gray-100 rounded-lg overflow-hidden shadow-inner flex-shrink-0">
+                  <div className="relative w-28 h-28 bg-gray-100 dark:bg-slate-700 rounded-lg overflow-hidden shadow-inner flex-shrink-0">
                     <img src={samplePhoto2} alt="Full photo" className="absolute inset-0 w-full h-full object-cover opacity-30" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div
@@ -277,7 +277,7 @@ export const LandingPage: React.FC = () => {
                           className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium transition-all ${
                             i === activeCropIndex
                               ? 'bg-primary text-white shadow-sm'
-                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                              : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
                           }`}
                         >
                           <span>{size.flag}</span>
@@ -297,10 +297,10 @@ export const LandingPage: React.FC = () => {
 
           {/* Center Column: Text Block */}
           <div className="order-first md:order-2 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-slate-100 mb-6">
               Create Professional Passport Photos
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-600 dark:text-slate-400 mb-8">
               Resize, crop, and create passport-sized photos meeting international standards. All processing happens on your device.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -326,9 +326,9 @@ export const LandingPage: React.FC = () => {
             {/* Card 3: Sheet Sizes */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-primary rounded-xl opacity-15 blur-lg" />
-              <div className="relative bg-white rounded-xl shadow-lg px-6 py-5">
+              <div className="relative bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg px-6 py-5">
                 <div className="flex items-center gap-4">
-                  <div className="relative w-28 h-28 bg-gray-50 rounded-lg overflow-hidden shadow-inner flex-shrink-0 flex items-center justify-center">
+                  <div className="relative w-28 h-28 bg-gray-50 dark:bg-slate-700 rounded-lg overflow-hidden shadow-inner flex-shrink-0 flex items-center justify-center">
                     {(() => {
                       const sheet = SHEET_SIZES[activeSheetIndex];
                       const aspect = sheet.w / sheet.h;
@@ -369,7 +369,7 @@ export const LandingPage: React.FC = () => {
                           className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium transition-all ${
                             i === activeSheetIndex
                               ? 'bg-green-600 text-white shadow-sm'
-                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                              : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
                           }`}
                         >
                           <span className="text-[10px]">📄</span>
@@ -377,7 +377,7 @@ export const LandingPage: React.FC = () => {
                         </button>
                       ))}
                     </div>
-                    <p className="text-[10px] text-gray-400 mt-2">{SHEET_SIZES[activeSheetIndex].cols * SHEET_SIZES[activeSheetIndex].rows} photos per sheet</p>
+                    <p className="text-[10px] text-gray-400 dark:text-slate-400 mt-2">{SHEET_SIZES[activeSheetIndex].cols * SHEET_SIZES[activeSheetIndex].rows} photos per sheet</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-1.5 mt-3">
@@ -390,7 +390,7 @@ export const LandingPage: React.FC = () => {
             {/* Card 4: Photo Adjustments */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-500 rounded-xl opacity-15 blur-lg" />
-              <div className="relative bg-white rounded-xl shadow-lg px-6 py-5">
+              <div className="relative bg-white dark:bg-slate-800 dark:border dark:border-slate-700 rounded-xl shadow-lg px-6 py-5">
                 <div className="flex items-center gap-4">
                   <div className="relative w-28 h-28 rounded-lg overflow-hidden shadow-inner flex-shrink-0">
                     <img
@@ -412,7 +412,7 @@ export const LandingPage: React.FC = () => {
                         <button
                           key={i}
                           className={`flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium transition-all ${
-                            i === activeAdjustIndex ? 'bg-amber-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                            i === activeAdjustIndex ? 'bg-amber-500 text-white shadow-sm' : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 hover:bg-gray-200 dark:hover:bg-slate-600'
                           }`}
                         >
                           <item.icon className="h-3 w-3" />
@@ -435,9 +435,9 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="bg-white py-20">
+      <section id="features" className="bg-white dark:bg-slate-900 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 text-center mb-12">
             Powerful Features
           </h2>
 
@@ -467,34 +467,34 @@ export const LandingPage: React.FC = () => {
             ].map((feature, idx) => (
               <div key={idx} className={`p-6 rounded-lg border transition ${
                 (feature as any).highlight
-                  ? 'border-primary bg-primary/5 hover:bg-primary/10 ring-1 ring-primary/20'
-                  : 'border-gray-200 hover:border-primary'
+                  ? 'border-primary bg-primary/5 dark:bg-indigo-900/20 hover:bg-primary/10 ring-1 ring-primary/20'
+                  : 'border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-indigo-500'
               }`}>
                 <feature.icon className={`h-10 w-10 mb-4 ${
                   (feature as any).highlight ? 'text-primary' : 'text-primary'
                 }`} />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">
                   {feature.title}
                   {(feature as any).highlight && (
                     <span className="ml-2 inline-block px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded-full align-middle">NEW</span>
                   )}
                 </h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-gray-600 dark:text-slate-400">{feature.description}</p>
               </div>
             ))}
           </div>
 
           {/* Print-Ready Collage Showcase - Big and Prominent */}
-          <div className="mt-16 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8 md:p-12 border-2 border-purple-200">
+          <div className="mt-16 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-slate-800 dark:to-slate-800 rounded-2xl p-8 md:p-12 border-2 border-purple-200 dark:border-purple-800">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               {/* Collage Visual */}
               <div className="flex justify-center">
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-primary rounded-2xl opacity-20 blur-2xl" />
-                  <div className="relative bg-white rounded-2xl p-6 shadow-2xl">
+                  <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-2xl">
                     <div className="grid grid-cols-2 gap-3">
                       {[collagePhoto, samplePhoto2, samplePhoto3, samplePhoto4].map((photo, i) => (
-                        <div key={i} className="w-32 h-40 rounded-lg overflow-hidden border-2 border-gray-200 shadow-md hover:scale-105 transition-transform">
+                        <div key={i} className="w-32 h-40 rounded-lg overflow-hidden border-2 border-gray-200 dark:border-slate-700 shadow-md hover:scale-105 transition-transform">
                           <img src={photo} alt={`Passport photo ${i + 1}`} className="w-full h-full object-cover" />
                         </div>
                       ))}
@@ -509,8 +509,8 @@ export const LandingPage: React.FC = () => {
                 <div className="inline-block px-3 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded-full mb-4">
                   BEST VALUE
                 </div>
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">Print-Ready Collage</h3>
-                <p className="text-lg text-gray-700 mb-6">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">Print-Ready Collage</h3>
+                <p className="text-lg text-gray-700 dark:text-slate-300 mb-6">
                   Create professional collage sheets with multiple passport photos. Perfect for printing at home or at a photo shop.
                 </p>
                 <ul className="space-y-3 mb-8">
@@ -521,7 +521,7 @@ export const LandingPage: React.FC = () => {
                     'Save money vs individual prints',
                     'High-resolution 300 DPI output'
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-700">
+                    <li key={i} className="flex items-center gap-3 text-gray-700 dark:text-slate-300">
                       <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
@@ -540,15 +540,15 @@ export const LandingPage: React.FC = () => {
           </div>
 
           <div className="mt-12 grid md:grid-cols-2 gap-8">
-            <div className="p-6 bg-blue-50 rounded-lg border border-blue-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Privacy First</h3>
-              <p className="text-gray-700">
+            <div className="p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-3">Privacy First</h3>
+              <p className="text-gray-700 dark:text-slate-300">
                 All image processing happens locally on your device. We never upload your photos to any server. Your privacy is guaranteed.
               </p>
             </div>
-            <div className="p-6 bg-purple-50 rounded-lg border border-purple-200">
-              <h3 className="text-lg font-semibold text-gray-900 mb-3">Simple Pricing</h3>
-              <p className="text-gray-700">
+            <div className="p-6 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-3">Simple Pricing</h3>
+              <p className="text-gray-700 dark:text-slate-300">
                 Single photo for just <strong>$5</strong>. Collage at <strong>$8</strong> — the more you print, the more you save.
               </p>
             </div>
@@ -557,9 +557,9 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* How It Works */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-20">
+      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">How It Works</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-12 text-center">How It Works</h2>
 
           <div className="grid md:grid-cols-6 gap-6">
             {[
@@ -575,8 +575,8 @@ export const LandingPage: React.FC = () => {
                   <div className="h-12 w-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mb-4">
                     {item.step}
                   </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600">{item.desc}</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">{item.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-slate-400">{item.desc}</p>
                 </div>
                 {idx < 5 && (
                   <div className="hidden md:flex justify-center mt-6">
@@ -590,27 +590,27 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="bg-white py-20 border-t border-gray-100">
+      <section className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">Simple, Transparent Pricing</h2>
-          <p className="text-gray-600 text-center mb-12">No subscriptions. Pay only for what you need.</p>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4 text-center">Simple, Transparent Pricing</h2>
+          <p className="text-gray-600 dark:text-slate-400 text-center mb-12">No subscriptions. Pay only for what you need.</p>
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Single Photo */}
-            <div className="relative rounded-2xl border-2 border-gray-200 p-8 hover:border-primary transition">
+            <div className="relative rounded-2xl border-2 border-gray-200 dark:border-slate-700 p-8 hover:border-primary transition">
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
                   <Camera className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">Single Photo</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100">Single Photo</h3>
               </div>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">$5</span>
-                <span className="text-gray-400 text-sm ml-2">per photo</span>
+                <span className="text-4xl font-bold text-gray-900 dark:text-slate-100">$5</span>
+                <span className="text-gray-400 dark:text-slate-400 text-sm ml-2">per photo</span>
               </div>
               <ul className="space-y-3 mb-8">
                 {['AI background removal', 'Any passport size standard', 'High-res 300 DPI download', 'Process on your device'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                  <li key={i} className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300">
                     <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
                     {item}
                   </li>
@@ -630,21 +630,21 @@ export const LandingPage: React.FC = () => {
                 <div className="h-10 w-10 rounded-lg bg-secondary/10 flex items-center justify-center">
                   <Grid3x3 className="h-5 w-5 text-secondary" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">Collage</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100">Collage</h3>
               </div>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900">$8</span>
-                <span className="text-gray-400 text-sm ml-2">per collage</span>
+                <span className="text-4xl font-bold text-gray-900 dark:text-slate-100">$8</span>
+                <span className="text-gray-400 dark:text-slate-400 text-sm ml-2">per collage</span>
               </div>
               <ul className="space-y-3 mb-4">
                 {['Everything in Single Photo', 'Print-ready A4, 4×6", 5×7" sheets', 'Multiple photos per sheet', 'Save vs individual photos'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                  <li key={i} className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300">
                     <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <p className="text-xs text-gray-500 mb-4">One sheet with multiple photos for just $8</p>
+              <p className="text-xs text-gray-500 dark:text-slate-400 mb-4">One sheet with multiple photos for just $8</p>
               <Link to="/editor/collage" className="block w-full text-center px-6 py-3 bg-secondary hover:bg-purple-700 text-white rounded-lg font-semibold transition">
                 Create Collage
               </Link>
@@ -655,8 +655,8 @@ export const LandingPage: React.FC = () => {
 
       {/* CTA Section */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to get started?</h2>
-        <p className="text-lg text-gray-600 mb-8">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-6">Ready to get started?</h2>
+        <p className="text-lg text-gray-600 dark:text-slate-400 mb-8">
           Professional passport photos, starting at just $5.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -671,10 +671,10 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Privacy Section */}
-      <section id="privacy" className="bg-gray-50 py-20 border-t border-gray-200">
+      <section id="privacy" className="bg-gray-50 dark:bg-slate-800 py-20 border-t border-gray-200 dark:border-slate-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Privacy & Security</h2>
-          <div className="space-y-4 text-gray-700">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-6">Privacy & Security</h2>
+          <div className="space-y-4 text-gray-700 dark:text-slate-300">
             <p>
               <strong>Your photos never leave your device.</strong> All image processing is done using your browser's built-in capabilities. We don't collect, store, or transmit any of your images.
             </p>

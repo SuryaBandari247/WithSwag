@@ -11,7 +11,7 @@ interface PassportSizeSelectProps {
 export const PassportSizeSelect: React.FC<PassportSizeSelectProps> = ({ selected, onSelect }) => {
   return (
     <div className="space-y-3">
-      <p className="font-semibold text-gray-900">Select Passport Size</p>
+      <p className="font-semibold text-gray-900 dark:text-slate-100">Select Passport Size</p>
       <div className="grid grid-cols-1 gap-2 max-h-96 overflow-y-auto">
         {PASSPORT_SIZES.map((size) => (
           <button
@@ -20,12 +20,12 @@ export const PassportSizeSelect: React.FC<PassportSizeSelectProps> = ({ selected
             className={`p-3 rounded-lg text-left transition-all flex items-start justify-between ${
               selected?.id === size.id
                 ? 'bg-primary text-white ring-2 ring-blue-200'
-                : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
+                : 'bg-gray-50 hover:bg-gray-100 border border-gray-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700'
             }`}
           >
             <div>
-              <p className="font-medium">{size.name}</p>
-              <p className={`text-sm ${selected?.id === size.id ? 'text-blue-100' : 'text-gray-600'}`}>
+              <p className="font-medium dark:text-slate-100">{size.name}</p>
+              <p className={`text-sm ${selected?.id === size.id ? 'text-blue-100' : 'text-gray-600 dark:text-slate-400'}`}>
                 {size.widthMm}×{size.heightMm}mm
                 {size.widthInch && ` / ${size.widthInch}"×${size.heightInch}"`}
               </p>

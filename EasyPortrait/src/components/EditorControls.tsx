@@ -23,10 +23,10 @@ export const EditorControls: React.FC<EditorControlsProps> = ({
     <div className="space-y-4 max-h-96 overflow-y-auto">
       {/* DPI Selection */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Quality (DPI)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Quality (DPI)</label>
         <div className="space-y-1">
           {DPI_OPTIONS.map((option) => (
-            <label key={option} className="flex items-center gap-3 p-2 cursor-pointer hover:bg-gray-50 rounded">
+            <label key={option} className="flex items-center gap-3 p-2 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 rounded">
               <input
                 type="radio"
                 name="dpi"
@@ -35,9 +35,9 @@ export const EditorControls: React.FC<EditorControlsProps> = ({
                 onChange={(e) => onDpiChange(parseInt(e.target.value))}
                 className="h-4 w-4 text-primary"
               />
-              <span className="text-sm">
+              <span className="text-sm dark:text-slate-300">
                 {option} DPI
-                {option === 300 && <span className="text-gray-500 ml-1">(Recommended)</span>}
+                {option === 300 && <span className="text-gray-500 dark:text-slate-500 ml-1">(Recommended)</span>}
               </span>
             </label>
           ))}
@@ -45,7 +45,7 @@ export const EditorControls: React.FC<EditorControlsProps> = ({
       </div>
 
       {/* Info Box */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
+      <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-3 text-sm text-blue-800 dark:text-blue-200">
         <p className="font-medium mb-1">DPI Explained</p>
         <ul className="text-xs space-y-1">
           <li>• <span className="font-medium">300 DPI:</span> Professional printing quality (recommended)</li>
@@ -57,7 +57,7 @@ export const EditorControls: React.FC<EditorControlsProps> = ({
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition"
+        className="w-full px-4 py-2 border border-gray-300 dark:border-slate-600 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg font-medium transition"
       >
         Back
       </button>

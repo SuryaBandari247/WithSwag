@@ -48,8 +48,8 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelected, isLoa
       onDrop={handleDrop}
       className={`relative rounded-lg border-2 border-dashed p-8 text-center transition-all ${
         isDragActive
-          ? 'border-primary bg-blue-50'
-          : 'border-gray-300 hover:border-gray-400 bg-gray-50'
+          ? 'border-primary bg-blue-50 dark:bg-indigo-900/30'
+          : 'border-gray-300 hover:border-gray-400 bg-gray-50 dark:bg-slate-800 dark:border-slate-600 dark:hover:border-slate-500'
       } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
     >
       <input
@@ -64,17 +64,17 @@ export const ImageUpload: React.FC<ImageUploadProps> = ({ onImageSelected, isLoa
       <div className="space-y-4">
         <div className="flex justify-center gap-3">
           <Upload className="h-8 w-8 text-primary" />
-          <File className="h-8 w-8 text-gray-400" />
+          <File className="h-8 w-8 text-gray-400 dark:text-slate-500" />
         </div>
 
         <div>
-          <p className="text-lg font-semibold text-gray-900">
+          <p className="text-lg font-semibold text-gray-900 dark:text-slate-100">
             {isDragActive ? 'Drop your image here' : 'Drag and drop your photo'}
           </p>
-          <p className="mt-1 text-sm text-gray-600">or click to browse</p>
+          <p className="mt-1 text-sm text-gray-600 dark:text-slate-400">or click to browse</p>
         </div>
 
-        <p className="text-xs text-gray-500">JPG, PNG, or WEBP • Max 10MB</p>
+        <p className="text-xs text-gray-500 dark:text-slate-500">JPG, PNG, or WEBP • Max 10MB</p>
       </div>
 
       <button

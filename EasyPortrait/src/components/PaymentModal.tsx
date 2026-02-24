@@ -32,7 +32,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white relative">
           <button
@@ -49,11 +49,11 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
         {/* Content */}
         <div className="p-6 space-y-6">
           {/* Item Details */}
-          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+          <div className="bg-gray-50 dark:bg-slate-700 rounded-lg p-4 border border-gray-200 dark:border-slate-600">
             <div className="flex justify-between items-start mb-2">
               <div>
-                <h3 className="font-semibold text-gray-900">Passport Photo Download</h3>
-                <p className="text-sm text-gray-600 mt-1">{itemDescription}</p>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100">Passport Photo Download</h3>
+                <p className="text-sm text-gray-600 dark:text-slate-400 mt-1">{itemDescription}</p>
               </div>
               <div className="text-right">
                 <p className="text-2xl font-bold text-indigo-600">€{amount.toFixed(2)}</p>
@@ -63,7 +63,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
           {/* Features */}
           <div className="space-y-3">
-            <h4 className="font-semibold text-gray-900 text-sm">What you get:</h4>
+            <h4 className="font-semibold text-gray-900 dark:text-slate-100 text-sm">What you get:</h4>
             <div className="space-y-2">
               {[
                 'High-resolution download (300 DPI)',
@@ -72,7 +72,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                 'Instant download access',
                 'No watermarks',
               ].map((feature, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                <div key={i} className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300">
                   <Check className="h-4 w-4 text-green-600 flex-shrink-0" />
                   <span>{feature}</span>
                 </div>
@@ -81,14 +81,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
           </div>
 
           {/* Security Badge */}
-          <div className="flex items-center gap-2 text-xs text-gray-600 bg-green-50 border border-green-200 rounded-lg p-3">
+          <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-slate-400 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 rounded-lg p-3">
             <Lock className="h-4 w-4 text-green-600" />
             <span>Secure payment processing. Your data is encrypted and protected.</span>
           </div>
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-700">
+            <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-lg p-3 text-sm text-red-700 dark:text-red-300">
               {error}
             </div>
           )}
@@ -161,7 +161,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
           <button
             onClick={onClose}
             disabled={isProcessing}
-            className="w-full px-4 py-2 text-gray-600 hover:text-gray-900 text-sm font-medium transition disabled:opacity-50"
+            className="w-full px-4 py-2 text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-slate-100 text-sm font-medium transition disabled:opacity-50"
           >
             Cancel
           </button>

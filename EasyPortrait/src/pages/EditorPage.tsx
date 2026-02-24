@@ -498,25 +498,25 @@ export const EditorPage: React.FC = () => {
   const currentStepIndex = stepMap[step];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <AppSwitcher />
 
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
+      <div className="bg-white border-b border-gray-200 dark:bg-slate-800 dark:border-slate-700 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 rounded-lg transition">
-              <ChevronLeft className="h-6 w-6 text-gray-600" />
+            <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition">
+              <ChevronLeft className="h-6 w-6 text-gray-600 dark:text-slate-400" />
             </button>
-            <h1 className="text-xl font-bold text-gray-900">
+            <h1 className="text-xl font-bold text-gray-900 dark:text-slate-100">
               {isCollage ? 'Photo Collage' : 'Single Passport Photo'}
             </h1>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
             {stepLabels.map((label, i) => (
               <React.Fragment key={label}>
-                {i > 0 && <span className="text-gray-400">→</span>}
-                <span className={`px-3 py-1 rounded-full ${currentStepIndex === i ? 'bg-primary text-white' : 'bg-gray-200'}`}>
+                {i > 0 && <span className="text-gray-400 dark:text-slate-600">→</span>}
+                <span className={`px-3 py-1 rounded-full ${currentStepIndex === i ? 'bg-primary text-white' : 'bg-gray-200 dark:bg-slate-700 dark:text-slate-300'}`}>
                   {label}
                 </span>
               </React.Fragment>
@@ -554,8 +554,8 @@ export const EditorPage: React.FC = () => {
               {/* Background step sidebar */}
               {step === 'background' && (
                 <>
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <label className="block text-sm font-semibold text-gray-900 mb-3">Background Color</label>
+                  <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">Background Color</label>
                     <div className="grid grid-cols-3 gap-2">
                       {BG_COLORS.map((bg) => (
                         <button
@@ -565,18 +565,18 @@ export const EditorPage: React.FC = () => {
                           className={`flex flex-col items-center gap-1.5 p-2 rounded-lg transition ${
                             bgColor === bg.id
                               ? 'ring-2 ring-primary ring-offset-1 bg-primary/5'
-                              : 'hover:bg-gray-50'
+                              : 'hover:bg-gray-50 dark:hover:bg-slate-700'
                           } ${isRemovingBg ? 'opacity-50 cursor-not-allowed' : ''}`}
                         >
                           <div className={`w-8 h-8 rounded-full ${bg.preview} flex-shrink-0`} />
-                          <span className="text-[10px] text-gray-600 leading-tight text-center">{bg.label}</span>
+                          <span className="text-[10px] text-gray-600 dark:text-slate-400 leading-tight text-center">{bg.label}</span>
                         </button>
                       ))}
                     </div>
                   </div>
                   <button
                     onClick={handleBack}
-                    className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition text-sm"
+                    className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 rounded-lg font-medium transition text-sm"
                   >
                     ← Back to Crop
                   </button>
@@ -586,17 +586,17 @@ export const EditorPage: React.FC = () => {
               {/* Adjust step sidebar — sliders are in the main AdjustmentPanel component */}
               {step === 'adjust' && (
                 <div className="space-y-3">
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h3 className="font-semibold text-gray-900 mb-3">Settings</h3>
+                  <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-3">Settings</h3>
                     <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
-                      <p><span className="text-gray-600">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
-                      <p><span className="text-gray-600">Background:</span> <span className="font-medium">{BG_COLORS.find(b => b.id === bgColor)?.label || 'Original'}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Background:</span> <span className="font-medium">{BG_COLORS.find(b => b.id === bgColor)?.label || 'Original'}</span></p>
                     </div>
                   </div>
                   <button
                     onClick={handleBack}
-                    className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition text-sm"
+                    className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 rounded-lg font-medium transition text-sm"
                   >
                     ← Back to Background
                   </button>
@@ -606,13 +606,13 @@ export const EditorPage: React.FC = () => {
               {/* Collage layout controls — layout step (controls in main area) */}
               {step === 'layout' && isCollage && (
                 <div className="space-y-3">
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h3 className="font-semibold text-gray-900 mb-3">Settings</h3>
+                  <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-3">Settings</h3>
                     <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
-                      <p><span className="text-gray-600">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
-                      <p><span className="text-gray-600">Photos:</span> <span className="font-medium">{numPhotos}</span></p>
-                      <p><span className="text-gray-600">Sheet:</span> <span className="font-medium">{getSheetDims().name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Photos:</span> <span className="font-medium">{numPhotos}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Sheet:</span> <span className="font-medium">{getSheetDims().name}</span></p>
                     </div>
                   </div>
                 </div>
@@ -621,21 +621,21 @@ export const EditorPage: React.FC = () => {
               {/* Settings summary — preview step */}
               {step === 'preview' && (
                 <>
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <h3 className="font-semibold text-gray-900 mb-3">Settings</h3>
+                  <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-3">Settings</h3>
                     <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
-                      <p><span className="text-gray-600">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
-                      <p><span className="text-gray-600">Quality:</span> <span className="font-medium">{dpi} DPI</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Quality:</span> <span className="font-medium">{dpi} DPI</span></p>
                       {isCollage && (
-                        <p><span className="text-gray-600">Photos:</span> <span className="font-medium">{numPhotos}</span></p>
+                        <p><span className="text-gray-600 dark:text-slate-400">Photos:</span> <span className="font-medium">{numPhotos}</span></p>
                       )}
                     </div>
                   </div>
 
                   {isCollage && (
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <label className="block text-sm font-semibold text-gray-900 mb-3">Print Sheet</label>
+                  <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">Print Sheet</label>
                     <div className="space-y-2">
                       {(['a4', '4x6', '5x7'] as const).map((key) => {
                         const size = PAPER_SIZES[key];
@@ -644,11 +644,11 @@ export const EditorPage: React.FC = () => {
                             key={key}
                             onClick={() => handlePaperSizeChange(key)}
                             className={`w-full px-3 py-2 rounded-lg text-sm font-medium transition text-left ${
-                              paperSize === key ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              paperSize === key ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
                             }`}
                           >
                             {size.name}
-                            <span className={`block text-xs ${paperSize === key ? 'text-white/75' : 'text-gray-500'}`}>
+                            <span className={`block text-xs ${paperSize === key ? 'text-white/75' : 'text-gray-500 dark:text-slate-400'}`}>
                               {size.widthMm}×{size.heightMm}mm
                             </span>
                           </button>
@@ -657,11 +657,11 @@ export const EditorPage: React.FC = () => {
                       <button
                         onClick={() => handlePaperSizeChange('custom')}
                         className={`w-full px-3 py-2 rounded-lg text-sm font-medium transition text-left ${
-                          paperSize === 'custom' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          paperSize === 'custom' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
                         }`}
                       >
                         Custom
-                        <span className={`block text-xs ${paperSize === 'custom' ? 'text-white/75' : 'text-gray-500'}`}>
+                        <span className={`block text-xs ${paperSize === 'custom' ? 'text-white/75' : 'text-gray-500 dark:text-slate-400'}`}>
                           {customSheetW}×{customSheetH}mm
                         </span>
                       </button>
@@ -669,25 +669,25 @@ export const EditorPage: React.FC = () => {
                     {paperSize === 'custom' && (
                       <div className="mt-3 grid grid-cols-2 gap-2">
                         <div>
-                          <label className="block text-xs text-gray-500 mb-1">Width (mm)</label>
+                          <label className="block text-xs text-gray-500 dark:text-slate-400 mb-1">Width (mm)</label>
                           <input
                             type="number"
                             min="10"
                             max="1000"
                             value={customSheetW}
                             onChange={(e) => handleCustomSheetChange(parseFloat(e.target.value) || 10, customSheetH)}
-                            className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                            className="w-full px-2 py-1.5 border border-gray-300 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 rounded-lg text-sm"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs text-gray-500 mb-1">Height (mm)</label>
+                          <label className="block text-xs text-gray-500 dark:text-slate-400 mb-1">Height (mm)</label>
                           <input
                             type="number"
                             min="10"
                             max="1000"
                             value={customSheetH}
                             onChange={(e) => handleCustomSheetChange(customSheetW, parseFloat(e.target.value) || 10)}
-                            className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                            className="w-full px-2 py-1.5 border border-gray-300 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 rounded-lg text-sm"
                           />
                         </div>
                       </div>
@@ -695,10 +695,10 @@ export const EditorPage: React.FC = () => {
                   </div>
                   )}
                   <div className="flex flex-col gap-2">
-                    <button onClick={handleBack} className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition">
+                    <button onClick={handleBack} className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 rounded-lg font-medium transition">
                       {isCollage ? 'Edit Layout' : (canvasSupported ? 'Edit Adjustments' : 'Edit Background')}
                     </button>
-                    <button onClick={handleNewPhoto} className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg font-medium transition">
+                    <button onClick={handleNewPhoto} className="w-full px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 rounded-lg font-medium transition">
                       New Photo
                     </button>
                   </div>
@@ -715,8 +715,8 @@ export const EditorPage: React.FC = () => {
             {step === 'upload' && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Upload Your Photo</h2>
-                  <p className="text-gray-600">Select a clear, front-facing photo</p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-2">Upload Your Photo</h2>
+                  <p className="text-gray-600 dark:text-slate-400">Select a clear, front-facing photo</p>
                 </div>
                 <ImageUpload onImageSelected={handleImageSelected} isLoading={isLoading} />
               </div>
@@ -725,8 +725,8 @@ export const EditorPage: React.FC = () => {
             {/* CROP */}
             {step === 'crop' && imageSrc && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900">Crop Your Photo</h2>
-                <div className="bg-white rounded-lg shadow overflow-hidden" style={{ height: '600px' }}>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Crop Your Photo</h2>
+                <div className="bg-white rounded-lg shadow dark:bg-slate-800 overflow-hidden" style={{ height: '600px' }}>
                   <ImageCropper
                     imageSrc={imageSrc}
                     passportSize={passportSize}
@@ -741,13 +741,13 @@ export const EditorPage: React.FC = () => {
             {step === 'background' && imageSrc && cropArea && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Edit Background</h2>
-                  <p className="text-gray-600">Select a background color for your passport photo</p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-2">Edit Background</h2>
+                  <p className="text-gray-600 dark:text-slate-400">Select a background color for your passport photo</p>
                 </div>
 
-                <div className="bg-white rounded-lg p-6 shadow">
+                <div className="bg-white rounded-lg p-6 shadow dark:bg-slate-800">
                   <div className="flex justify-center mb-6">
-                    <div className="relative border border-gray-200 rounded-lg overflow-hidden shadow-sm" style={{ maxWidth: '320px' }}>
+                    <div className="relative border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-sm" style={{ maxWidth: '320px' }}>
                       <img
                         src={croppedPreviewUrl}
                         alt="Cropped preview"
@@ -757,7 +757,7 @@ export const EditorPage: React.FC = () => {
                   </div>
 
                   <div className="max-w-md mx-auto">
-                    <h3 className="text-sm font-semibold text-gray-700 mb-3 text-center">Choose Background Color</h3>
+                    <h3 className="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3 text-center">Choose Background Color</h3>
                     <div className="grid grid-cols-6 gap-3 justify-center">
                       {BG_COLORS.map((bg) => (
                         <button
@@ -767,11 +767,11 @@ export const EditorPage: React.FC = () => {
                           className={`flex flex-col items-center gap-1.5 p-2 rounded-lg transition ${
                             bgColor === bg.id
                               ? 'ring-2 ring-primary ring-offset-2 bg-primary/5 scale-105'
-                              : 'hover:bg-gray-50 hover:scale-105'
+                              : 'hover:bg-gray-50 hover:scale-105 dark:hover:bg-slate-700'
                           } ${isRemovingBg ? 'opacity-50 cursor-not-allowed' : ''}`}
                         >
                           <div className={`w-10 h-10 rounded-full ${bg.preview} flex-shrink-0 shadow-sm`} />
-                          <span className="text-[10px] text-gray-600 leading-tight text-center font-medium">{bg.label}</span>
+                          <span className="text-[10px] text-gray-600 dark:text-slate-400 leading-tight text-center font-medium">{bg.label}</span>
                         </button>
                       ))}
                     </div>
@@ -795,8 +795,8 @@ export const EditorPage: React.FC = () => {
             {step === 'adjust' && imageSrc && cropArea && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Adjust Photo</h2>
-                  <p className="text-gray-600">Fine-tune brightness, contrast, and more</p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-2">Adjust Photo</h2>
+                  <p className="text-gray-600 dark:text-slate-400">Fine-tune brightness, contrast, and more</p>
                 </div>
 
                 <AdjustmentPanel
@@ -812,7 +812,7 @@ export const EditorPage: React.FC = () => {
                 <div className="flex gap-3">
                   <button
                     onClick={handleBack}
-                    className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold rounded-lg transition"
+                    className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 font-semibold rounded-lg transition"
                   >
                     ← Back to Background
                   </button>
@@ -830,12 +830,12 @@ export const EditorPage: React.FC = () => {
             {step === 'layout' && isCollage && imageSrc && cropArea && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Configure Collage Layout</h2>
-                  <p className="text-gray-600">Choose number of photos and paper size</p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-2">Configure Collage Layout</h2>
+                  <p className="text-gray-600 dark:text-slate-400">Choose number of photos and paper size</p>
                 </div>
 
                 {passportSize.id !== croppedWithSize.id && (
-                  <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 flex gap-3 items-start">
+                  <div className="bg-amber-50 border border-amber-300 dark:bg-amber-900/20 dark:border-amber-800 rounded-lg p-4 flex gap-3 items-start">
                     <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="text-sm font-medium text-amber-900">Passport size changed</p>
@@ -853,7 +853,7 @@ export const EditorPage: React.FC = () => {
                 )}
 
                 {validationError && (
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex gap-3">
+                  <div className="bg-red-50 border border-red-200 dark:bg-red-900/20 dark:border-red-800 rounded-lg p-4 flex gap-3">
                     <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
                     <p className="text-sm text-red-700">{validationError}</p>
                   </div>
@@ -862,20 +862,20 @@ export const EditorPage: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Left: Controls */}
                   <div className="space-y-4">
-                    <div className="bg-white p-4 rounded-lg border border-gray-200">
-                      <label className="block text-sm font-semibold text-gray-900 mb-3">Number of Photos</label>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">Number of Photos</label>
                       <input
                         type="number"
                         min="1"
                         max="100"
                         value={numPhotos}
                         onChange={(e) => validateAndSetNumPhotos(parseInt(e.target.value) || 1)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                        className="w-full px-3 py-2 border border-gray-300 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 rounded-lg text-sm"
                       />
                     </div>
 
-                    <div className="bg-white p-4 rounded-lg border border-gray-200">
-                      <label className="block text-sm font-semibold text-gray-900 mb-3">Print Sheet</label>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                      <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">Print Sheet</label>
                       <div className="space-y-2">
                         {(['a4', '4x6', '5x7'] as const).map((key) => {
                           const size = PAPER_SIZES[key];
@@ -884,11 +884,11 @@ export const EditorPage: React.FC = () => {
                               key={key}
                               onClick={() => handlePaperSizeChange(key)}
                               className={`w-full px-3 py-2 rounded-lg text-sm font-medium transition text-left ${
-                                paperSize === key ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                paperSize === key ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
                               }`}
                             >
                               {size.name}
-                              <span className={`block text-xs ${paperSize === key ? 'text-white/75' : 'text-gray-500'}`}>
+                              <span className={`block text-xs ${paperSize === key ? 'text-white/75' : 'text-gray-500 dark:text-slate-400'}`}>
                                 {size.widthMm}×{size.heightMm}mm
                               </span>
                             </button>
@@ -897,11 +897,11 @@ export const EditorPage: React.FC = () => {
                         <button
                           onClick={() => handlePaperSizeChange('custom')}
                           className={`w-full px-3 py-2 rounded-lg text-sm font-medium transition text-left ${
-                            paperSize === 'custom' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            paperSize === 'custom' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
                           }`}
                         >
                           Custom
-                          <span className={`block text-xs ${paperSize === 'custom' ? 'text-white/75' : 'text-gray-500'}`}>
+                          <span className={`block text-xs ${paperSize === 'custom' ? 'text-white/75' : 'text-gray-500 dark:text-slate-400'}`}>
                             {customSheetW}×{customSheetH}mm
                           </span>
                         </button>
@@ -909,40 +909,40 @@ export const EditorPage: React.FC = () => {
                       {paperSize === 'custom' && (
                         <div className="mt-3 grid grid-cols-2 gap-2">
                           <div>
-                            <label className="block text-xs text-gray-500 mb-1">Width (mm)</label>
+                            <label className="block text-xs text-gray-500 dark:text-slate-400 mb-1">Width (mm)</label>
                             <input
                               type="number"
                               min="10"
                               max="1000"
                               value={customSheetW}
                               onChange={(e) => handleCustomSheetChange(parseFloat(e.target.value) || 10, customSheetH)}
-                              className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                              className="w-full px-2 py-1.5 border border-gray-300 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 rounded-lg text-sm"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs text-gray-500 mb-1">Height (mm)</label>
+                            <label className="block text-xs text-gray-500 dark:text-slate-400 mb-1">Height (mm)</label>
                             <input
                               type="number"
                               min="10"
                               max="1000"
                               value={customSheetH}
                               onChange={(e) => handleCustomSheetChange(customSheetW, parseFloat(e.target.value) || 10)}
-                              className="w-full px-2 py-1.5 border border-gray-300 rounded-lg text-sm"
+                              className="w-full px-2 py-1.5 border border-gray-300 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100 rounded-lg text-sm"
                             />
                           </div>
                         </div>
                       )}
                     </div>
 
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900">
+                    <div className="bg-blue-50 border border-blue-200 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-300 rounded-lg p-3 text-xs text-blue-900">
                       <strong>Max:</strong> {getMaxPhotos(paperSize, passportSize)} photos of{' '}
                       {passportSize.widthMm}×{passportSize.heightMm}mm fit on {getSheetDims().name}
                     </div>
                   </div>
 
                   {/* Right: Layout Preview */}
-                  <div className="bg-white rounded-lg p-4 shadow">
-                    <h3 className="text-sm font-semibold text-gray-700 mb-4">Layout Preview</h3>
+                  <div className="bg-white rounded-lg p-4 shadow dark:bg-slate-800">
+                    <h3 className="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-4">Layout Preview</h3>
                     {(() => {
                       const ps = getSheetDims();
                       const cols = Math.floor(ps.widthMm / passportSize.widthMm);
@@ -951,7 +951,7 @@ export const EditorPage: React.FC = () => {
                       const usedH = (rows * passportSize.heightMm) / ps.heightMm * 100;
                       return (
                         <div
-                          className="bg-gray-100 border border-dashed border-gray-300 rounded-lg mx-auto overflow-hidden relative"
+                          className="bg-gray-100 border border-dashed border-gray-300 dark:bg-slate-700 dark:border-slate-600 rounded-lg mx-auto overflow-hidden relative"
                           style={{
                             aspectRatio: `${ps.widthMm} / ${ps.heightMm}`,
                           }}
@@ -973,7 +973,7 @@ export const EditorPage: React.FC = () => {
                             {Array.from({ length: Math.min(numPhotos, cols * rows) }).map((_, i) => (
                               <div
                                 key={i}
-                                className="border border-gray-300 rounded overflow-hidden"
+                                className="border border-gray-300 dark:border-slate-600 rounded overflow-hidden"
                               >
                                 {croppedPreviewUrl ? (
                                   <img
@@ -992,7 +992,7 @@ export const EditorPage: React.FC = () => {
                         </div>
                       );
                     })()}
-                    <p className="text-xs text-gray-500 text-center mt-3">
+                    <p className="text-xs text-gray-500 dark:text-slate-400 text-center mt-3">
                       {numPhotos} × {passportSize.widthMm}×{passportSize.heightMm}mm on {getSheetDims().name} ({getSheetDims().widthMm}×{getSheetDims().heightMm}mm)
                     </p>
                   </div>
@@ -1001,7 +1001,7 @@ export const EditorPage: React.FC = () => {
                 <div className="flex gap-3">
                   <button
                     onClick={handleBack}
-                    className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 font-semibold rounded-lg transition"
+                    className="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 font-semibold rounded-lg transition"
                   >
                     {canvasSupported ? '← Back to Adjust' : '← Back to Background'}
                   </button>
@@ -1019,8 +1019,8 @@ export const EditorPage: React.FC = () => {
             {/* PREVIEW — single photo */}
             {step === 'preview' && !isCollage && imageSrc && cropArea && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900">Preview & Download</h2>
-                <div className="bg-white rounded-lg p-6 shadow">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Preview & Download</h2>
+                <div className="bg-white rounded-lg p-6 shadow dark:bg-slate-800">
                   <PhotoPreview
                     imageSrc={imageSrc}
                     cropArea={cropArea}
@@ -1040,9 +1040,9 @@ export const EditorPage: React.FC = () => {
             {/* PREVIEW — collage */}
             {step === 'preview' && isCollage && collageCanvas && (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900">Preview & Download</h2>
-                <div className="bg-white rounded-lg p-6 shadow space-y-4">
-                  <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Preview & Download</h2>
+                <div className="bg-white rounded-lg p-6 shadow dark:bg-slate-800 space-y-4">
+                  <div className="border border-gray-200 dark:border-slate-700 rounded-lg p-4 bg-gray-50 dark:bg-slate-800">
                     <canvas
                       ref={(el) => {
                         if (el && collageCanvas) {
@@ -1054,16 +1054,16 @@ export const EditorPage: React.FC = () => {
                           }
                         }
                       }}
-                      className="w-full border border-gray-300 rounded"
+                      className="w-full border border-gray-300 dark:border-slate-600 rounded"
                     />
                   </div>
                   
                   {/* Payment Info */}
-                  <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-4 text-center">
-                    <p className="text-sm text-gray-700">
+                  <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 dark:from-indigo-900/20 dark:to-purple-900/20 dark:border-indigo-800 rounded-lg p-4 text-center">
+                    <p className="text-sm text-gray-700 dark:text-slate-300">
                       <span className="font-semibold text-indigo-700">€8.00</span> for high-quality collage download
                     </p>
-                    <p className="text-xs text-gray-600 mt-1">{numPhotos} photos • One-time payment • Valid for 24 hours</p>
+                    <p className="text-xs text-gray-600 dark:text-slate-400 mt-1">{numPhotos} photos • One-time payment • Valid for 24 hours</p>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
@@ -1087,17 +1087,17 @@ export const EditorPage: React.FC = () => {
       {/* Background removal loading overlay */}
       {isRemovingBg && (
         <div className="fixed inset-0 z-50 bg-black/30 flex items-center justify-center">
-          <div className="bg-white rounded-xl p-8 shadow-xl text-center max-w-sm mx-4">
+          <div className="bg-white rounded-xl p-8 shadow-xl text-center max-w-sm mx-4 dark:bg-slate-800">
             <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Removing Background</h3>
-            <p className="text-sm text-gray-600 mb-3">AI is detecting and removing the background…</p>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">Removing Background</h3>
+            <p className="text-sm text-gray-600 dark:text-slate-400 mb-3">AI is detecting and removing the background…</p>
+            <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
               <div
                 className="bg-primary h-2 rounded-full transition-all"
                 style={{ width: `${Math.round(bgRemovalProgress * 100)}%` }}
               />
             </div>
-            <p className="text-xs text-gray-500 mt-2">{Math.round(bgRemovalProgress * 100)}% complete</p>
+            <p className="text-xs text-gray-500 dark:text-slate-400 mt-2">{Math.round(bgRemovalProgress * 100)}% complete</p>
           </div>
         </div>
       )}

@@ -1473,3 +1473,380 @@ body.pro-user .ad-container {
         padding: 6px 10px;
     }
 }
+
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #0f172a;
+        color: #f1f5f9;
+    }
+
+    header {
+        background: rgba(15, 23, 42, 0.8);
+        border-bottom-color: #334155;
+    }
+
+    .header-title h1 {
+        color: #f1f5f9;
+    }
+
+    .header-tagline {
+        color: #94a3b8;
+    }
+
+    .stat-number {
+        color: #818cf8;
+    }
+
+    .stat-label {
+        color: #94a3b8;
+    }
+
+    .premium-btn {
+        background: #1e293b;
+        color: #818cf8;
+        border-color: #818cf8;
+    }
+
+    .premium-btn:hover {
+        background: #6366f1;
+        color: white;
+    }
+
+    .mode-selector {
+        border-bottom-color: #334155;
+    }
+
+    .mode-btn {
+        color: #94a3b8;
+    }
+
+    .mode-btn:hover {
+        color: #818cf8;
+        background: #1e293b;
+    }
+
+    .mode-btn.active {
+        color: #818cf8;
+        border-bottom-color: #818cf8;
+    }
+
+    .mode-content h2,
+    .editor-header h2 {
+        color: #f1f5f9;
+    }
+
+    .import-area,
+    .manual-form,
+    .tool-card,
+    .subtitle-item,
+    .seo-content,
+    .ad-container {
+        background: #1e293b;
+        border-color: #334155;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .import-area textarea,
+    #pasteInput,
+    #subtitleText,
+    .time-input,
+    .tool-input,
+    .format-select,
+    .duration-input {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    .import-area textarea:focus,
+    #pasteInput:focus,
+    #subtitleText:focus,
+    .time-input:focus,
+    .tool-input:focus,
+    .format-select:focus,
+    .duration-input:focus {
+        border-color: #818cf8;
+        background: #0f172a;
+    }
+
+    .format-select:disabled,
+    .tool-input:disabled,
+    .duration-input:disabled {
+        background: #1e293b;
+        opacity: 0.5;
+    }
+
+    .tool-card h3 {
+        color: #f1f5f9;
+    }
+
+    .tool-card p {
+        color: #94a3b8;
+    }
+
+    .tool-example {
+        background: rgba(99, 102, 241, 0.15);
+        border-left-color: #818cf8;
+        color: #cbd5e1;
+    }
+
+    .tool-example strong {
+        color: #818cf8;
+    }
+
+    .example-detail {
+        color: #94a3b8;
+    }
+
+    .usage-info {
+        background: rgba(251, 191, 36, 0.15);
+        color: #fbbf24;
+    }
+
+    .input-group span,
+    .duration-input-group span {
+        color: #94a3b8;
+    }
+
+    .secondary-btn {
+        background: #1e293b;
+        color: #94a3b8;
+        border-color: #334155;
+    }
+
+    .secondary-btn:hover:not(:disabled) {
+        border-color: #818cf8;
+        color: #818cf8;
+    }
+
+    .file-input {
+        border-color: #334155;
+        background: #0f172a;
+    }
+
+    .file-input:hover {
+        border-color: #818cf8;
+    }
+
+    .subtitle-item:hover {
+        border-color: #818cf8;
+        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+    }
+
+    .subtitle-number {
+        color: #818cf8;
+    }
+
+    .subtitle-time {
+        color: #94a3b8;
+    }
+
+    .subtitle-text {
+        color: #f1f5f9;
+    }
+
+    .checkbox-label {
+        color: #f1f5f9;
+    }
+
+    .auto-increment-control {
+        background: rgba(99, 102, 241, 0.1);
+        border-color: #4338ca;
+    }
+
+    .form-row span {
+        color: #64748b;
+    }
+
+    .tools-section h2 {
+        color: #f1f5f9;
+    }
+
+    .tools-hint {
+        color: #94a3b8;
+    }
+
+    .limit-notice {
+        background: rgba(251, 191, 36, 0.15);
+        border-color: #b45309;
+        color: #fbbf24;
+    }
+
+    .limit-notice a {
+        color: #818cf8;
+    }
+
+    /* Features highlight */
+    .feature-item {
+        color: #cbd5e1;
+    }
+
+    /* SEO content */
+    .seo-content h2 {
+        color: #f1f5f9;
+    }
+
+    .seo-content h3 {
+        color: #818cf8;
+    }
+
+    .seo-content p {
+        color: #94a3b8;
+    }
+
+    .seo-content li {
+        color: #94a3b8;
+    }
+
+    .free-tier-notice {
+        background: rgba(99, 102, 241, 0.1);
+        border-left-color: #818cf8;
+    }
+
+    .free-tier-notice h3 {
+        color: #818cf8;
+    }
+
+    .free-tier-notice p,
+    .free-tier-notice li {
+        color: #cbd5e1;
+    }
+
+    /* Modals */
+    .modal-content {
+        background: #1e293b;
+        color: #f1f5f9;
+    }
+
+    .close,
+    .close-auth,
+    .close-edit {
+        color: #64748b;
+    }
+
+    .close:hover,
+    .close-auth:hover,
+    .close-edit:hover {
+        color: #f1f5f9;
+    }
+
+    .price-card {
+        border-color: #334155;
+        background: #0f172a;
+    }
+
+    .price-card.featured {
+        border-color: #818cf8;
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+    }
+
+    .price-card h3 {
+        color: #f1f5f9;
+    }
+
+    .price {
+        color: #818cf8;
+    }
+
+    .price span {
+        color: #64748b;
+    }
+
+    .price-card li {
+        color: #94a3b8;
+    }
+
+    /* Auth modal */
+    .auth-tab {
+        background: #0f172a;
+        color: #94a3b8;
+    }
+
+    .auth-tab.active {
+        background: #6366f1;
+        color: white;
+    }
+
+    #authForm input {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    #authForm input:focus {
+        border-color: #818cf8;
+    }
+
+    .auth-error {
+        background: rgba(239, 68, 68, 0.15);
+        color: #fca5a5;
+        border-left-color: #ef4444;
+    }
+
+    .auth-note {
+        color: #94a3b8;
+    }
+
+    #authTitle {
+        color: #f1f5f9;
+    }
+
+    /* Edit/Confirm dialogs */
+    .confirm-dialog h3,
+    .edit-dialog h3 {
+        color: #f1f5f9;
+    }
+
+    .confirm-dialog p {
+        color: #94a3b8;
+    }
+
+    .edit-form label {
+        color: #cbd5e1;
+    }
+
+    .edit-form input,
+    .edit-form textarea {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    .edit-form input:focus,
+    .edit-form textarea:focus {
+        border-color: #818cf8;
+    }
+
+    /* Toast */
+    .toast {
+        background: #334155;
+        color: #f1f5f9;
+    }
+
+    /* User email */
+    .user-email {
+        color: #94a3b8;
+    }
+
+    /* Footer */
+    footer p {
+        color: #64748b !important;
+    }
+
+    footer a {
+        color: #818cf8 !important;
+    }
+
+    /* Delete button dark */
+    .delete-btn {
+        background: #475569;
+    }
+
+    .delete-btn:hover {
+        background: #334155;
+    }
+}

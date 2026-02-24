@@ -147,6 +147,55 @@
         .ws-breadcrumb-link:hover { color: #6366f1; }
         .ws-breadcrumb-sep { color: #9ca3af; flex-shrink: 0; }
         .ws-breadcrumb-current { color: #111827; font-weight: 500; }
+
+        /* Dark mode overrides for navigation */
+        @media (prefers-color-scheme: dark) {
+            .ws-app-switcher-btn {
+                background: rgba(30, 41, 59, 0.9);
+                color: #94a3b8;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+            .ws-app-switcher-btn:hover {
+                color: #818cf8;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            }
+            .ws-app-switcher-dropdown {
+                background: #1e293b;
+                border-color: #334155;
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            }
+            .ws-app-switcher-header {
+                color: #f1f5f9;
+                border-bottom-color: #334155;
+            }
+            .ws-app-switcher-item {
+                color: #f1f5f9;
+            }
+            .ws-app-switcher-item:hover {
+                background: rgba(99, 102, 241, 0.15);
+            }
+            .ws-app-switcher-item-icon {
+                color: #818cf8;
+            }
+            .ws-app-switcher-item-desc {
+                color: #94a3b8;
+            }
+            .ws-breadcrumbs {
+                color: #94a3b8;
+            }
+            .ws-breadcrumb-link {
+                color: #94a3b8;
+            }
+            .ws-breadcrumb-link:hover {
+                color: #818cf8;
+            }
+            .ws-breadcrumb-sep {
+                color: #475569;
+            }
+            .ws-breadcrumb-current {
+                color: #f1f5f9;
+            }
+        }
     </style>
 
     <link rel="stylesheet" href="styles.css">

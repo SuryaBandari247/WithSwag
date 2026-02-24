@@ -151,11 +151,11 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
     <div className="space-y-6">
       {/* Header with back button */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-gray-900">Create Photo Collage</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Create Photo Collage</h2>
         {step !== 'size' && (
           <button
             onClick={handleBackStep}
-            className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+            className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg"
           >
             <ChevronLeft className="h-4 w-4" />
             Back
@@ -167,7 +167,7 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
       {step === 'size' && (
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Step 1: Select Passport Size</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Step 1: Select Passport Size</h3>
             <PassportSizeSelect selected={passportSize} onSelect={setPassportSize} />
           </div>
           <button
@@ -183,8 +183,8 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
       {step === 'upload' && (
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Step 2: Upload Photo</h3>
-            <p className="text-sm text-gray-600 mb-4">Selected size: <strong>{passportSize.name}</strong> ({passportSize.widthMm}×{passportSize.heightMm}mm)</p>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Step 2: Upload Photo</h3>
+            <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">Selected size: <strong>{passportSize.name}</strong> ({passportSize.widthMm}×{passportSize.heightMm}mm)</p>
             <ImageUpload onImageSelected={handleImageSelected} isLoading={isLoading} />
           </div>
         </div>
@@ -194,8 +194,8 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
       {step === 'crop' && uploadedImage && (
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Step 3: Crop Photo</h3>
-            <p className="text-sm text-gray-600 mb-4">Adjust and crop your photo for the collage</p>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">Step 3: Crop Photo</h3>
+            <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">Adjust and crop your photo for the collage</p>
           </div>
           <div className="bg-white rounded-lg shadow overflow-hidden" style={{ height: '600px' }}>
             <ImageCropper
@@ -212,12 +212,12 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
       {step === 'layout' && (
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">Step 4: Configure Collage Layout</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-6">Step 4: Configure Collage Layout</h3>
           </div>
 
           {/* Number of Photos */}
-          <div className="bg-white rounded-lg p-4 border border-gray-200">
-            <label className="block text-sm font-semibold text-gray-900 mb-3">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+            <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">
               Number of Photos
             </label>
             <div className="flex items-center gap-4">
@@ -227,15 +227,15 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
                 max="100"
                 value={numPhotos}
                 onChange={(e) => handleNumPhotosChange(parseInt(e.target.value) || 1)}
-                className="w-24 px-3 py-2 border border-gray-300 rounded-lg"
+                className="w-24 px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg"
               />
-              <span className="text-sm text-gray-600">photos in collage</span>
+              <span className="text-sm text-gray-600 dark:text-slate-400">photos in collage</span>
             </div>
           </div>
 
           {/* Paper Size Selection */}
-          <div className="bg-white rounded-lg p-4 border border-gray-200">
-            <label className="block text-sm font-semibold text-gray-900 mb-3">
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+            <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">
               Paper Size
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -248,7 +248,7 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition ${
                       selectedPaperSize === key
                         ? 'bg-primary text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
                     }`}
                   >
                     <div>{key === '4x6' ? '4×6"' : key === '5x7' ? '5×7"' : 'A4'}</div>
@@ -261,18 +261,18 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
 
           {/* Validation Error */}
           {validationError && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex gap-3">
-              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-lg p-4 flex gap-3">
+              <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-semibold text-red-900 mb-1">Layout Issue</h4>
-                <p className="text-sm text-red-700">{validationError}</p>
+                <h4 className="font-semibold text-red-900 dark:text-red-200 mb-1">Layout Issue</h4>
+                <p className="text-sm text-red-700 dark:text-red-300">{validationError}</p>
               </div>
             </div>
           )}
 
           {/* Info Box */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p className="text-sm text-blue-900">
+          <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
+            <p className="text-sm text-blue-900 dark:text-blue-200">
               <strong>Paper Size Info:</strong> Paper {selectedPaperSize.toUpperCase()} ({PAPER_SIZES[selectedPaperSize].widthMm}×{PAPER_SIZES[selectedPaperSize].heightMm}mm) will fit{' '}
               <strong>
                 {Math.floor(PAPER_SIZES[selectedPaperSize].widthMm / passportSize.widthMm) *
@@ -283,10 +283,10 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
           </div>
 
           {/* Preview Grid */}
-          <div className="bg-white rounded-lg p-4 border border-gray-200">
-            <p className="text-sm font-semibold text-gray-900 mb-3">Layout Preview</p>
+          <div className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700">
+            <p className="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">Layout Preview</p>
             <div
-              className="bg-gray-100 rounded border border-dashed border-gray-300 p-2"
+              className="bg-gray-100 dark:bg-slate-700 rounded border border-dashed border-gray-300 dark:border-slate-600 p-2"
               style={{
                 display: 'grid',
                 gridTemplateColumns: `repeat(${Math.floor(
@@ -298,7 +298,7 @@ export const CollageEditor: React.FC<CollageEditorProps> = ({ onComplete, onBack
               {Array.from({ length: numPhotos }).map((_, i) => (
                 <div
                   key={i}
-                  className="bg-gray-300 rounded aspect-square flex items-center justify-center text-xs text-gray-600"
+                  className="bg-gray-300 dark:bg-slate-600 rounded aspect-square flex items-center justify-center text-xs text-gray-600 dark:text-slate-400"
                 >
                   {i + 1}
                 </div>

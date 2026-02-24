@@ -294,28 +294,28 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
   return (
     <div className="space-y-4">
       {/* Preview Canvas */}
-      <div className="bg-white rounded-lg p-4 flex items-center justify-center border border-gray-200 min-h-80">
+      <div className="bg-white dark:bg-slate-800 rounded-lg p-4 flex items-center justify-center border border-gray-200 dark:border-slate-700 min-h-80">
         <canvas
           ref={canvasRef}
-          className="max-w-full max-h-96 border border-gray-300 rounded"
+          className="max-w-full max-h-96 border border-gray-300 dark:border-slate-600 rounded"
         />
       </div>
 
       {/* Quality Warning */}
       {qualityWarning && (
-        <div className="flex gap-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-          <AlertTriangle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-          <p className="text-sm text-amber-800">{qualityWarning}</p>
+        <div className="flex gap-3 p-3 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg">
+          <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-amber-800 dark:text-amber-200">{qualityWarning}</p>
         </div>
       )}
 
       {/* Output Info */}
-      <div className="bg-gray-50 p-3 rounded-lg text-sm">
-        <p className="text-gray-700">
+      <div className="bg-gray-50 dark:bg-slate-800 p-3 rounded-lg text-sm">
+        <p className="text-gray-700 dark:text-slate-300">
           <span className="font-medium">Output size:</span> {MM_TO_PX(passportSize.widthMm, dpi).toFixed(0)}×
           {MM_TO_PX(passportSize.heightMm, dpi).toFixed(0)} pixels @ {dpi} DPI
         </p>
-        <p className="text-gray-600 text-xs mt-1">
+        <p className="text-gray-600 dark:text-slate-400 text-xs mt-1">
           File size will be approximately{' '}
           {((MM_TO_PX(passportSize.widthMm, dpi) * MM_TO_PX(passportSize.heightMm, dpi) * 3) / 1024 / 1024).toFixed(
             1
@@ -345,11 +345,11 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
       </div>
       
       {/* Payment Info */}
-      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-3 text-center">
-        <p className="text-sm text-gray-700">
-          <span className="font-semibold text-indigo-700">€5.00</span> for high-quality download
+      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 border border-indigo-200 dark:border-indigo-700 rounded-lg p-3 text-center">
+        <p className="text-sm text-gray-700 dark:text-slate-300">
+          <span className="font-semibold text-indigo-700 dark:text-indigo-400">€5.00</span> for high-quality download
         </p>
-        <p className="text-xs text-gray-600 mt-1">One-time payment • Valid for 24 hours</p>
+        <p className="text-xs text-gray-600 dark:text-slate-400 mt-1">One-time payment • Valid for 24 hours</p>
       </div>
     </div>
   );

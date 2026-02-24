@@ -179,14 +179,14 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
     <div className="flex flex-col md:flex-row gap-6 w-full">
       {/* Canvas preview — on top for mobile, right side for desktop */}
       <div className="flex-1 order-1 md:order-2 flex items-center justify-center">
-        <div className="relative bg-white rounded-lg shadow-sm border border-gray-200 p-4 w-full flex items-center justify-center">
+        <div className="relative bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4 w-full flex items-center justify-center">
           <canvas
             ref={canvasRef}
             className="max-w-full max-h-[500px] rounded-lg"
             style={{ aspectRatio: `${cropArea.width} / ${cropArea.height}` }}
           />
           {error && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-amber-700 text-sm">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg text-amber-700 dark:text-amber-300 text-sm">
               <AlertTriangle className="h-4 w-4 flex-shrink-0" />
               <span>{error}</span>
             </div>
@@ -196,8 +196,8 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
 
       {/* Sidebar sliders — below canvas on mobile, left side on desktop */}
       <div className="w-full md:w-72 flex-shrink-0 order-2 md:order-1">
-        <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
-          <h3 className="text-sm font-semibold text-gray-900">Photo Adjustments</h3>
+        <div className="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-4 space-y-4">
+          <h3 className="text-sm font-semibold text-gray-900 dark:text-slate-100">Photo Adjustments</h3>
 
           <div className="space-y-3">
             {ADJUSTMENT_SLIDERS.map((slider) => {
@@ -210,12 +210,12 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor={sliderId}
-                      className="flex items-center gap-1.5 text-xs font-medium text-gray-700"
+                      className="flex items-center gap-1.5 text-xs font-medium text-gray-700 dark:text-slate-300"
                     >
                       <Icon className="h-3.5 w-3.5 text-indigo-500" />
                       {slider.label}
                     </label>
-                    <span className="text-xs font-mono text-gray-500 w-8 text-right">
+                    <span className="text-xs font-mono text-gray-500 dark:text-slate-500 w-8 text-right">
                       {value}
                     </span>
                   </div>
@@ -229,7 +229,7 @@ const AdjustmentPanel: React.FC<AdjustmentPanelProps> = ({
                     onChange={(e) =>
                       handleSliderChange(slider.key, Number(e.target.value))
                     }
-                    className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                    className="w-full h-1.5 bg-gray-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
                   />
                 </div>
               );
