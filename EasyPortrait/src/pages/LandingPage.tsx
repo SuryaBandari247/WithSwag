@@ -689,7 +689,7 @@ export const LandingPage: React.FC = () => {
             <div className="p-6 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-3">Simple Pricing</h3>
               <p className="text-gray-700 dark:text-slate-300">
-                Single photo for just <strong>$5</strong>. Collage at <strong>$8</strong> — the more you print, the more you save.
+                Single photo for just <strong>€3</strong>. Collage at <strong>$8</strong> — the more you print, the more you save.
               </p>
             </div>
           </div>
@@ -745,7 +745,7 @@ export const LandingPage: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100">Single Photo</h3>
               </div>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-gray-900 dark:text-slate-100">$5</span>
+                <span className="text-4xl font-bold text-gray-900 dark:text-slate-100">€3</span>
                 <span className="text-gray-400 dark:text-slate-400 text-sm ml-2">per photo</span>
               </div>
               <ul className="space-y-3 mb-8">
@@ -853,11 +853,11 @@ export const LandingPage: React.FC = () => {
               { q: 'What size is a US passport photo?', a: 'A US passport photo must be 2×2 inches (51×51 mm). The head must be between 1 and 1⅜ inches (25–35 mm) from the bottom of the chin to the top of the head. The background must be plain white.' },
               { q: 'Can I take my own passport photo at home?', a: 'Yes. Use a smartphone or digital camera with good lighting. Stand in front of a plain white or light-colored wall. Upload your photo to EasyPortrait and we\'ll crop, resize, and replace the background to meet official requirements.' },
               { q: 'What background color is required for passport photos?', a: 'Most countries require a plain white or off-white background. Some countries like India accept a light-colored background. EasyPortrait\'s AI background removal lets you replace any background with the correct color instantly.' },
-              { q: 'Is EasyPortrait free to use?', a: 'You can upload, crop, and preview your passport photo for free. High-resolution downloads with AI background removal start at $5 for a single photo or $8 for a print-ready collage sheet.' },
+              { q: 'Is EasyPortrait free to use?', a: 'You can upload, crop, and preview your passport photo for free. High-resolution downloads with AI background removal start at €3 for a single photo or $8 for a print-ready collage sheet.' },
               { q: 'Are my photos uploaded to a server?', a: 'No. All image processing happens locally in your browser using on-device AI. Your photos are never uploaded to any server. This is a privacy-first tool — your data stays on your device.' },
               { q: 'What countries does EasyPortrait support?', a: 'We support passport photo standards for 50+ countries including the US, EU, UK, India, Canada, Australia, China, Malaysia, Singapore, Japan, South Korea, Brazil, and many more.' },
               { q: 'Can I print the photos at home?', a: 'Yes. Use the collage feature to create a print-ready sheet (A4, 4×6", or 5×7") with multiple photos. Print on glossy photo paper at 300 DPI for best results.' },
-              { q: 'How is this different from a photo studio?', a: 'Photo studios charge $10–$20 per set. EasyPortrait gives you the same compliant result for $5 (single) or $8 (collage), and you can retake as many times as you want from home.' },
+              { q: 'How is this different from a photo studio?', a: 'Photo studios charge $10–$20 per set. EasyPortrait gives you the same compliant result for €3 (single) or $8 (collage), and you can retake as many times as you want from home.' },
             ].map((item, i) => (
               <div key={i} className="border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
                 <button
@@ -907,7 +907,7 @@ export const LandingPage: React.FC = () => {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-6">Ready to get started?</h2>
         <p className="text-lg text-gray-600 dark:text-slate-400 mb-8">
-          Professional passport photos, starting at just $5.
+          Professional passport photos, starting at just €3.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
