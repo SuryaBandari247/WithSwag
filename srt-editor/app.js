@@ -564,6 +564,15 @@ onAuthStateChanged(auth, async (user) => {
         loginBtn.classList.add('hidden');
         logoutBtn.classList.remove('hidden');
         
+        // Close auth modal if it's open (signup/login just completed)
+        if (!authModal.classList.contains('hidden')) {
+            authModal.classList.add('hidden');
+            authForm.reset();
+            authSubmit.disabled = false;
+            authSubmit.textContent = currentAuthMode === 'login' ? 'Login' : 'Sign Up';
+            showToast(`Welcome${currentAuthMode === 'signup' ? '! Account created successfully' : ' back, ' + user.email}`, 'success');
+        }
+        
         // Check if user is Pro
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists()) {
@@ -621,6 +630,25 @@ authTabs.forEach(tab => {
     });
 });
 
+// Map Firebase error codes to user-friendly messages
+function getFriendlyAuthError(code) {
+    const messages = {
+        'auth/email-already-in-use': 'This email is already registered. Try logging in instead.',
+        'auth/invalid-email': 'Please enter a valid email address.',
+        'auth/user-disabled': 'This account has been disabled. Contact support for help.',
+        'auth/user-not-found': 'No account found with this email. Want to sign up?',
+        'auth/wrong-password': 'Incorrect password. Please try again.',
+        'auth/invalid-credential': 'Incorrect email or password. Please try again.',
+        'auth/weak-password': 'Password is too weak. Use at least 6 characters.',
+        'auth/too-many-requests': 'Too many attempts. Please wait a moment and try again.',
+        'auth/network-request-failed': 'Network error. Check your connection and try again.',
+        'auth/popup-closed-by-user': 'Sign-in was cancelled. Please try again.',
+        'auth/operation-not-allowed': 'This sign-in method is not enabled. Contact support.',
+        'auth/missing-password': 'Please enter your password.',
+    };
+    return messages[code] || 'Something went wrong. Please try again.';
+}
+
 // Auth form submit
 authForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -642,12 +670,10 @@ authForm.addEventListener('submit', async (e) => {
         } else {
             await signInWithEmailAndPassword(auth, email, password);
         }
-        authModal.classList.add('hidden');
-        authForm.reset();
+        // Modal close and feedback handled by onAuthStateChanged
     } catch (error) {
-        authError.textContent = error.message;
+        authError.textContent = getFriendlyAuthError(error.code || error.message);
         authError.classList.remove('hidden');
-    } finally {
         authSubmit.disabled = false;
         authSubmit.textContent = currentAuthMode === 'login' ? 'Login' : 'Sign Up';
     }
@@ -661,6 +687,7 @@ loginBtn.addEventListener('click', () => {
 // Logout button
 logoutBtn.addEventListener('click', async () => {
     await signOut(auth);
+    showToast('You have been logged out', 'info');
     subtitles = [];
     renderSubtitles();
     saveSubtitlesToStorage();
