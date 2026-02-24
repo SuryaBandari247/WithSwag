@@ -173,6 +173,27 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:bg-slate-900 dark:from-slate-900 dark:to-slate-900">
       <AppSwitcher />
 
+      {/* Right-side red ribbons */}
+      <div className="fixed right-0 top-1/3 z-40 hidden lg:flex flex-col gap-2">
+        {[
+          'Instant Passport Photo',
+          '50+ Countries Supported',
+          'Ready in Seconds',
+          'Print-Ready Sizes',
+          '100% Browser-Based',
+        ].map((text, i) => (
+          <div
+            key={i}
+            className="relative bg-red-600 text-white text-xs font-semibold px-4 py-2 pr-3 pl-5 shadow-lg"
+            style={{
+              clipPath: 'polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%)',
+            }}
+          >
+            {text}
+          </div>
+        ))}
+      </div>
+
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 dark:bg-slate-900/80 dark:border-slate-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
