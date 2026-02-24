@@ -507,21 +507,50 @@ export const EditorPage: React.FC = () => {
       {/* Custom Color Picker Modal */}
       {showColorPicker && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowColorPicker(false)}>
-          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 w-80" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl p-6 w-[340px]" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4 text-center">Pick a Color</h3>
-            <div className="flex justify-center mb-4">
+            
+            {/* Color grid */}
+            <div className="grid grid-cols-8 gap-1.5 mb-4">
+              {[
+                '#FFFFFF','#F5F5F5','#E0E0E0','#BDBDBD','#9E9E9E','#757575','#424242','#212121',
+                '#FFCDD2','#EF9A9A','#EF5350','#E53935','#C62828','#B71C1C','#880E4F','#4A148C',
+                '#F8BBD0','#F48FB1','#EC407A','#D81B60','#AD1457','#6A1B9A','#4527A0','#283593',
+                '#CE93D8','#BA68C8','#AB47BC','#8E24AA','#7B1FA2','#5C6BC0','#3F51B5','#1A237E',
+                '#90CAF9','#64B5F6','#42A5F5','#1E88E5','#1565C0','#0D47A1','#01579B','#006064',
+                '#80DEEA','#4DD0E1','#26C6DA','#00ACC1','#00838F','#004D40','#1B5E20','#33691E',
+                '#A5D6A7','#81C784','#66BB6A','#43A047','#2E7D32','#558B2F','#827717','#F57F17',
+                '#FFF59D','#FFF176','#FFEE58','#FDD835','#F9A825','#FF8F00','#EF6C00','#BF360C',
+                '#FFCC80','#FFB74D','#FFA726','#FB8C00','#E65100','#D84315','#3E2723','#263238',
+              ].map((color) => (
+                <button
+                  key={color}
+                  onClick={() => setCustomColor(color)}
+                  className={`w-8 h-8 rounded-md border-2 transition-transform hover:scale-110 ${
+                    customColor.toUpperCase() === color ? 'border-primary scale-110 shadow-md' : 'border-transparent'
+                  }`}
+                  style={{ background: color }}
+                  title={color}
+                />
+              ))}
+            </div>
+
+            {/* Preview + hex input */}
+            <div className="flex items-center gap-3 mb-4 bg-gray-50 dark:bg-slate-700 rounded-lg p-3">
+              <div className="w-10 h-10 rounded-lg border border-gray-300 dark:border-slate-500 flex-shrink-0" style={{ background: customColor }} />
               <input
-                type="color"
+                type="text"
                 value={customColor}
-                onChange={(e) => setCustomColor(e.target.value)}
-                className="w-48 h-48 rounded-lg border-0 cursor-pointer p-0"
-                style={{ WebkitAppearance: 'none', border: 'none' }}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (/^#[0-9A-Fa-f]{0,6}$/.test(val)) setCustomColor(val);
+                }}
+                className="flex-1 px-3 py-2 text-sm font-mono bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-md text-gray-900 dark:text-slate-100"
+                placeholder="#FFFFFF"
+                maxLength={7}
               />
             </div>
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full border border-gray-300" style={{ background: customColor }} />
-              <span className="text-sm font-mono text-gray-600 dark:text-slate-400">{customColor}</span>
-            </div>
+
             <div className="flex gap-3">
               <button
                 onClick={() => setShowColorPicker(false)}
