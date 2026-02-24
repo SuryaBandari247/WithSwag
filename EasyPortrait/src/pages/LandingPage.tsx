@@ -9,7 +9,7 @@ import samplePhoto2 from '../resources/Gemini_Generated_Image_2ff4mq2ff4mq2ff4.j
 import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.jpeg';
 import samplePhoto4 from '../resources/Gemini_Generated_Image_n0jv12n0jv12n0jv.jpeg';
 import collagePhoto from '../resources/abced.jpeg';
-import homePhotoGuide from '../resources/Gemini_Generated_Image_gmapwngmapwngmap.png';
+import homePhotoGuide from '../resources/B476E3CC-E517-4909-B143-9F3118F22DEF_1_201_a.jpeg';
 
 const BG_DEMO_COLORS = [
   { color: '#FFFFFF', label: 'White' },
