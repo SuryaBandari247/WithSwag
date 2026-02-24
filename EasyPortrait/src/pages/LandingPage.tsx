@@ -173,6 +173,27 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:bg-slate-900 dark:from-slate-900 dark:to-slate-900">
       <AppSwitcher />
 
+      {/* Right-side red ribbons */}
+      <div className="fixed right-0 top-1/3 z-40 hidden lg:flex flex-col gap-2">
+        {[
+          'Instant Passport Photo',
+          '50+ Countries Supported',
+          'Ready in Seconds',
+          'Print-Ready Sizes',
+          '100% Browser-Based',
+        ].map((text, i) => (
+          <div
+            key={i}
+            className="relative bg-red-600 text-white text-xs font-semibold px-4 py-2 pr-3 pl-5 shadow-lg"
+            style={{
+              clipPath: 'polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%)',
+            }}
+          >
+            {text}
+          </div>
+        ))}
+      </div>
+
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 dark:bg-slate-900/80 dark:border-slate-700">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -186,13 +207,24 @@ export const LandingPage: React.FC = () => {
             </div>
             <span className="hidden sm:inline text-xs text-gray-500 dark:text-slate-400 font-medium">50+ countries supported</span>
           </div>
-          <div className="flex items-center gap-4">
-            <a href="#features" className="text-sm text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100">
-              Features
-            </a>
-            <a href="#privacy" className="text-sm text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100">
-              Privacy
-            </a>
+          <div className="hidden md:flex items-center gap-2 overflow-x-auto">
+            {[
+              { label: 'Features', href: '#features' },
+              { label: 'Country Guide', href: '#country-guide' },
+              { label: 'Compliance', href: '#compliance' },
+              { label: 'Privacy', href: '#privacy' },
+              { label: 'How-To', href: '#home-photo' },
+              { label: 'FAQ', href: '#faq' },
+              { label: 'Pricing', href: '#pricing' },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="flex-shrink-0 px-3 py-1.5 text-xs font-semibold rounded-md bg-primary/10 text-primary dark:bg-indigo-900/30 dark:text-indigo-300 border border-primary/20 dark:border-indigo-700/40 hover:bg-primary hover:text-white dark:hover:bg-indigo-600 dark:hover:text-white transition-all"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
@@ -315,26 +347,6 @@ export const LandingPage: React.FC = () => {
 
           {/* Center Column: Text Block */}
           <div className="order-first md:order-2 text-center max-w-lg mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 mb-6 overflow-x-auto scrollbar-hide">
-              {[
-                { label: 'Instant Passport Photo', href: '#how-it-works' },
-                { label: 'Printer-Compatible Sizes', href: '#features' },
-                { label: 'AI Background Removal', href: '#features' },
-                { label: '50+ Country Standards', href: '#country-guide' },
-                { label: 'Compliance Guaranteed', href: '#compliance' },
-                { label: '100% Private', href: '#privacy' },
-                { label: 'How-To Guide', href: '#home-photo' },
-                { label: 'FAQ', href: '#faq' },
-              ].map((tag) => (
-                <a
-                  key={tag.label}
-                  href={tag.href}
-                  className="flex-shrink-0 px-3 py-1 text-xs font-medium rounded-full bg-red-600/90 text-white border border-red-500/50 hover:bg-red-700 transition-colors shadow-sm"
-                >
-                  {tag.label}
-                </a>
-              ))}
-            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-slate-100 mb-6 leading-tight">
               Create Professional Passport Photos
             </h1>
