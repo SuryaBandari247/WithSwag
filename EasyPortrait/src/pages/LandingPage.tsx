@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Sun, Contrast as ContrastIcon, Palette } from 'lucide-react';
+import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Sun, Contrast as ContrastIcon, Palette, Globe, Shield, ChevronDown, Lightbulb, Lock, Eye, Zap, Monitor } from 'lucide-react';
 import { removeBackground } from '@imgly/background-removal';
 import AppSwitcher from '../components/AppSwitcher';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -35,6 +35,7 @@ export const LandingPage: React.FC = () => {
   const [activeSheetIndex, setActiveSheetIndex] = useState(0);
   const [adjustSliderPos, setAdjustSliderPos] = useState(0);
   const [activeAdjustIndex, setActiveAdjustIndex] = useState(0);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const CROP_SIZES = [
     { name: 'US / India', dims: '2×2″', w: 1, h: 1, flag: '🇺🇸' },
@@ -649,6 +650,170 @@ export const LandingPage: React.FC = () => {
                 Create Collage
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Country-Specific Passport Photo Guide */}
+      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Globe className="h-10 w-10 text-primary mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">Passport Photo Sizes by Country</h2>
+            <p className="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Every country has specific photo requirements for passports and visas. We support 50+ standards so your photo is accepted the first time.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { country: 'United States', size: '2 × 2 in (51 × 51 mm)', bg: 'White', flag: '🇺🇸' },
+              { country: 'European Union', size: '35 × 45 mm', bg: 'White / Light Gray', flag: '🇪🇺' },
+              { country: 'United Kingdom', size: '35 × 45 mm', bg: 'Plain Light Gray', flag: '🇬🇧' },
+              { country: 'India', size: '2 × 2 in (51 × 51 mm)', bg: 'White', flag: '🇮🇳' },
+              { country: 'Canada', size: '50 × 70 mm', bg: 'White / Light', flag: '🇨🇦' },
+              { country: 'Australia', size: '35 × 45 mm', bg: 'Plain White', flag: '🇦🇺' },
+              { country: 'China', size: '33 × 48 mm', bg: 'White', flag: '🇨🇳' },
+              { country: 'Malaysia', size: '35 × 50 mm', bg: 'White', flag: '🇲🇾' },
+            ].map((item, i) => (
+              <div key={i} className="bg-white dark:bg-slate-800 rounded-xl p-5 border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-indigo-500 transition hover:shadow-md">
+                <div className="text-3xl mb-2">{item.flag}</div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 text-sm mb-1">{item.country}</h3>
+                <p className="text-xs text-primary font-medium mb-1">{item.size}</p>
+                <p className="text-xs text-gray-500 dark:text-slate-400">Background: {item.bg}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-gray-500 dark:text-slate-400 mt-6">
+            Plus Singapore, Japan, South Korea, Brazil, Mexico, and many more.
+          </p>
+        </div>
+      </section>
+
+      {/* Compliance Standards */}
+      <section className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Shield className="h-10 w-10 text-green-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">Official Compliance Standards</h2>
+            <p className="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Passport photos are rejected for small mistakes. EasyPortrait helps you meet every requirement.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { title: 'Correct Dimensions', desc: 'Automatically crops to the exact pixel dimensions required by each country. US 2×2", EU 35×45mm, and more.', icon: Crop },
+              { title: 'White Background', desc: 'AI removes your background and replaces it with the correct color — plain white, light gray, or blue as needed.', icon: Wand2 },
+              { title: 'Even Lighting', desc: 'Adjust brightness, contrast, and face lighting to eliminate shadows and ensure even illumination across your face.', icon: Sun },
+              { title: 'Neutral Expression', desc: 'Tips and guidelines to help you capture the right expression — mouth closed, eyes open, facing forward.', icon: Eye },
+              { title: 'High Resolution', desc: 'Output at 300 DPI or 600 DPI for sharp, print-ready results that meet government quality standards.', icon: Zap },
+              { title: 'Proper Framing', desc: 'Smart crop guides ensure your head size, eye position, and chin-to-crown ratio meet official specifications.', icon: Camera },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 p-5 rounded-lg border border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800 transition">
+                <item.icon className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-1">{item.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-slate-400">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How to Take a Passport Photo at Home */}
+      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Lightbulb className="h-10 w-10 text-amber-500 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">How to Take a Passport Photo at Home</h2>
+            <p className="text-gray-600 dark:text-slate-400">
+              Skip the photo studio. Follow these tips to get a compliant passport photo with just your phone.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { step: '1', title: 'Find good lighting', desc: 'Stand facing a window or use soft, even lighting. Avoid harsh overhead lights that create shadows under your eyes or nose.' },
+              { step: '2', title: 'Use a plain background', desc: 'Stand in front of a white or light-colored wall. Don\'t worry if it\'s not perfect — our AI will replace it.' },
+              { step: '3', title: 'Position your camera at eye level', desc: 'Hold your phone at arm\'s length or use a tripod. The camera should be level with your eyes, not angled up or down.' },
+              { step: '4', title: 'Keep a neutral expression', desc: 'Look directly at the camera. Keep your mouth closed, eyes open, and face relaxed. No smiling or frowning.' },
+              { step: '5', title: 'Remove glasses and hats', desc: 'Most countries require no eyewear or head coverings (religious exceptions apply). Remove any accessories that obscure your face.' },
+              { step: '6', title: 'Upload to EasyPortrait', desc: 'Our tool handles the rest — crop, resize, background removal, and compliance checks. Download your print-ready photo in seconds.' },
+            ].map((item, i) => (
+              <div key={i} className="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-5 border border-gray-200 dark:border-slate-700">
+                <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                  {item.step}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-1">{item.title}</h3>
+                  <p className="text-sm text-gray-600 dark:text-slate-400">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4 text-center">Frequently Asked Questions</h2>
+          <p className="text-gray-600 dark:text-slate-400 text-center mb-10">Everything you need to know about passport photos and EasyPortrait.</p>
+
+          <div className="space-y-3">
+            {[
+              { q: 'What size is a US passport photo?', a: 'A US passport photo must be 2×2 inches (51×51 mm). The head must be between 1 and 1⅜ inches (25–35 mm) from the bottom of the chin to the top of the head. The background must be plain white.' },
+              { q: 'Can I take my own passport photo at home?', a: 'Yes. Use a smartphone or digital camera with good lighting. Stand in front of a plain white or light-colored wall. Upload your photo to EasyPortrait and we\'ll crop, resize, and replace the background to meet official requirements.' },
+              { q: 'What background color is required for passport photos?', a: 'Most countries require a plain white or off-white background. Some countries like India accept a light-colored background. EasyPortrait\'s AI background removal lets you replace any background with the correct color instantly.' },
+              { q: 'Is EasyPortrait free to use?', a: 'You can upload, crop, and preview your passport photo for free. High-resolution downloads with AI background removal start at $5 for a single photo or $8 for a print-ready collage sheet.' },
+              { q: 'Are my photos uploaded to a server?', a: 'No. All image processing happens locally in your browser using on-device AI. Your photos are never uploaded to any server. This is a privacy-first tool — your data stays on your device.' },
+              { q: 'What countries does EasyPortrait support?', a: 'We support passport photo standards for 50+ countries including the US, EU, UK, India, Canada, Australia, China, Malaysia, Singapore, Japan, South Korea, Brazil, and many more.' },
+              { q: 'Can I print the photos at home?', a: 'Yes. Use the collage feature to create a print-ready sheet (A4, 4×6", or 5×7") with multiple photos. Print on glossy photo paper at 300 DPI for best results.' },
+              { q: 'How is this different from a photo studio?', a: 'Photo studios charge $10–$20 per set. EasyPortrait gives you the same compliant result for $5 (single) or $8 (collage), and you can retake as many times as you want from home.' },
+            ].map((item, i) => (
+              <div key={i} className="border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                <button
+                  onClick={() => setOpenFaqIndex(openFaqIndex === i ? null : i)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 dark:hover:bg-slate-800 transition"
+                  aria-expanded={openFaqIndex === i}
+                >
+                  <span className="font-medium text-gray-900 dark:text-slate-100 pr-4">{item.q}</span>
+                  <ChevronDown className={`h-5 w-5 text-gray-400 flex-shrink-0 transition-transform ${openFaqIndex === i ? 'rotate-180' : ''}`} />
+                </button>
+                {openFaqIndex === i && (
+                  <div className="px-5 pb-4 text-sm text-gray-600 dark:text-slate-400 leading-relaxed">
+                    {item.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Signals */}
+      <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-12 text-center">Why Choose EasyPortrait</h2>
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { icon: Lock, title: 'Privacy First', desc: 'Photos never leave your device. Zero server uploads. Your data is yours.' },
+              { icon: Monitor, title: '100% Browser-Based', desc: 'No app to install. Works on any device with a modern browser — phone, tablet, or desktop.' },
+              { icon: Globe, title: '50+ Country Standards', desc: 'US, EU, UK, India, Canada, Australia, China, and many more. Always up to date.' },
+              { icon: Zap, title: 'Instant Results', desc: 'Upload, crop, and download in under 60 seconds. AI background removal in real time.' },
+            ].map((item, i) => (
+              <div key={i} className="text-center">
+                <div className="h-14 w-14 rounded-2xl bg-primary/10 dark:bg-indigo-900/30 flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="h-7 w-7 text-primary" />
+                </div>
+                <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-slate-400">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

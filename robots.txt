@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://easysrt.vercel.app/sitemap.xml
+Sitemap: https://withswag.org/sitemap.xml
