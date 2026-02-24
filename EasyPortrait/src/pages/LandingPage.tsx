@@ -9,6 +9,7 @@ import samplePhoto2 from '../resources/Gemini_Generated_Image_2ff4mq2ff4mq2ff4.j
 import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.jpeg';
 import samplePhoto4 from '../resources/Gemini_Generated_Image_n0jv12n0jv12n0jv.jpeg';
 import collagePhoto from '../resources/abced.jpeg';
+import homePhotoGuide from '../resources/Gemini_Generated_Image_gmapwngmapwngmap.png';
 
 const BG_DEMO_COLORS = [
   { color: '#FFFFFF', label: 'White' },
@@ -731,7 +732,7 @@ export const LandingPage: React.FC = () => {
 
       {/* How to Take a Passport Photo at Home */}
       <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Lightbulb className="h-10 w-10 text-amber-500 mx-auto mb-4" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">How to Take a Passport Photo at Home</h2>
@@ -740,25 +741,40 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="space-y-4">
-            {[
-              { step: '1', title: 'Find good lighting', desc: 'Stand facing a window or use soft, even lighting. Avoid harsh overhead lights that create shadows under your eyes or nose.' },
-              { step: '2', title: 'Use a plain background', desc: 'Stand in front of a white or light-colored wall. Don\'t worry if it\'s not perfect — our AI will replace it.' },
-              { step: '3', title: 'Position your camera at eye level', desc: 'Hold your phone at arm\'s length or use a tripod. The camera should be level with your eyes, not angled up or down.' },
-              { step: '4', title: 'Keep a neutral expression', desc: 'Look directly at the camera. Keep your mouth closed, eyes open, and face relaxed. No smiling or frowning.' },
-              { step: '5', title: 'Remove glasses and hats', desc: 'Most countries require no eyewear or head coverings (religious exceptions apply). Remove any accessories that obscure your face.' },
-              { step: '6', title: 'Upload to EasyPortrait', desc: 'Our tool handles the rest — crop, resize, background removal, and compliance checks. Download your print-ready photo in seconds.' },
-            ].map((item, i) => (
-              <div key={i} className="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-5 border border-gray-200 dark:border-slate-700">
-                <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
-                  {item.step}
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-slate-400">{item.desc}</p>
-                </div>
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            {/* Image */}
+            <div className="flex justify-center order-2 md:order-1">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-primary rounded-2xl opacity-20 blur-2xl" />
+                <img
+                  src={homePhotoGuide}
+                  alt="Person taking a passport photo at home with a smartphone"
+                  className="relative rounded-2xl shadow-2xl max-w-full h-auto max-h-[480px] object-cover"
+                />
               </div>
-            ))}
+            </div>
+
+            {/* Steps */}
+            <div className="space-y-4 order-1 md:order-2">
+              {[
+                { step: '1', title: 'Find good lighting', desc: 'Stand facing a window or use soft, even lighting. Avoid harsh overhead lights that create shadows under your eyes or nose.' },
+                { step: '2', title: 'Use a plain background', desc: 'Stand in front of a white or light-colored wall. Don\'t worry if it\'s not perfect — our AI will replace it.' },
+                { step: '3', title: 'Position your camera at eye level', desc: 'Hold your phone at arm\'s length or use a tripod. The camera should be level with your eyes, not angled up or down.' },
+                { step: '4', title: 'Keep a neutral expression', desc: 'Look directly at the camera. Keep your mouth closed, eyes open, and face relaxed. No smiling or frowning.' },
+                { step: '5', title: 'Remove glasses and hats', desc: 'Most countries require no eyewear or head coverings (religious exceptions apply). Remove any accessories that obscure your face.' },
+                { step: '6', title: 'Upload to EasyPortrait', desc: 'Our tool handles the rest — crop, resize, background removal, and compliance checks. Download your print-ready photo in seconds.' },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700">
+                  <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    {item.step}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-1">{item.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-slate-400">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
