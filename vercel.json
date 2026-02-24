@@ -3,11 +3,19 @@
   "outputDirectory": ".",
   "routes": [
     {
-      "src": "/portrait/(.*)",
+      "src": "/portrait/assets/(.*)",
+      "dest": "/EasyPortrait/dist/assets/$1"
+    },
+    {
+      "src": "/portrait/vite\\.svg",
+      "dest": "/EasyPortrait/dist/vite.svg"
+    },
+    {
+      "src": "/portrait/(.*\\.(js|css|png|jpg|jpeg|svg|ico|woff|woff2|wasm|mjs))",
       "dest": "/EasyPortrait/dist/$1"
     },
     {
-      "src": "/portrait",
+      "src": "/portrait(/.*)?",
       "dest": "/EasyPortrait/dist/index.html"
     },
     {
