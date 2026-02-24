@@ -9,7 +9,7 @@ import samplePhoto2 from '../resources/Gemini_Generated_Image_2ff4mq2ff4mq2ff4.j
 import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.jpeg';
 import samplePhoto4 from '../resources/Gemini_Generated_Image_n0jv12n0jv12n0jv.jpeg';
 import collagePhoto from '../resources/abced.jpeg';
-import homePhotoGuide from '../resources/B476E3CC-E517-4909-B143-9F3118F22DEF_1_201_a.jpeg';
+import homePhotoGuide from '../resources/387831C9-07A3-4837-AB44-F7D3CFDA983F_1_201_a.jpeg';
 import passportUSA from '../resources/USA.png';
 import passportIndia from '../resources/india.png';
 import passportCanada from '../resources/canada.png';
