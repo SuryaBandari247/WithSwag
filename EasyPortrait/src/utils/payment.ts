@@ -35,7 +35,7 @@ export const getPaymentAmount = (isCollage: boolean, numPhotos?: number): number
     return 8.00;
   }
   // Single photo price
-  return 5.00;
+  return 3.00;
 };
 
 export const getPaymentDescription = (isCollage: boolean, numPhotos?: number, passportSize?: string): string => {

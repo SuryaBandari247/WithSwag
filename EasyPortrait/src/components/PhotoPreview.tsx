@@ -347,7 +347,7 @@ export const PhotoPreview: React.FC<PreviewProps> = ({
       {/* Payment Info */}
       <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 border border-indigo-200 dark:border-indigo-700 rounded-lg p-3 text-center">
         <p className="text-sm text-gray-700 dark:text-slate-300">
-          <span className="font-semibold text-indigo-700 dark:text-indigo-400">€5.00</span> for high-quality download
+          <span className="font-semibold text-indigo-700 dark:text-indigo-400">€3.00</span> for high-quality download
         </p>
         <p className="text-xs text-gray-600 dark:text-slate-400 mt-1">One-time payment • Valid for 24 hours</p>
       </div>
