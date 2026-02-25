@@ -85,3 +85,13 @@ body {
 .guide-example-caption {
   text-align: center; font-size: 13px; color: #6b7280; margin: -12px 0 20px; font-style: italic;
 }
+
+/* AdSense Ad Containers */
+.guide-ad {
+  max-width: 800px; margin: 24px auto; padding: 0 20px; text-align: center;
+}
+.guide-ad ins { display: block; }
+.guide-ad-label {
+  font-size: 11px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
