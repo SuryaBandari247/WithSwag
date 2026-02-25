@@ -69,3 +69,11 @@ body {
   .guide-content h2 { font-size: 22px; }
   .related-guides { grid-template-columns: 1fr; }
 }
+
+.guide-example-img {
+  display: block; max-width: 280px; margin: 20px auto; border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12); border: 1px solid #e5e7eb;
+}
+.guide-example-caption {
+  text-align: center; font-size: 13px; color: #6b7280; margin: -12px 0 20px; font-style: italic;
+}
