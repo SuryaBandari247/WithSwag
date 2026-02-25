@@ -23,50 +23,10 @@
       ]
     }
   ],
-  "routes": [
-    {
-      "src": "/portrait/assets/(.*)",
-      "dest": "/EasyPortrait/dist/assets/$1"
-    },
-    {
-      "src": "/portrait/vite\\.svg",
-      "dest": "/EasyPortrait/dist/vite.svg"
-    },
-    {
-      "src": "/portrait/(.*\\.(js|css|png|jpg|jpeg|svg|ico|woff|woff2|wasm|mjs))",
-      "dest": "/EasyPortrait/dist/$1"
-    },
-    {
-      "src": "/portrait(/.*)?",
-      "dest": "/EasyPortrait/dist/index.html"
-    },
-    {
-      "src": "/guides/([^/]+)/$",
-      "dest": "/guides/$1/index.html"
-    },
-    {
-      "src": "/guides/([^/]+)$",
-      "dest": "/guides/$1/index.html"
-    },
-    {
-      "src": "/guides/(.*\\.(css|js|png|jpg|jpeg|svg|ico|woff|woff2))",
-      "dest": "/guides/$1"
-    },
-    {
-      "src": "/guides/?$",
-      "dest": "/guides/index.html"
-    },
-    {
-      "src": "/srt-editor/(.*)",
-      "dest": "/srt-editor/$1"
-    },
-    {
-      "src": "/srt-editor",
-      "dest": "/srt-editor/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+  "rewrites": [
+    { "source": "/portrait/assets/:path*", "destination": "/EasyPortrait/dist/assets/:path*" },
+    { "source": "/portrait/vite.svg", "destination": "/EasyPortrait/dist/vite.svg" },
+    { "source": "/portrait/:path*", "destination": "/EasyPortrait/dist/index.html" },
+    { "source": "/portrait", "destination": "/EasyPortrait/dist/index.html" }
   ]
 }
