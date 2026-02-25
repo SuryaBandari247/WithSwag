@@ -791,7 +791,7 @@ export const LandingPage: React.FC = () => {
                 <span className="text-gray-400 dark:text-slate-400 text-sm ml-2">per collage</span>
               </div>
               <ul className="space-y-3 mb-4">
-                {['Everything in Single Photo', 'Print-ready A4, 4×6", 5×7" sheets', 'Multiple photos per sheet', 'Save vs individual photos'].map((item, i) => (
+                {['Everything in Single Photo', 'Print-ready A4, 4×6", 5×7" or custom size', 'Multiple photos per sheet', 'Save vs individual photos'].map((item, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300">
                     <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
                     {item}
