@@ -505,16 +505,16 @@ export const LandingPage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {[
-              { country: 'United States', flag: '🇺🇸', img: passportUSA, size: '2 × 2 in (51 × 51 mm)', head: 'Head height: 25–35 mm', bg: 'Plain white', extra: 'No glasses since 2016. Head must be centered. Taken within last 6 months.' },
-              { country: 'India', flag: '🇮🇳', img: passportIndia, size: '2 × 2 in (51 × 51 mm)', head: 'Face covers 70–80% of frame', bg: 'Plain white', extra: 'Ears must be visible. No border. Matte or glossy finish accepted.' },
-              { country: 'Canada', flag: '🇨🇦', img: passportCanada, size: '50 × 70 mm', head: 'Face height: 31–36 mm', bg: 'Plain white or light gray', extra: 'Neutral expression, mouth closed. Crown to chin must be 31–36 mm. Taken within 12 months.' },
-              { country: 'Australia', flag: '🇦🇺', img: passportAustralia, size: '35 × 45 mm', head: 'Head height: 32–36 mm', bg: 'Plain white', extra: 'No head tilt. Chin to crown 32–36 mm. Photo must be less than 6 months old. No digital alterations.' },
-              { country: 'China', flag: '🇨🇳', img: passportChina, size: '33 × 48 mm', head: 'Head height: 28–33 mm', bg: 'Plain white', extra: 'Both ears visible. No hair covering forehead. Head width 15–22 mm. Taken within 6 months.' },
-              { country: 'France', flag: '🇫🇷', img: passportFrance, size: '35 × 45 mm', head: 'Face height: 32–36 mm', bg: 'Plain light gray or light blue', extra: 'Mouth closed, no smile. Face must be 70–80% of photo. No glasses. ISO/IEC 19794-5 compliant.' },
-              { country: 'Germany', flag: '🇩🇪', img: passportGermany, size: '35 × 45 mm', head: 'Face height: 32–36 mm', bg: 'Plain light gray', extra: 'Biometric standard required. Neutral expression. Eyes open, looking straight at camera. Sharp focus, no shadows.' },
-              { country: 'Netherlands', flag: '🇳🇱', img: passportNetherlands, size: '35 × 45 mm', head: 'Face height: 26–30 mm', bg: 'Plain light gray', extra: 'No glasses. Both ears visible. Uniform lighting, no shadows on face or background. Recent photo (< 6 months).' },
-              { country: 'Norway', flag: '🇳🇴', img: passportNorway, size: '35 × 45 mm', head: 'Face height: 30–36 mm', bg: 'Plain light gray', extra: 'Straight-on view, neutral expression. No head coverings except religious. High resolution, no pixelation.' },
-              { country: 'Switzerland', flag: '🇨🇭', img: passportSwitzerland, size: '35 × 45 mm', head: 'Face height: 30–36 mm', bg: 'Plain light gray', extra: 'ICAO compliant. Eyes clearly visible. No reflections on skin. Taken within 12 months. Print on photo-quality paper.' },
+              { country: 'United States', flag: '🇺🇸', img: passportUSA, size: '2 × 2 in (51 × 51 mm)', head: 'Head height: 25–35 mm', bg: 'Plain white', extra: 'No glasses since 2016. Head must be centered. Taken within last 6 months.', docUrl: 'https://travel.state.gov/content/travel/en/passports/how-apply/photos.html', docLabel: 'U.S. Department of State' },
+              { country: 'India', flag: '🇮🇳', img: passportIndia, size: '2 × 2 in (51 × 51 mm)', head: 'Face covers 70–80% of frame', bg: 'Plain white', extra: 'Ears must be visible. No border. Matte or glossy finish accepted.', docUrl: 'https://www.passportindia.gov.in/bitstream/123456789/225/1/Photo-Spec.pdf', docLabel: 'Passport Seva (MEA)' },
+              { country: 'Canada', flag: '🇨🇦', img: passportCanada, size: '50 × 70 mm', head: 'Face height: 31–36 mm', bg: 'Plain white or light gray', extra: 'Neutral expression, mouth closed. Crown to chin must be 31–36 mm. Taken within 12 months.', docUrl: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-passports/photos.html', docLabel: 'Government of Canada (IRCC)' },
+              { country: 'Australia', flag: '🇦🇺', img: passportAustralia, size: '35 × 45 mm', head: 'Head height: 32–36 mm', bg: 'Plain white', extra: 'No head tilt. Chin to crown 32–36 mm. Photo must be less than 6 months old. No digital alterations.', docUrl: 'https://www.passports.gov.au/getting-passport-how-it-works/photo-guidelines', docLabel: 'Australian Passport Office (DFAT)' },
+              { country: 'China', flag: '🇨🇳', img: passportChina, size: '33 × 48 mm', head: 'Head height: 28–33 mm', bg: 'Plain white', extra: 'Both ears visible. No hair covering forehead. Head width 15–22 mm. Taken within 6 months.', docUrl: 'https://www.visaforchina.cn/', docLabel: 'China Visa Application Center' },
+              { country: 'France', flag: '🇫🇷', img: passportFrance, size: '35 × 45 mm', head: 'Face height: 32–36 mm', bg: 'Plain light gray or light blue', extra: 'Mouth closed, no smile. Face must be 70–80% of photo. No glasses. ISO/IEC 19794-5 compliant.', docUrl: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F10619', docLabel: 'Service-Public.fr' },
+              { country: 'Germany', flag: '🇩🇪', img: passportGermany, size: '35 × 45 mm', head: 'Face height: 32–36 mm', bg: 'Plain light gray', extra: 'Biometric standard required. Neutral expression. Eyes open, looking straight at camera. Sharp focus, no shadows.', docUrl: 'https://www.bmi.bund.de/SharedDocs/downloads/DE/veroeffentlichungen/themen/moderne-verwaltung/ausweise/fotomustertafel.html', docLabel: 'Federal Ministry of the Interior (BMI)' },
+              { country: 'Netherlands', flag: '🇳🇱', img: passportNetherlands, size: '35 × 45 mm', head: 'Face height: 26–30 mm', bg: 'Plain light gray', extra: 'No glasses. Both ears visible. Uniform lighting, no shadows on face or background. Recent photo (< 6 months).', docUrl: 'https://www.government.nl/topics/identification-documents/requirements-for-photos', docLabel: 'Rijksoverheid (Government.nl)' },
+              { country: 'Norway', flag: '🇳🇴', img: passportNorway, size: '35 × 45 mm', head: 'Face height: 30–36 mm', bg: 'Plain light gray', extra: 'Straight-on view, neutral expression. No head coverings except religious. High resolution, no pixelation.', docUrl: 'https://www.politiet.no/en/services/passport-and-id-card/photo-requirements/', docLabel: 'Politiet (Norwegian Police)' },
+              { country: 'Switzerland', flag: '🇨🇭', img: passportSwitzerland, size: '35 × 45 mm', head: 'Face height: 30–36 mm', bg: 'Plain light gray', extra: 'ICAO compliant. Eyes clearly visible. No reflections on skin. Taken within 12 months. Print on photo-quality paper.', docUrl: 'https://www.fedpol.admin.ch/fedpol/en/home/pass---identitaetskarte/pass/pass-id-erfassen.html', docLabel: 'Federal Office of Police (fedpol)' },
             ].map((item, i) => (
               <div key={i} className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-indigo-500 transition hover:shadow-lg group">
                 <div className="aspect-[3/4] bg-gray-100 dark:bg-slate-700 overflow-hidden">
@@ -535,6 +535,16 @@ export const LandingPage: React.FC = () => {
                     <p className="text-xs text-gray-600 dark:text-slate-400">Background: {item.bg}</p>
                   </div>
                   <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed">{item.extra}</p>
+                  <a
+                    href={item.docUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 mt-3 text-[11px] font-semibold text-primary hover:text-blue-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors"
+                  >
+                    <FileText className="h-3 w-3" />
+                    Official Documentation
+                    <span className="text-gray-400 dark:text-slate-500">— {item.docLabel}</span>
+                  </a>
                 </div>
               </div>
             ))}
