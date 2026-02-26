@@ -605,28 +605,39 @@ export const EditorPage: React.FC = () => {
 
       {/* Header */}
       <div className="bg-white border-b border-gray-200 dark:bg-slate-800 dark:border-slate-700 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between sm:h-16">
-          {/* Top row: back button + title */}
-          <div className="flex items-center gap-3 h-12 sm:h-16 flex-shrink-0">
-            <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+          {/* Left: back button + title */}
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0 min-w-0">
+            <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition flex-shrink-0">
               <ChevronLeft className="h-5 w-5 text-gray-600 dark:text-slate-400" />
             </button>
-            <h1 className="text-base sm:text-xl font-bold text-gray-900 dark:text-slate-100 truncate">
-              {isCollage ? 'Photo Collage' : 'Single Photo'}
+            <h1 className="text-sm sm:text-xl font-bold text-gray-900 dark:text-slate-100 truncate">
+              {isCollage ? 'Collage' : 'Single Photo'}
             </h1>
           </div>
-          {/* Step progress — scrollable on mobile */}
-          <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 dark:text-slate-400 pb-2 sm:pb-0 overflow-x-auto scrollbar-hide">
+
+          {/* Mobile: compact step indicator */}
+          <div className="flex sm:hidden items-center gap-2">
+            <span className="text-xs font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+              {stepLabels[currentStepIndex]}
+            </span>
+            <span className="text-[10px] text-gray-400">
+              {currentStepIndex + 1}/{stepLabels.length}
+            </span>
+          </div>
+
+          {/* Desktop: full step pills */}
+          <div className="hidden sm:flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
             {stepLabels.map((label, i) => {
               const isCompleted = i < currentStepIndex;
               const isCurrent = i === currentStepIndex;
               return (
                 <React.Fragment key={label}>
-                  {i > 0 && <span className="text-gray-400 dark:text-slate-600 flex-shrink-0">→</span>}
+                  {i > 0 && <span className="text-gray-400 dark:text-slate-600">→</span>}
                   <button
                     onClick={() => handleStepClick(i)}
                     disabled={!isCompleted}
-                    className={`px-2.5 sm:px-3 py-1 rounded-full transition-all whitespace-nowrap flex-shrink-0 ${
+                    className={`px-3 py-1 rounded-full transition-all whitespace-nowrap ${
                       isCurrent
                         ? 'bg-primary text-white'
                         : isCompleted
