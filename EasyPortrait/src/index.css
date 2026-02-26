@@ -54,3 +54,12 @@ button:active {
 .animate-bg-cycle {
   animation: bg-cycle 6s ease-in-out infinite;
 }
+
+/* Hide scrollbar for horizontal scroll strips */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

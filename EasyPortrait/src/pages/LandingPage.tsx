@@ -377,6 +377,27 @@ export const LandingPage: React.FC = () => {
                 Create Collage
               </Link>
             </div>
+
+            {/* Mobile-only feature cards */}
+            <div className="flex md:hidden overflow-x-auto gap-3 mt-8 pb-2 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+              {[
+                { icon: Wand2, label: 'AI Background Removal', color: 'text-primary', bg: 'bg-primary/10', badge: 'NEW' },
+                { icon: Crop, label: 'Smart Crop — Any Country', color: 'text-secondary', bg: 'bg-secondary/10', badge: null },
+                { icon: FileText, label: 'Print-Ready Sheet Sizes', color: 'text-green-600', bg: 'bg-green-50', badge: null },
+                { icon: Sun, label: 'Photo Adjustments', color: 'text-amber-500', bg: 'bg-amber-50', badge: 'NEW' },
+              ].map((feat, i) => (
+                <div
+                  key={i}
+                  className={`flex-shrink-0 snap-start w-[160px] ${feat.bg} rounded-xl p-4 flex flex-col items-center gap-2 text-center border border-gray-100 dark:border-slate-700`}
+                >
+                  <feat.icon className={`h-6 w-6 ${feat.color}`} />
+                  <span className={`text-xs font-semibold ${feat.color} leading-tight`}>{feat.label}</span>
+                  {feat.badge && (
+                    <span className="px-2 py-0.5 bg-primary text-white text-[9px] font-bold rounded-full">{feat.badge}</span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Right Column: Cards 3 & 4 */}
