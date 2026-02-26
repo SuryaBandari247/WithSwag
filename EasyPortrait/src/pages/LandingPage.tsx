@@ -21,10 +21,11 @@ import passportNorway from '../resources/norway.png';
 import passportSwitzerland from '../resources/swiss.png';
 
 const BG_DEMO_COLORS = [
-  { color: '#FFFFFF', label: 'White' },
-  { color: '#BFDBFE', label: 'Light Blue' },
   { color: '#F87171', label: 'Red' },
+  { color: '#86EFAC', label: 'Green' },
+  { color: '#BFDBFE', label: 'Blue' },
   { color: '#D1D5DB', label: 'Gray' },
+  { color: '#FFFFFF', label: 'White' },
 ];
 
 const SHEET_SIZES = [
