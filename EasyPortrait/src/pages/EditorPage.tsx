@@ -605,26 +605,28 @@ export const EditorPage: React.FC = () => {
 
       {/* Header */}
       <div className="bg-white border-b border-gray-200 dark:bg-slate-800 dark:border-slate-700 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between sm:h-16">
+          {/* Top row: back button + title */}
+          <div className="flex items-center gap-3 h-12 sm:h-16 flex-shrink-0">
             <button onClick={() => navigate('/')} className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition">
-              <ChevronLeft className="h-6 w-6 text-gray-600 dark:text-slate-400" />
+              <ChevronLeft className="h-5 w-5 text-gray-600 dark:text-slate-400" />
             </button>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-slate-100">
-              {isCollage ? 'Photo Collage' : 'Single Passport Photo'}
+            <h1 className="text-base sm:text-xl font-bold text-gray-900 dark:text-slate-100 truncate">
+              {isCollage ? 'Photo Collage' : 'Single Photo'}
             </h1>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
+          {/* Step progress — scrollable on mobile */}
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-600 dark:text-slate-400 pb-2 sm:pb-0 overflow-x-auto scrollbar-hide">
             {stepLabels.map((label, i) => {
               const isCompleted = i < currentStepIndex;
               const isCurrent = i === currentStepIndex;
               return (
                 <React.Fragment key={label}>
-                  {i > 0 && <span className="text-gray-400 dark:text-slate-600">→</span>}
+                  {i > 0 && <span className="text-gray-400 dark:text-slate-600 flex-shrink-0">→</span>}
                   <button
                     onClick={() => handleStepClick(i)}
                     disabled={!isCompleted}
-                    className={`px-3 py-1 rounded-full transition-all ${
+                    className={`px-2.5 sm:px-3 py-1 rounded-full transition-all whitespace-nowrap flex-shrink-0 ${
                       isCurrent
                         ? 'bg-primary text-white'
                         : isCompleted
@@ -852,7 +854,7 @@ export const EditorPage: React.FC = () => {
             {step === 'crop' && imageSrc && (
               <div className="space-y-4">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Crop Your Photo</h2>
-                <div className="bg-white rounded-lg shadow dark:bg-slate-800 overflow-hidden" style={{ height: '600px' }}>
+                <div className="bg-white rounded-lg shadow dark:bg-slate-800 overflow-hidden h-[400px] sm:h-[500px] md:h-[600px]">
                   <ImageCropper
                     imageSrc={imageSrc}
                     passportSize={passportSize}
@@ -884,7 +886,7 @@ export const EditorPage: React.FC = () => {
 
                   <div className="max-w-md mx-auto">
                     <h3 className="text-sm font-semibold text-gray-700 dark:text-slate-300 mb-3 text-center">Choose Background Color</h3>
-                    <div className="grid grid-cols-7 gap-3 justify-center">
+                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 justify-center">
                       {BG_COLORS.map((bg) => (
                         <button
                           key={bg.id}
