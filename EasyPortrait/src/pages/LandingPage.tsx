@@ -348,7 +348,7 @@ export const LandingPage: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-center gap-2 mt-4">
                   <Crop className="h-4 w-4 text-secondary" />
-                  <span className="text-xs font-semibold text-secondary">Smart Crop — Any Country, Any Size</span>
+                  <span className="text-xs font-semibold text-secondary">Smart Crop — Any Country, Any Size, Custom Dimensions</span>
                 </div>
               </div>
             </div>
@@ -574,7 +574,7 @@ export const LandingPage: React.FC = () => {
               { title: 'Even Lighting', desc: 'Adjust brightness, contrast, and face lighting to eliminate shadows and ensure even illumination across your face.', icon: Sun },
               { title: 'Neutral Expression', desc: 'Tips and guidelines to help you capture the right expression — mouth closed, eyes open, facing forward.', icon: Eye },
               { title: 'High Resolution', desc: 'Output at 300 DPI or 600 DPI for sharp, print-ready results that meet government quality standards.', icon: Zap },
-              { title: 'Proper Framing', desc: 'Smart crop guides ensure your head size, eye position, and chin-to-crown ratio meet official specifications.', icon: Camera },
+              { title: 'Proper Framing', desc: 'Smart crop guides with preset country sizes or fully custom dimensions — set any width and height in mm for total flexibility.', icon: Camera },
             ].map((item, i) => (
               <div key={i} className="flex gap-4 p-5 rounded-lg border border-gray-100 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800 transition">
                 <item.icon className="h-6 w-6 text-green-600 flex-shrink-0 mt-0.5" />
