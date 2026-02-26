@@ -728,9 +728,9 @@ export const EditorPage: React.FC = () => {
                   <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
                     <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-3">Settings</h3>
                     <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
-                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
-                      <p><span className="text-gray-600 dark:text-slate-400">Background:</span> <span className="font-medium">{BG_COLORS.find(b => b.id === bgColor)?.label || 'Original'}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{passportSize.name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Background:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{BG_COLORS.find(b => b.id === bgColor)?.label || 'Original'}</span></p>
                     </div>
                   </div>
                   <button
@@ -748,10 +748,10 @@ export const EditorPage: React.FC = () => {
                   <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
                     <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-3">Settings</h3>
                     <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
-                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
-                      <p><span className="text-gray-600 dark:text-slate-400">Photos:</span> <span className="font-medium">{numPhotos}</span></p>
-                      <p><span className="text-gray-600 dark:text-slate-400">Sheet:</span> <span className="font-medium">{getSheetDims().name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{passportSize.name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Photos:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{numPhotos}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Sheet:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{getSheetDims().name}</span></p>
                     </div>
                   </div>
                 </div>
@@ -763,11 +763,11 @@ export const EditorPage: React.FC = () => {
                   <div className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
                     <h3 className="font-semibold text-gray-900 dark:text-slate-100 mb-3">Settings</h3>
                     <div className="space-y-2 text-sm">
-                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium">{passportSize.name}</span></p>
-                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
-                      <p><span className="text-gray-600 dark:text-slate-400">Quality:</span> <span className="font-medium">{dpi} DPI</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Size:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{passportSize.name}</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Dimensions:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{passportSize.widthMm}×{passportSize.heightMm}mm</span></p>
+                      <p><span className="text-gray-600 dark:text-slate-400">Quality:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{dpi} DPI</span></p>
                       {isCollage && (
-                        <p><span className="text-gray-600 dark:text-slate-400">Photos:</span> <span className="font-medium">{numPhotos}</span></p>
+                        <p><span className="text-gray-600 dark:text-slate-400">Photos:</span> <span className="font-medium text-gray-900 dark:text-slate-100">{numPhotos}</span></p>
                       )}
                     </div>
                   </div>
