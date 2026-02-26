@@ -4,6 +4,7 @@ import { Camera, Grid3x3, ArrowRight, Check, Wand2, Crop, FileText, Sun, Contras
 import { removeBackground } from '@imgly/background-removal';
 import AppSwitcher from '../components/AppSwitcher';
 import samplePhoto1 from '../resources/Gemini_Generated_Image_29o95h29o95h29o9_1.jpeg';
+import bgRemovalOriginal from '../resources/B476E3CC-E517-4909-B143-9F3118F22DEF_1_201_a.jpeg';
 import samplePhoto2 from '../resources/Gemini_Generated_Image_2ff4mq2ff4mq2ff4.jpeg';
 import samplePhoto3 from '../resources/Gemini_Generated_Image_7aflzh7aflzh7afl.jpeg';
 import samplePhoto4 from '../resources/Gemini_Generated_Image_n0jv12n0jv12n0jv.jpeg';
@@ -118,7 +119,7 @@ export const LandingPage: React.FC = () => {
     if (hasStartedProcessing.current) return;
     hasStartedProcessing.current = true;
 
-    const CACHE_KEY = 'easyportrait_transparent_v2';
+    const CACHE_KEY = 'easyportrait_transparent_v3';
 
     const processImage = async () => {
       // 1. Try loading from cache first (instant)
@@ -138,7 +139,7 @@ export const LandingPage: React.FC = () => {
       setBgRemovalLoading(true);
       setBgRemovalError(null);
       try {
-        const response = await fetch(samplePhoto1);
+        const response = await fetch(bgRemovalOriginal);
         const imageBlob = await response.blob();
 
         const resultBlob = await removeBackground(imageBlob, {
@@ -252,7 +253,7 @@ export const LandingPage: React.FC = () => {
                 <div className="flex items-center gap-5">
                   <div className="flex items-center gap-3 flex-shrink-0">
                     <div className="w-[72px] h-[92px] rounded-lg overflow-hidden shadow-sm border border-gray-200 dark:border-slate-700">
-                      <img src={samplePhoto1} alt="Original" className="w-full h-full object-cover" />
+                      <img src={bgRemovalOriginal} alt="Original with background" className="w-full h-full object-cover" />
                     </div>
                     <ArrowRight className="h-4 w-4 text-primary flex-shrink-0" />
                     <div
@@ -265,7 +266,7 @@ export const LandingPage: React.FC = () => {
                         </div>
                       )}
                       <img
-                        src={transparentUrl || samplePhoto1}
+                        src={transparentUrl || bgRemovalOriginal}
                         alt={transparentUrl ? 'New background' : 'Processing...'}
                         className="absolute inset-0 w-full h-full object-cover z-[1]"
                       />
