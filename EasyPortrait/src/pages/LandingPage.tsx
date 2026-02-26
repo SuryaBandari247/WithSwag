@@ -49,10 +49,10 @@ export const LandingPage: React.FC = () => {
 
   const CROP_SIZES = [
     { name: 'US / India', dims: '2×2″', w: 1, h: 1, flag: '🇺🇸' },
-    { name: 'EU / UK', dims: '35×45mm', w: 35, h: 45, flag: '🇪🇺' },
     { name: 'Canada', dims: '50×70mm', w: 50, h: 70, flag: '🇨🇦' },
+    { name: 'Japan', dims: '45×45mm', w: 1, h: 1, flag: '🇯🇵' },
+    { name: 'EU / UK', dims: '35×45mm', w: 35, h: 45, flag: '🇪🇺' },
     { name: 'China', dims: '33×48mm', w: 33, h: 48, flag: '🇨🇳' },
-    { name: 'Malaysia', dims: '35×50mm', w: 35, h: 50, flag: '🇲🇾' },
   ];
 
   const [transparentUrl, setTransparentUrl] = useState<string | null>(null);
