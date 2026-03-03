@@ -459,6 +459,61 @@
             .aff-sidebar { display: none; }
         }
 
+        /* Mobile affiliate strip (shown below 1280px) */
+        .aff-mobile-strip { display: none; }
+        @media (max-width: 1279px) {
+            .aff-mobile-strip {
+                display: block;
+                padding: 24px 16px;
+                background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 100%);
+                border-top: 1px solid #e2e8f0;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            .aff-mobile-strip-title {
+                text-align: center;
+                font-size: 13px;
+                font-weight: 600;
+                color: #64748b;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 14px;
+            }
+            .aff-mobile-cards {
+                display: flex;
+                gap: 12px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 4px;
+            }
+            .aff-mobile-cards::-webkit-scrollbar { display: none; }
+            .aff-mobile-card {
+                flex: 0 0 220px;
+                scroll-snap-align: start;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                padding: 14px;
+                text-decoration: none;
+                color: inherit;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            }
+            .aff-mobile-card-icon { font-size: 24px; margin-bottom: 6px; }
+            .aff-mobile-card-name { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 3px; }
+            .aff-mobile-card-desc { font-size: 11px; color: #64748b; line-height: 1.4; margin-bottom: 8px; }
+            .aff-mobile-card-btn {
+                font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 6px;
+                color: #fff; text-decoration: none;
+            }
+            .aff-mobile-card-btn.green { background: #16a34a; }
+            .aff-mobile-card-btn.orange { background: #ea580c; }
+            .aff-mobile-card-btn.blue { background: #2563eb; }
+        }
+
         /* ── SEO content ── */
         .seo-block {
             max-width: 800px;
@@ -650,6 +705,31 @@
             <div style="text-align:center;margin-top:20px;"><a href="/tools/" style="color:#2563eb;font-weight:600;font-size:15px;text-decoration:none;">View All Tools →</a></div>
         </div>
     </section>
+
+    <!-- Mobile Affiliate Strip -->
+    <div class="aff-mobile-strip">
+        <div class="aff-mobile-strip-title">Recommended for Travelers</div>
+        <div class="aff-mobile-cards">
+            <a href="https://safetywing.com/?referenceID=26486258&utm_source=26486258&utm_medium=Ambassador" class="aff-mobile-card" target="_blank" rel="noopener sponsored">
+                <div class="aff-mobile-card-icon">🛡️</div>
+                <div class="aff-mobile-card-name">SafetyWing Insurance</div>
+                <div class="aff-mobile-card-desc">From $45/mo. Schengen compliant. Cancel anytime.</div>
+                <span class="aff-mobile-card-btn green">Get Quote →</span>
+            </a>
+            <a href="https://www.amazon.com/dp/B0B5MQ3WY8?tag=withswag-20" class="aff-mobile-card" target="_blank" rel="noopener sponsored">
+                <div class="aff-mobile-card-icon">🖨️</div>
+                <div class="aff-mobile-card-name">Canon SELPHY CP1500</div>
+                <div class="aff-mobile-card-desc">Print passport photos at home. ~$0.25/set.</div>
+                <span class="aff-mobile-card-btn orange">Amazon →</span>
+            </a>
+            <a href="/tools/insurance-compare/" class="aff-mobile-card">
+                <div class="aff-mobile-card-icon">⚖️</div>
+                <div class="aff-mobile-card-name">Compare Insurance</div>
+                <div class="aff-mobile-card-desc">Side-by-side Schengen insurance comparison.</div>
+                <span class="aff-mobile-card-btn blue">Compare →</span>
+            </a>
+        </div>
+    </div>
 
     <!-- Passport Photo Guides by Country -->
     <section class="section section-dark">
