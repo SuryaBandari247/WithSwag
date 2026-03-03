@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Embassy & Consulate Finder — Find Your Nearest Visa Office | WithSwag</title>
-<meta name="description" content="Find the nearest embassy, consulate, or visa application center for your visa application. Addresses, phone numbers, appointment links for US, UK, Schengen, Canada, Australia embassies worldwide.">
-<meta name="keywords" content="embassy finder, consulate finder, visa application center, VFS global, TLS contact, nearest embassy, visa office, embassy address, consulate appointment">
+<meta name="description" content="Find the nearest embassy, consulate, or visa application center. Direct links to official appointment booking for US, UK, Schengen, Canada, Australia embassies and VFS Global, TLS Contact centers.">
+<meta name="keywords" content="embassy finder, consulate finder, visa application center, VFS global, TLS contact, nearest embassy, visa office, embassy address, consulate appointment, book visa appointment">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://withswag.org/tools/embassy-finder/">
 <link rel="icon" href="/logo.png" type="image/png">
@@ -14,178 +14,164 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8351430872646121" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/tools/shared.css">
+<style>
+.dest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 24px; }
+.dest-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; transition: all 0.2s; }
+.dest-card:hover { border-color: #2563eb; box-shadow: 0 4px 16px rgba(37,99,235,0.1); }
+.dest-card h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+.dest-card .flag { font-size: 28px; }
+.dest-card .subtitle { font-size: 13px; color: #64748b; margin-bottom: 16px; }
+.link-list { list-style: none; padding: 0; margin: 0; }
+.link-list li { margin-bottom: 8px; }
+.link-list a { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: #0f172a; font-size: 14px; font-weight: 500; transition: all 0.15s; }
+.link-list a:hover { background: #eff6ff; border-color: #2563eb; color: #2563eb; }
+.link-list .link-desc { font-size: 12px; color: #64748b; font-weight: 400; }
+.link-list svg { flex-shrink: 0; color: #2563eb; }
+.tip-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin-top: 32px; }
+.tip-box h3 { font-size: 16px; font-weight: 600; color: #1e40af; margin-bottom: 8px; }
+.tip-box p, .tip-box li { font-size: 14px; color: #1e3a5f; line-height: 1.7; }
+.tip-box ul { padding-left: 20px; margin-top: 8px; }
+.search-tip { text-align: center; margin-top: 24px; padding: 20px; background: #f8fafc; border-radius: 10px; }
+.search-tip p { font-size: 14px; color: #475569; }
+.search-tip code { background: #e2e8f0; padding: 2px 8px; border-radius: 4px; font-size: 13px; }
+</style>
 </head>
 <body>
 <nav class="tool-nav">
   <a href="/" class="tool-logo">With<span>Swag</span></a>
-  <div class="tool-nav-links"><a href="/guides/">Guides</a><a href="/portrait/" class="nav-cta">Create Photo</a></div>
+  <div class="tool-nav-links"><a href="/tools/">Tools</a><a href="/guides/">Guides</a><a href="/portrait/" class="nav-cta">Create Photo</a></div>
 </nav>
 <div class="tool-breadcrumb">
   <a href="/">WithSwag</a><span>›</span><a href="/tools/">Tools</a><span>›</span><span>Embassy Finder</span>
 </div>
 <main class="tool-container">
   <div class="tool-header">
-    <h1>🏛️ Embassy & Consulate Finder</h1>
-    <p>Find the nearest embassy, consulate, or visa application center for your destination country.</p>
+    <h1>Embassy & Consulate Finder</h1>
+    <p>Direct links to official embassy websites, visa application centers, and appointment booking portals.</p>
   </div>
+
+  <!-- Visa Application Centers -->
   <div class="tool-card">
-    <div class="form-row">
-      <div class="form-group"><label for="ef-country">Your Country (where you are)</label>
-        <select id="ef-country">
-          <option value="">Select your country...</option>
-          <option value="us">United States</option>
-          <option value="uk">United Kingdom</option>
-          <option value="de">Germany</option>
-          <option value="fr">France</option>
-          <option value="nl">Netherlands</option>
-          <option value="in">India</option>
-          <option value="ca">Canada</option>
-          <option value="au">Australia</option>
-          <option value="ae">UAE</option>
-          <option value="ng">Nigeria</option>
-          <option value="ph">Philippines</option>
-          <option value="pk">Pakistan</option>
-          <option value="bd">Bangladesh</option>
-          <option value="br">Brazil</option>
-          <option value="mx">Mexico</option>
-        </select>
-      </div>
-      <div class="form-group"><label for="ef-dest">Destination (visa for)</label>
-        <select id="ef-dest">
-          <option value="">Select destination...</option>
-          <option value="us">United States</option>
-          <option value="uk">United Kingdom</option>
-          <option value="schengen">Schengen / EU</option>
-          <option value="canada">Canada</option>
-          <option value="australia">Australia</option>
-          <option value="india">India</option>
-        </select>
-      </div>
+    <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:4px;">Visa Application Centers</h2>
+    <p style="font-size:14px;color:#64748b;margin-bottom:16px;">Most countries outsource visa processing to these centers. Start here to find your nearest office and book an appointment.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">
+      <a href="https://www.vfsglobal.com/" target="_blank" rel="nofollow" class="link-list" style="display:flex;align-items:center;gap:12px;padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;text-decoration:none;transition:all 0.15s;">
+        <div style="width:48px;height:48px;background:#dbeafe;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        </div>
+        <div><div style="font-size:15px;font-weight:600;color:#0f172a;">VFS Global</div><div style="font-size:13px;color:#64748b;">Schengen, UK, Canada, Australia & more · 140+ countries</div></div>
+      </a>
+      <a href="https://www.tlscontact.com/" target="_blank" rel="nofollow" class="link-list" style="display:flex;align-items:center;gap:12px;padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;text-decoration:none;transition:all 0.15s;">
+        <div style="width:48px;height:48px;background:#dbeafe;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div><div style="font-size:15px;font-weight:600;color:#0f172a;">TLS Contact</div><div style="font-size:13px;color:#64748b;">France, Germany, Switzerland, Belgium & more Schengen</div></div>
+      </a>
+      <a href="https://www.ustraveldocs.com/" target="_blank" rel="nofollow" class="link-list" style="display:flex;align-items:center;gap:12px;padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;text-decoration:none;transition:all 0.15s;">
+        <div style="width:48px;height:48px;background:#dbeafe;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><circle cx="12" cy="10" r="3"/><path d="M7 20v-1a5 5 0 0 1 10 0v1"/></svg>
+        </div>
+        <div><div style="font-size:15px;font-weight:600;color:#0f172a;">US Travel Docs (CGI Federal)</div><div style="font-size:13px;color:#64748b;">US visa appointments worldwide · DS-160 scheduling</div></div>
+      </a>
     </div>
-    <button class="tool-btn" onclick="findEmbassy()">Find Embassy →</button>
   </div>
-  <div id="ef-results" style="display:none;"></div>
+
+  <!-- Country-specific embassy directories -->
+  <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin:32px 0 8px;">Official Embassy Directories by Country</h2>
+  <p style="font-size:14px;color:#64748b;margin-bottom:8px;">Find the exact embassy or consulate for your nationality and destination.</p>
+
+  <div class="dest-grid">
+    <div class="dest-card">
+      <h3><span class="flag">🇺🇸</span> United States</h3>
+      <div class="subtitle">US embassies & consulates worldwide</div>
+      <ul class="link-list">
+        <li><a href="https://www.usembassy.gov/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>USEmbassy.gov<br><span class="link-desc">Official directory of all US embassies</span></div></a></li>
+        <li><a href="https://www.ustraveldocs.com/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>Book US Visa Appointment<br><span class="link-desc">Schedule DS-160 interview worldwide</span></div></a></li>
+      </ul>
+    </div>
+
+    <div class="dest-card">
+      <h3><span class="flag">🇬🇧</span> United Kingdom</h3>
+      <div class="subtitle">UK visa application centers</div>
+      <ul class="link-list">
+        <li><a href="https://www.gov.uk/find-a-visa-application-centre" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>GOV.UK Visa Centre Finder<br><span class="link-desc">Official UK visa application center locator</span></div></a></li>
+        <li><a href="https://www.vfsglobal.co.uk/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>VFS Global (UK Visas)<br><span class="link-desc">Book UK visa appointment</span></div></a></li>
+      </ul>
+    </div>
+
+    <div class="dest-card">
+      <h3><span class="flag">🇪🇺</span> Schengen / EU</h3>
+      <div class="subtitle">Schengen visa application centers</div>
+      <ul class="link-list">
+        <li><a href="https://www.vfsglobal.com/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>VFS Global (Schengen)<br><span class="link-desc">Germany, Netherlands, Italy, Austria & more</span></div></a></li>
+        <li><a href="https://www.tlscontact.com/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>TLS Contact (Schengen)<br><span class="link-desc">France, Switzerland, Belgium & more</span></div></a></li>
+      </ul>
+    </div>
+
+    <div class="dest-card">
+      <h3><span class="flag">🇨🇦</span> Canada</h3>
+      <div class="subtitle">Canadian visa offices</div>
+      <ul class="link-list">
+        <li><a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/contact-ircc/offices.html" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>IRCC Office Locator<br><span class="link-desc">Official Canadian visa office directory</span></div></a></li>
+        <li><a href="https://www.vfsglobal.ca/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>VFS Global (Canada)<br><span class="link-desc">Book Canada visa appointment</span></div></a></li>
+      </ul>
+    </div>
+
+    <div class="dest-card">
+      <h3><span class="flag">🇦🇺</span> Australia</h3>
+      <div class="subtitle">Australian visa offices</div>
+      <ul class="link-list">
+        <li><a href="https://immi.homeaffairs.gov.au/help-support/contact-us/offices-and-locations" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>Home Affairs Office Locator<br><span class="link-desc">Official Australian immigration offices</span></div></a></li>
+        <li><a href="https://www.vfsglobal.com/australia/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>VFS Global (Australia)<br><span class="link-desc">Book Australia visa appointment</span></div></a></li>
+      </ul>
+    </div>
+
+    <div class="dest-card">
+      <h3><span class="flag">🇮🇳</span> India</h3>
+      <div class="subtitle">Indian visa services</div>
+      <ul class="link-list">
+        <li><a href="https://indianvisaonline.gov.in/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>Indian Visa Online<br><span class="link-desc">e-Visa & regular visa applications</span></div></a></li>
+        <li><a href="https://www.blsindia-canada.com/" target="_blank" rel="nofollow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><div>BLS International (India)<br><span class="link-desc">Indian visa centers worldwide</span></div></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="tip-box">
+    <h3>💡 How to Find Your Specific Embassy</h3>
+    <p>Not sure which office handles your visa? Follow these steps:</p>
+    <ul>
+      <li>For <strong>Schengen visas</strong>: Apply at the embassy of the country where you'll spend the most time. If equal, apply at the country of first entry.</li>
+      <li>For <strong>US visas</strong>: Go to <a href="https://www.ustraveldocs.com/" target="_blank" rel="nofollow" style="color:#2563eb;">ustraveldocs.com</a>, select your country, and book an appointment.</li>
+      <li>For <strong>UK visas</strong>: Use the <a href="https://www.gov.uk/find-a-visa-application-centre" target="_blank" rel="nofollow" style="color:#2563eb;">GOV.UK visa centre finder</a>.</li>
+      <li>For any country: Search <code>"[country] embassy in [your city]"</code> on Google.</li>
+    </ul>
+  </div>
+
+  <!-- Photo CTA -->
+  <div class="tool-card" style="text-align:center;margin-top:24px;">
+    <p style="font-size:15px;color:#475569;margin-bottom:12px;">Need a passport photo for your visa application?</p>
+    <a href="/portrait/" class="tool-btn">Create Passport Photo →</a>
+  </div>
 </main>
 
-<script>
-var embassies = {
-  'in-us': [
-    {name:'US Embassy New Delhi',address:'Shantipath, Chanakyapuri, New Delhi 110021',phone:'+91-11-2419-8000',web:'https://in.usembassy.gov/',appt:'https://www.ustraveldocs.com/in/',type:'Embassy'},
-    {name:'US Consulate Mumbai',address:'C-49, G-Block, Bandra Kurla Complex, Mumbai 400051',phone:'+91-22-2672-4000',web:'https://in.usembassy.gov/embassy-consulates/mumbai/',appt:'https://www.ustraveldocs.com/in/',type:'Consulate'},
-    {name:'US Consulate Chennai',address:'220 Anna Salai, Gemini Circle, Chennai 600006',phone:'+91-44-2857-4000',web:'https://in.usembassy.gov/embassy-consulates/chennai/',appt:'https://www.ustraveldocs.com/in/',type:'Consulate'},
-    {name:'US Consulate Hyderabad',address:'Paigah Palace, 1-8-323, Chiran Fort Lane, Hyderabad 500029',phone:'+91-40-4033-8300',web:'https://in.usembassy.gov/embassy-consulates/hyderabad/',appt:'https://www.ustraveldocs.com/in/',type:'Consulate'},
-    {name:'US Consulate Kolkata',address:'5/1 Ho Chi Minh Sarani, Kolkata 700071',phone:'+91-33-3984-2400',web:'https://in.usembassy.gov/embassy-consulates/kolkata/',appt:'https://www.ustraveldocs.com/in/',type:'Consulate'}
-  ],
-  'in-uk': [
-    {name:'UK Visa Application Centre (VFS) — New Delhi',address:'Shivaji Stadium Metro Station, New Delhi',phone:'VFS helpline',web:'https://www.gov.uk/world/india',appt:'https://www.vfsglobal.co.uk/in/en',type:'VFS Centre'},
-    {name:'UK Visa Application Centre (VFS) — Mumbai',address:'Urmi Axis Building, Mumbai',phone:'VFS helpline',web:'https://www.gov.uk/world/india',appt:'https://www.vfsglobal.co.uk/in/en',type:'VFS Centre'},
-    {name:'UK Visa Application Centre (VFS) — Chennai',address:'Olympia Tech Park, Chennai',phone:'VFS helpline',web:'https://www.gov.uk/world/india',appt:'https://www.vfsglobal.co.uk/in/en',type:'VFS Centre'}
-  ],
-  'in-schengen': [
-    {name:'German Embassy New Delhi',address:'No. 6/50G, Shantipath, Chanakyapuri, New Delhi',phone:'+91-11-4419-9199',web:'https://india.diplo.de/',appt:'https://www.vfsglobal.com/germany/india/',type:'Embassy'},
-    {name:'French Embassy New Delhi',address:'2/50-E, Shantipath, Chanakyapuri, New Delhi',phone:'+91-11-2419-6100',web:'https://in.ambafrance.org/',appt:'https://www.tlscontact.com/in/',type:'Embassy'},
-    {name:'Netherlands Embassy New Delhi',address:'6/50-F, Shantipath, Chanakyapuri, New Delhi',phone:'+91-11-2419-7600',web:'https://www.netherlandsandyou.nl/your-country-and-the-netherlands/india',appt:'https://www.vfsglobal.com/netherlands/india/',type:'Embassy'},
-    {name:'VFS Global (Schengen) — Multiple Cities',address:'Delhi, Mumbai, Chennai, Bangalore, Hyderabad, Kolkata, Pune, Ahmedabad',phone:'VFS helpline',web:'https://www.vfsglobal.com/',appt:'https://www.vfsglobal.com/',type:'VFS Centre'}
-  ],
-  'in-canada': [
-    {name:'Canada Visa Application Centre (VFS) — New Delhi',address:'Shivaji Stadium Metro Station, New Delhi',phone:'VFS helpline',web:'https://www.canada.ca/en/immigration-refugees-citizenship.html',appt:'https://www.vfsglobal.ca/canada/india/',type:'VFS Centre'},
-    {name:'Canada Visa Application Centre (VFS) — Mumbai',address:'Urmi Axis Building, Mumbai',phone:'VFS helpline',appt:'https://www.vfsglobal.ca/canada/india/',type:'VFS Centre'}
-  ],
-  'in-australia': [
-    {name:'Australian Visa Application Centre (VFS) — New Delhi',address:'Shivaji Stadium Metro Station, New Delhi',phone:'VFS helpline',web:'https://india.embassy.gov.au/',appt:'https://www.vfsglobal.com/australia/india/',type:'VFS Centre'},
-    {name:'Australian Visa Application Centre (VFS) — Mumbai',address:'Urmi Axis Building, Mumbai',phone:'VFS helpline',appt:'https://www.vfsglobal.com/australia/india/',type:'VFS Centre'}
-  ],
-  'us-uk': [
-    {name:'UK Visa Application Centre (VFS) — New York',address:'290 Madison Avenue, New York, NY 10017',phone:'VFS helpline',web:'https://www.gov.uk/world/usa',appt:'https://www.vfsglobal.co.uk/us/en',type:'VFS Centre'},
-    {name:'UK Visa Application Centre (VFS) — Los Angeles',address:'11766 Wilshire Blvd, Los Angeles, CA 90025',phone:'VFS helpline',appt:'https://www.vfsglobal.co.uk/us/en',type:'VFS Centre'},
-    {name:'UK Visa Application Centre (VFS) — Washington DC',address:'1625 K Street NW, Washington, DC 20006',phone:'VFS helpline',appt:'https://www.vfsglobal.co.uk/us/en',type:'VFS Centre'}
-  ],
-  'us-schengen': [
-    {name:'German Embassy Washington DC',address:'4645 Reservoir Road NW, Washington, DC 20007',phone:'+1-202-298-4000',web:'https://www.germany.info/',appt:'https://www.germany.info/us-en/service/visa',type:'Embassy'},
-    {name:'French Embassy Washington DC',address:'4101 Reservoir Road NW, Washington, DC 20007',phone:'+1-202-944-6000',web:'https://franceintheus.org/',appt:'https://www.tlscontact.com/us/',type:'Embassy'},
-    {name:'VFS Global (Schengen) — Multiple US Cities',address:'New York, Los Angeles, Chicago, Houston, San Francisco, Miami',phone:'VFS helpline',appt:'https://www.vfsglobal.com/',type:'VFS Centre'}
-  ],
-  'us-canada': [
-    {name:'Canada Visa Application Centre (VFS) — New York',address:'290 Madison Avenue, New York, NY 10017',phone:'VFS helpline',web:'https://www.canada.ca/',appt:'https://www.vfsglobal.ca/canada/usa/',type:'VFS Centre'},
-    {name:'Canada Visa Application Centre (VFS) — Los Angeles',address:'11766 Wilshire Blvd, Los Angeles, CA',phone:'VFS helpline',appt:'https://www.vfsglobal.ca/canada/usa/',type:'VFS Centre'}
-  ],
-  'uk-us': [
-    {name:'US Embassy London',address:'33 Nine Elms Lane, London SW11 7US',phone:'+44-20-7499-9000',web:'https://uk.usembassy.gov/',appt:'https://www.ustraveldocs.com/gb/',type:'Embassy'},
-    {name:'US Consulate Belfast',address:'Danesfort House, 223 Stranmillis Road, Belfast BT9 5GR',phone:'+44-28-9038-6100',web:'https://uk.usembassy.gov/embassy-consulates/belfast/',appt:'https://www.ustraveldocs.com/gb/',type:'Consulate'}
-  ],
-  'uk-schengen': [
-    {name:'TLScontact (France) — London',address:'London',phone:'TLS helpline',web:'https://fr.tlscontact.com/gb/',appt:'https://fr.tlscontact.com/gb/',type:'TLS Centre'},
-    {name:'VFS Global (Germany) — London',address:'London',phone:'VFS helpline',appt:'https://www.vfsglobal.com/germany/uk/',type:'VFS Centre'},
-    {name:'VFS Global (Netherlands) — London',address:'London',phone:'VFS helpline',appt:'https://www.vfsglobal.com/netherlands/uk/',type:'VFS Centre'}
-  ],
-  'de-us': [
-    {name:'US Embassy Berlin',address:'Pariser Platz 2, 10117 Berlin',phone:'+49-30-8305-0',web:'https://de.usembassy.gov/',appt:'https://www.ustraveldocs.com/de/',type:'Embassy'},
-    {name:'US Consulate Frankfurt',address:'Gießener Str. 30, 60435 Frankfurt',phone:'+49-69-7535-0',web:'https://de.usembassy.gov/embassy-consulates/frankfurt/',appt:'https://www.ustraveldocs.com/de/',type:'Consulate'},
-    {name:'US Consulate Munich',address:'Königinstraße 5, 80539 München',phone:'+49-89-2888-0',appt:'https://www.ustraveldocs.com/de/',type:'Consulate'}
-  ],
-  'nl-us': [
-    {name:'US Embassy The Hague',address:'John Adams Park 1, 2244 BZ Wassenaar',phone:'+31-70-310-2209',web:'https://nl.usembassy.gov/',appt:'https://www.ustraveldocs.com/nl/',type:'Embassy'},
-    {name:'US Consulate Amsterdam',address:'Museumplein 19, 1071 DJ Amsterdam',phone:'+31-20-575-5309',web:'https://nl.usembassy.gov/embassy-consulates/amsterdam/',appt:'https://www.ustraveldocs.com/nl/',type:'Consulate'}
-  ],
-  'nl-uk': [
-    {name:'UK Visa Application Centre (VFS) — The Hague',address:'The Hague',phone:'VFS helpline',web:'https://www.gov.uk/world/netherlands',appt:'https://www.vfsglobal.co.uk/nl/en',type:'VFS Centre'}
-  ],
-  'fr-us': [
-    {name:'US Embassy Paris',address:'2 Avenue Gabriel, 75008 Paris',phone:'+33-1-4312-2222',web:'https://fr.usembassy.gov/',appt:'https://www.ustraveldocs.com/fr/',type:'Embassy'}
-  ],
-  'ae-us': [
-    {name:'US Embassy Abu Dhabi',address:'Embassies District, Plot 38, Abu Dhabi',phone:'+971-2-414-2200',web:'https://ae.usembassy.gov/',appt:'https://www.ustraveldocs.com/ae/',type:'Embassy'},
-    {name:'US Consulate Dubai',address:'Corner of Al Seef Rd and Sheikh Khalifa bin Zayed Rd, Dubai',phone:'+971-4-309-4000',appt:'https://www.ustraveldocs.com/ae/',type:'Consulate'}
-  ],
-  'ae-uk': [
-    {name:'UK Visa Application Centre (VFS) — Dubai',address:'Dubai',phone:'VFS helpline',appt:'https://www.vfsglobal.co.uk/ae/en',type:'VFS Centre'},
-    {name:'UK Visa Application Centre (VFS) — Abu Dhabi',address:'Abu Dhabi',phone:'VFS helpline',appt:'https://www.vfsglobal.co.uk/ae/en',type:'VFS Centre'}
-  ],
-  'ae-schengen': [
-    {name:'VFS Global (Schengen) — Dubai & Abu Dhabi',address:'Dubai, Abu Dhabi',phone:'VFS helpline',appt:'https://www.vfsglobal.com/',type:'VFS Centre'}
-  ]
-};
 
-// Generate fallback for missing combos
-function findEmbassy() {
-  var country = document.getElementById('ef-country').value;
-  var dest = document.getElementById('ef-dest').value;
-  if (!country || !dest) { alert('Please select both fields'); return; }
-  if (country === dest) { alert('You don\'t need a visa for your own country!'); return; }
+<section style="max-width:720px;margin:40px auto;padding:0 20px;">
+<h2 style="font-size:22px;font-weight:700;color:#0f172a;margin-bottom:16px;text-align:center;">Frequently Asked Questions</h2>
+<div style="border:1px solid #e2e8f0;border-radius:10px;margin-bottom:10px;overflow:hidden;">
+<button type="button" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 18px;border:none;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#0f172a;font-family:inherit;text-align:left;">Do I apply at the embassy or a visa center?<span style="color:#94a3b8;">▾</span></button>
+<div style="display:none;padding:0 18px 16px;font-size:14px;color:#475569;line-height:1.7;">It depends on the country. Many countries outsource visa processing to VFS Global or TLS Contact. You submit documents at the visa center, but the embassy makes the decision. Some embassies still accept direct applications — check the specific embassy website for your nationality.</div>
+</div>
+<div style="border:1px solid #e2e8f0;border-radius:10px;margin-bottom:10px;overflow:hidden;">
+<button type="button" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 18px;border:none;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#0f172a;font-family:inherit;text-align:left;">What is VFS Global?<span style="color:#94a3b8;">▾</span></button>
+<div style="display:none;padding:0 18px 16px;font-size:14px;color:#475569;line-height:1.7;">VFS Global is the world's largest visa outsourcing company. They operate visa application centers on behalf of 60+ governments in 140+ countries. They handle document collection, biometrics, and appointment scheduling — but the embassy still makes the visa decision.</div>
+</div>
+<div style="border:1px solid #e2e8f0;border-radius:10px;margin-bottom:10px;overflow:hidden;">
+<button type="button" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'" style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 18px;border:none;background:#fff;cursor:pointer;font-size:15px;font-weight:600;color:#0f172a;font-family:inherit;text-align:left;">How early should I book my visa appointment?<span style="color:#94a3b8;">▾</span></button>
+<div style="display:none;padding:0 18px 16px;font-size:14px;color:#475569;line-height:1.7;">Book as early as possible. Popular embassies (especially US and Schengen in India, Nigeria, and the Philippines) can have wait times of 2–8 weeks for an appointment slot. For Schengen visas, you can apply up to 6 months before your travel date. For US visas, appointment availability varies by location.</div>
+</div>
+</section>
 
-  var key = country + '-' + dest;
-  var results = embassies[key];
-  var container = document.getElementById('ef-results');
-
-  if (!results || results.length === 0) {
-    container.innerHTML = '<div class="tool-card"><h2>No specific data available</h2><p style="color:#64748b;margin-top:8px;">We don\'t have detailed embassy data for this combination yet. Try these resources:</p><ul style="margin-top:12px;padding-left:20px;color:#475569;font-size:14px;line-height:2;"><li><a href="https://www.vfsglobal.com/" rel="nofollow" style="color:#2563eb;">VFS Global</a> — Visa application centers worldwide</li><li><a href="https://www.tlscontact.com/" rel="nofollow" style="color:#2563eb;">TLScontact</a> — Schengen visa centers</li><li>Search: "[destination country] embassy in [your country]"</li></ul></div>';
-    container.style.display = 'block';
-    return;
-  }
-
-  var html = '';
-  results.forEach(function(e) {
-    html += '<div class="embassy-card">';
-    html += '<div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:8px;">';
-    html += '<h3>' + e.name + '</h3>';
-    html += '<span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;background:#dbeafe;color:#1d4ed8;">' + e.type + '</span>';
-    html += '</div>';
-    html += '<p style="margin-top:6px;">📍 ' + e.address + '</p>';
-    if (e.phone) html += '<p>📞 ' + e.phone + '</p>';
-    var links = '';
-    if (e.web) links += '<a href="' + e.web + '" target="_blank" rel="nofollow">Website ↗</a> ';
-    if (e.appt) links += '<a href="' + e.appt + '" target="_blank" rel="nofollow">Book Appointment ↗</a>';
-    if (links) html += '<p style="margin-top:8px;">' + links + '</p>';
-    html += '</div>';
-  });
-
-  html += '<div class="tool-card" style="text-align:center;margin-top:16px;"><p style="font-size:14px;color:#475569;margin-bottom:12px;">Need a passport photo for your visa application?</p><a href="/portrait/" class="tool-btn">Create Passport Photo →</a></div>';
-
-  container.innerHTML = html;
-  container.style.display = 'block';
-  container.scrollIntoView({ behavior: 'smooth' });
-}
-</script>
 <footer class="tool-footer">
   <p>© 2026 WithSwag. All rights reserved.</p>
   <nav><a href="/">Home</a><a href="/guides/">Guides</a><a href="/portrait/">Photo Tool</a><a href="/about.html">About</a></nav>
