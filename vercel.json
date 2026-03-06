@@ -23,6 +23,11 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/crisis-help/flights/", "destination": "/tools/flight-itinerary/", "statusCode": 301 },
+    { "source": "/crisis-help/travel-gear/", "destination": "/guides/best-passport-photo-printers/", "statusCode": 301 },
+    { "source": "/crisis-help/(.*)", "destination": "/", "statusCode": 301 }
+  ],
   "rewrites": [
     { "source": "/portrait/(.*)", "destination": "/portrait/index.html" }
   ]
