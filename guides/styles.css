@@ -23,7 +23,69 @@ body {
 .guide-nav a { color: #6366f1; text-decoration: none; font-weight: 500; }
 .guide-nav a:hover { text-decoration: underline; }
 .guide-nav .sep { color: #9ca3af; }
-.guide-content { max-width: 800px; margin: 0 auto; padding: 40px 20px 60px; }
+/* Three-column layout: TOC | Content | Affiliates */
+.guide-layout {
+  max-width: 1320px; margin: 0 auto; padding: 40px 20px 60px;
+  display: grid; grid-template-columns: 200px 1fr 220px; gap: 32px; align-items: start;
+}
+.guide-content { max-width: none; padding: 0; min-width: 0; }
+
+/* Left sidebar — Table of Contents */
+.guide-toc-sidebar { position: sticky; top: 60px; }
+.guide-toc {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px 14px;
+}
+.guide-toc-title {
+  font-size: 12px; font-weight: 700; color: #6366f1; text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 10px;
+}
+.guide-toc ul { list-style: none; margin: 0; padding: 0; }
+.guide-toc li { margin-bottom: 0; }
+.guide-toc a {
+  display: block; padding: 5px 0; font-size: 12.5px; color: #475569; text-decoration: none;
+  border-left: 2px solid transparent; padding-left: 10px; transition: all 0.15s; line-height: 1.4;
+}
+.guide-toc a:hover { color: #6366f1; border-left-color: #6366f1; }
+.guide-toc a.active { color: #6366f1; border-left-color: #6366f1; font-weight: 600; }
+
+/* Right sidebar — Affiliate banners */
+.guide-aff-sidebar { position: sticky; top: 60px; display: flex; flex-direction: column; gap: 14px; }
+.sidebar-aff-card {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px;
+  text-align: center; text-decoration: none; color: inherit; display: block;
+  transition: all 0.2s;
+}
+.sidebar-aff-card:hover { border-color: #6366f1; box-shadow: 0 4px 16px rgba(99,102,241,0.12); transform: translateY(-2px); }
+.sidebar-aff-badge {
+  display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; margin-bottom: 8px;
+}
+.sidebar-aff-badge.rec { background: #dcfce7; color: #166534; }
+.sidebar-aff-badge.deal { background: #fef3c7; color: #92400e; }
+.sidebar-aff-badge.tool { background: #e0e7ff; color: #3730a3; }
+.sidebar-aff-icon { font-size: 26px; margin-bottom: 6px; }
+.sidebar-aff-title { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 4px; line-height: 1.3; }
+.sidebar-aff-desc { font-size: 11px; color: #64748b; line-height: 1.4; margin-bottom: 8px; }
+.sidebar-aff-btn {
+  display: inline-block; font-size: 11px; font-weight: 600; padding: 6px 14px;
+  border-radius: 6px; color: #fff; text-decoration: none; transition: opacity 0.15s;
+}
+.sidebar-aff-btn:hover { opacity: 0.9; color: #fff; }
+.sidebar-aff-btn.green { background: #16a34a; }
+.sidebar-aff-btn.blue { background: #2563eb; }
+.sidebar-aff-btn.indigo { background: #6366f1; }
+.sidebar-aff-btn.orange { background: #ea580c; }
+
+/* Responsive: hide sidebars on smaller screens */
+@media (max-width: 1024px) {
+  .guide-layout { grid-template-columns: 1fr; gap: 0; }
+  .guide-toc-sidebar { display: none; }
+  .guide-aff-sidebar { display: none; }
+  .guide-content { padding: 0; }
+}
+
+/* Fallback for pages without .guide-layout wrapper */
+.guide-content:not(.guide-layout .guide-content) { max-width: 800px; margin: 0 auto; padding: 40px 20px 60px; }
 .guide-content h2 { font-size: 26px; font-weight: 700; margin: 36px 0 16px; color: #111827; }
 .guide-content h3 { font-size: 20px; font-weight: 600; margin: 28px 0 12px; color: #1f2937; }
 .guide-content p { margin-bottom: 16px; color: #374151; font-size: 16px; }
@@ -68,6 +130,7 @@ body {
   .guide-header p { font-size: 16px; }
   .guide-content h2 { font-size: 22px; }
   .related-guides { grid-template-columns: 1fr; }
+  .guide-layout { padding: 24px 16px 40px; }
 }
 
 .official-source {
