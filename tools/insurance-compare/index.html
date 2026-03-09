@@ -94,7 +94,7 @@ var plans = [
     features: ['Emergency medical','Trip cancellation','Adventure sports','Emergency dental','Travel delay','Lost luggage','Emergency evacuation','24/7 support'],
     missing: ['Pre-existing conditions'],
     best: 'Best for adventure travelers',
-    link: 'https://www.worldnomads.com/',
+    link: 'https://www.tkqlhce.com/click-101699316-15798942',
     badge: 'Most Coverage'
   },
   {
@@ -106,7 +106,7 @@ var plans = [
     features: ['Emergency medical','Trip cancellation','Extreme sports','Emergency dental','Travel delay','Lost luggage','Emergency evacuation','Electronics coverage','24/7 support'],
     missing: [],
     best: 'Best for extreme sports & high coverage',
-    link: 'https://www.worldnomads.com/',
+    link: 'https://www.tkqlhce.com/click-101699316-15798942',
     badge: null
   },
   {
@@ -159,7 +159,10 @@ function compareInsurance() {
     });
     html += '</div>';
 
-    html += '<a href="' + p.link + '" target="_blank" rel="nofollow" class="ins-btn">Get Quote →</a>';
+    html += '<a href="' + p.link + '" target="_blank" rel="noopener sponsored" class="ins-btn">Get Quote →</a>';
+    if (p.name.indexOf('World Nomads') !== -1) {
+      html += '<p style="font-size:10px;color:#9ca3af;margin-top:6px;line-height:1.4;">We receive a fee when you get a quote from World Nomads using this link. We do not represent World Nomads. This is not a recommendation to buy travel insurance.</p>';
+    }
     html += '</div>';
   });
 
