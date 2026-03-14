@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Converter for Visa & Passport — Resize, Compress, Convert | WithSwag</title>
+<meta name="description" content="Free browser-based file converter for visa and passport applications. Resize photos, compress PDFs, convert formats. Your files never leave your device — 100% private.">
+<meta name="keywords" content="file converter, resize photo for passport, compress pdf for visa, reduce photo size, passport photo resize, visa document converter, image compressor, pdf compressor, file size reducer">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://withswag.org/file-converter/">
+<meta property="og:title" content="File Converter for Visa & Passport Applications | WithSwag">
+<meta property="og:description" content="Resize photos, compress images, convert formats — all in your browser. Files never upload. 100% private.">
+<meta property="og:url" content="https://withswag.org/file-converter/">
+<meta property="og:image" content="https://withswag.org/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WithSwag">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="File Converter for Visa & Passport — Resize, Compress, Convert | WithSwag">
+<meta name="twitter:description" content="Resize photos, compress images, convert formats — all in your browser. Files never upload. 100% private.">
+<link rel="icon" href="/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="/cookie-consent.js"></script>
+<link rel="stylesheet" href="/tools/shared.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "WithSwag File Converter",
+  "url": "https://withswag.org/file-converter/",
+  "description": "Free browser-based file converter for visa and passport applications. Resize photos, compress images, convert formats. 100% private — files never leave your device.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": ["Image resize for passport photos", "File compression to target size", "Format conversion (JPG, PNG, WebP, BMP)", "Country-specific upload presets", "100% browser-based processing", "No file uploads — complete privacy"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this file converter safe to use with passport photos?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. All processing happens inside your browser using the Canvas API. Your files are never uploaded to any server. This makes it safer than online converters that require file uploads."}
+    },
+    {
+      "@type": "Question",
+      "name": "What file size does a US passport photo need to be?",
+      "acceptedAnswer": {"@type": "Answer", "text": "US passport and visa photos (DS-160) must be 600x600 pixels in JPEG format, under 240KB. Use the US Passport or US Visa preset to auto-resize and compress to these exact specs."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I reduce my photo to a specific file size?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Use the Compress tab and enter your target file size (e.g., 200 KB). The tool uses binary search compression to hit your target while preserving maximum quality."}
+    },
+    {
+      "@type": "Question",
+      "name": "How do I reduce my photo to exactly 200KB?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Click the Compress tab, enter 200 in the target size field, select KB, and click Compress. The tool tries multiple quality levels to find the highest quality that fits under 200KB."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I resize and compress at the same time?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Use the Country Presets tab. Each preset resizes to the exact pixel dimensions AND compresses to the maximum file size required by that country's government portal. One click does both."}
+    },
+    {
+      "@type": "Question",
+      "name": "Does this work on mobile phones?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. The tool is fully responsive and works on iPhone, Android, iPad, and any mobile browser. Take a photo with your phone camera and convert it right there — no app download needed."}
+    }
+  ]
+}
+</script>
+<style>
+/* Privacy banner */
+.privacy-banner {
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: #166534;
+}
+.privacy-banner svg { flex-shrink: 0; }
+
+/* Tab navigation */
+.tab-nav {
+  display: flex;
+  gap: 4px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  background: transparent;
+  color: #64748b;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.tab-btn.active {
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.tab-btn:hover:not(.active) { color: #2563eb; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Drop zone */
+.drop-zone {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fafbfc;
+  margin-bottom: 20px;
+}
+.drop-zone:hover, .drop-zone.dragover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+.drop-zone-icon { font-size: 40px; margin-bottom: 12px; }
+.drop-zone-text { font-size: 15px; color: #475569; font-weight: 500; }
+.drop-zone-hint { font-size: 13px; color: #94a3b8; margin-top: 6px; }
+.drop-zone input[type="file"] { display: none; }
+
+/* File info */
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.file-info-icon { font-size: 28px; }
+.file-info-details { flex: 1; }
+.file-info-name { font-size: 14px; font-weight: 600; color: #0f172a; word-break: break-all; }
+.file-info-meta { font-size: 12px; color: #64748b; margin-top: 2px; }
+.file-info-remove {
+  background: none; border: none; cursor: pointer; color: #94a3b8; padding: 4px;
+  transition: color 0.15s;
+}
+.file-info-remove:hover { color: #ef4444; }
+
+/* Preset buttons */
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.preset-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.15s;
+  text-align: left;
+}
+.preset-btn:hover { border-color: #2563eb; background: #eff6ff; }
+.preset-btn.selected { border-color: #2563eb; background: #eff6ff; box-shadow: 0 0 0 2px rgba(37,99,235,0.2); }
+.preset-flag { font-size: 20px; }
+.preset-info { line-height: 1.3; }
+.preset-name { font-weight: 600; color: #0f172a; }
+.preset-spec { font-size: 11px; color: #64748b; }
+
+/* Settings */
+.settings-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.setting-group { display: flex; flex-direction: column; gap: 6px; }
+.setting-group label { font-size: 13px; font-weight: 600; color: #374151; }
+.setting-group input, .setting-group select {
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1a1a2e;
+  background: #fff;
+}
+.setting-group input:focus, .setting-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+/* Quality slider */
+.quality-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.quality-slider input[type="range"] {
+  flex: 1;
+  accent-color: #2563eb;
+  height: 6px;
+}
+.quality-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* Target size */
+.target-size-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.target-size-row input {
+  width: 100px;
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+.target-size-row select {
+  padding: 9px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+/* Preview */
+.preview-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.preview-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.preview-box h4 { font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 10px; }
+.preview-box img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+.preview-box .size-badge {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #475569;
+}
+.size-reduced { background: #dcfce7; color: #166534; }
+
+/* Action buttons */
+.action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.action-row .tool-btn { flex: 1; text-align: center; }
+.btn-download {
+  background: #16a34a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-download:hover { background: #15803d; }
+
+/* Progress */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 16px 0;
+  display: none;
+}
+.progress-bar.active { display: block; }
+.progress-fill {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 3px;
+  transition: width 0.3s;
+  width: 0%;
+}
+
+/* Conversion result */
+.result-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+.result-stat {
+  text-align: center;
+  padding: 14px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+.result-stat-val { font-size: 20px; font-weight: 700; color: #0f172a; }
+.result-stat-label { font-size: 12px; color: #64748b; margin-top: 2px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tab-btn span { display: none; }
+  .tab-btn { padding: 10px 12px; }
+  .settings-row { grid-template-columns: 1fr; }
+  .preview-area { grid-template-columns: 1fr; }
+  .result-summary { grid-template-columns: 1fr; }
+  .preset-grid { grid-template-columns: 1fr 1fr; }
+  .action-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="tool-nav">
+  <a href="/" class="tool-logo">With<span>Swag</span></a>
+  <div class="tool-nav-links">
+    <a href="/guides/">Guides</a>
+    <a href="/tools/">Tools</a>
+    <a href="/passport-photo-maker/" class="nav-cta">Create Photo</a>
+  </div>
+</nav>
+<div class="tool-breadcrumb">
+  <a href="/">WithSwag</a><span>›</span><span>File Converter</span>
+</div>
+
+<main class="tool-container" style="max-width:860px;">
+  <div class="tool-header">
+    <h1>📁 File Converter for Visa & Passport</h1>
+    <p>Resize photos, compress images, convert formats — all in your browser. Your files never leave your device.</p>
+  </div>
+
+  <div class="privacy-banner">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <span>100% Private — All processing happens in your browser. No files are uploaded to any server.</span>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="resize" onclick="switchTab('resize')">📐 <span>Resize Image</span></button>
+    <button class="tab-btn" data-tab="compress" onclick="switchTab('compress')">🗜️ <span>Compress</span></button>
+    <button class="tab-btn" data-tab="convert" onclick="switchTab('convert')">🔄 <span>Convert Format</span></button>
+    <button class="tab-btn" data-tab="preset" onclick="switchTab('preset')">🌍 <span>Country Presets</span></button>
+  </div>
+</main>
+</body>
+</html>
+  <!-- Tabs -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="resize" onclick="switchTab('resize')">📐 <span>Resize Image</span></button>
+    <button class="tab-btn" data-tab="compress" onclick="switchTab('compress')">🗜️ <span>Compress</span></button>
+    <button class="tab-btn" data-tab="convert" onclick="switchTab('convert')">🔄 <span>Convert Format</span></button>
+    <button class="tab-btn" data-tab="preset" onclick="switchTab('preset')">🌍 <span>Country Presets</span></button>
+  </div>
+
+  <!-- Shared drop zone -->
+  <div class="tool-card">
+    <div class="drop-zone" id="dropZone">
+      <div class="drop-zone-icon">📎</div>
+      <div class="drop-zone-text">Drop your file here or click to browse</div>
+      <div class="drop-zone-hint">Supports JPG, PNG, WebP, BMP, GIF — up to 50MB</div>
+      <input type="file" id="fileInput" accept="image/*">
+    </div>
+    <div class="file-info" id="fileInfo" style="display:none;">
+      <div class="file-info-icon" id="fileIcon">🖼️</div>
+      <div class="file-info-details">
+        <div class="file-info-name" id="fileName"></div>
+        <div class="file-info-meta" id="fileMeta"></div>
+      </div>
+      <button class="file-info-remove" onclick="clearFile()" aria-label="Remove file">✕</button>
+    </div>
+
+    <!-- RESIZE panel -->
+    <div class="tab-panel active" id="panel-resize">
+      <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:14px;">Resize Settings</h3>
+      <div class="settings-row">
+        <div class="setting-group">
+          <label for="resizeWidth">Width (px)</label>
+          <input type="number" id="resizeWidth" placeholder="e.g. 600" min="1" max="10000">
+        </div>
+        <div class="setting-group">
+          <label for="resizeHeight">Height (px)</label>
+          <input type="number" id="resizeHeight" placeholder="e.g. 600" min="1" max="10000">
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:13px;display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="lockAspect" checked style="accent-color:#2563eb;width:16px;height:16px;">
+          <span style="font-weight:500;color:#374151;">Lock aspect ratio</span>
+        </label>
+      </div>
+      <div class="setting-group" style="margin-bottom:16px;">
+        <label for="resizeQuality">Output Quality</label>
+        <div class="quality-slider">
+          <input type="range" id="resizeQuality" min="10" max="100" value="92" title="Output quality" oninput="document.getElementById('resizeQualVal').textContent=this.value+'%'">
+          <span class="quality-val" id="resizeQualVal">92%</span>
+        </div>
+      </div>
+      <div class="action-row">
+        <button class="tool-btn" onclick="processResize()">Resize Image</button>
+      </div>
+    </div>
+
+    <!-- COMPRESS panel -->
+    <div class="tab-panel" id="panel-compress">
+      <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:14px;">Compression Settings</h3>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:13px;font-weight:600;color:#374151;display:block;margin-bottom:6px;">Target File Size (optional)</label>
+        <div class="target-size-row">
+          <input type="number" id="targetSize" placeholder="e.g. 200" min="1">
+          <select id="targetUnit">
+            <option value="KB">KB</option>
+            <option value="MB">MB</option>
+          </select>
+          <span style="font-size:12px;color:#94a3b8;">Leave empty for auto</span>
+        </div>
+      </div>
+      <div class="setting-group" style="margin-bottom:16px;">
+        <label>Quality Level</label>
+        <div class="quality-slider">
+          <input type="range" id="compressQuality" min="5" max="100" value="75" oninput="document.getElementById('compressQualVal').textContent=this.value+'%'">
+          <span class="quality-val" id="compressQualVal">75%</span>
+        </div>
+      </div>
+      <div class="action-row">
+        <button class="tool-btn" onclick="processCompress()">Compress File</button>
+      </div>
+    </div>
+
+    <!-- CONVERT panel -->
+    <div class="tab-panel" id="panel-convert">
+      <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:14px;">Format Conversion</h3>
+      <div class="settings-row">
+        <div class="setting-group">
+          <label>Current Format</label>
+          <input type="text" id="currentFormat" readonly style="background:#f8fafc;color:#64748b;">
+        </div>
+        <div class="setting-group">
+          <label for="targetFormat">Convert To</label>
+          <select id="targetFormat">
+            <option value="image/jpeg">JPEG (.jpg)</option>
+            <option value="image/png">PNG (.png)</option>
+            <option value="image/webp">WebP (.webp)</option>
+            <option value="image/bmp">BMP (.bmp)</option>
+          </select>
+        </div>
+      </div>
+      <div class="setting-group" style="margin-bottom:16px;">
+        <label>Output Quality</label>
+        <div class="quality-slider">
+          <input type="range" id="convertQuality" min="10" max="100" value="92" oninput="document.getElementById('convertQualVal').textContent=this.value+'%'">
+          <span class="quality-val" id="convertQualVal">92%</span>
+        </div>
+      </div>
+      <div class="action-row">
+        <button class="tool-btn" onclick="processConvert()">Convert Format</button>
+      </div>
+    </div>
+
+    <!-- PRESET panel -->
+    <div class="tab-panel" id="panel-preset">
+      <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:6px;">Country Upload Presets</h3>
+      <p style="font-size:13px;color:#64748b;margin-bottom:14px;">One click to resize and format your photo for a specific country's requirements.</p>
+      <div class="preset-grid" id="presetGrid"></div>
+      <div class="action-row">
+        <button class="tool-btn" id="presetGoBtn" onclick="processPreset()" disabled>Apply Preset</button>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <!-- Preview area -->
+    <div class="preview-area" id="previewArea" style="display:none;">
+      <div class="preview-box">
+        <h4>Original</h4>
+        <img id="previewOriginal" alt="Original">
+        <div class="size-badge" id="originalSize"></div>
+      </div>
+      <div class="preview-box">
+        <h4>Result</h4>
+        <img id="previewResult" alt="Result">
+        <div class="size-badge size-reduced" id="resultSize"></div>
+      </div>
+    </div>
+
+    <!-- Result summary -->
+    <div class="result-summary" id="resultSummary" style="display:none;">
+      <div class="result-stat">
+        <div class="result-stat-val" id="statOriginal">—</div>
+        <div class="result-stat-label">Original Size</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-val" id="statResult">—</div>
+        <div class="result-stat-label">New Size</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-val" id="statReduction">—</div>
+        <div class="result-stat-label">Reduction</div>
+      </div>
+    </div>
+
+    <!-- Download -->
+    <div class="action-row" id="downloadRow" style="display:none;">
+      <button class="tool-btn btn-download" id="downloadBtn" onclick="downloadResult()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download
+      </button>
+      <button class="tool-btn" onclick="clearFile()" style="background:#64748b;">Start Over</button>
+    </div>
+  </div>
+
+  <!-- SEO content -->
+  <div style="margin-top:40px;">
+    <div class="tool-card">
+      <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:12px;">Why Use This Tool?</h2>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin-bottom:12px;">Government portals for passport and visa applications often have strict file size and format requirements. A US passport photo upload needs to be under 240KB in JPEG format. Schengen visa portals may require photos under 500KB. Indian passport applications need specific pixel dimensions.</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin-bottom:12px;">Most free online converters upload your files to their servers — meaning your passport photo, ID scan, or personal documents pass through unknown infrastructure. This tool processes everything inside your browser using the Canvas API. Nothing leaves your device.</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;">Use the country presets to instantly resize and compress your photo to meet exact government specifications. Or use the manual controls for custom dimensions and target file sizes.</p>
+    </div>
+
+    <div class="tool-card" style="margin-top:16px;">
+      <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:12px;">How to Reduce Photo Size to 200KB</h2>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin-bottom:12px;">Many government portals require photos under a specific file size — 200KB, 240KB, or 500KB. Here's how to reduce your photo size without losing quality:</p>
+      <ol style="font-size:14px;color:#475569;line-height:1.8;padding-left:20px;margin-bottom:12px;">
+        <li>Upload your photo using the drop zone above</li>
+        <li>Click the <strong>Compress</strong> tab</li>
+        <li>Enter your target size (e.g. 200 KB)</li>
+        <li>Click "Compress File" — the tool uses binary search to find the best quality at your target size</li>
+        <li>Download the result</li>
+      </ol>
+      <p style="font-size:14px;color:#475569;line-height:1.7;">This works for any target: reduce photo to 100KB, 200KB, 240KB, 500KB, or any custom size. The algorithm preserves maximum quality while hitting your exact file size limit.</p>
+    </div>
+
+    <div class="tool-card" style="margin-top:16px;">
+      <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:12px;">Resize Photo to Passport Size Online</h2>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin-bottom:12px;">Different countries require different passport photo dimensions. Use the <strong>Country Presets</strong> tab to auto-resize to the exact pixel dimensions required:</p>
+      <table style="width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;">
+        <thead>
+          <tr style="background:#f8fafc;"><th style="padding:10px 14px;text-align:left;border-bottom:2px solid #e2e8f0;font-weight:600;color:#374151;">Country</th><th style="padding:10px 14px;text-align:left;border-bottom:2px solid #e2e8f0;font-weight:600;color:#374151;">Photo Size</th><th style="padding:10px 14px;text-align:left;border-bottom:2px solid #e2e8f0;font-weight:600;color:#374151;">Pixels</th><th style="padding:10px 14px;text-align:left;border-bottom:2px solid #e2e8f0;font-weight:600;color:#374151;">Max File Size</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇺🇸 US Passport</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">2×2 inches</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">600×600 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">240 KB</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇺🇸 US Visa (DS-160)</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">2×2 inches</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">600×600 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">240 KB</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇪🇺 Schengen Visa</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">35×45 mm</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">413×531 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">500 KB</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇬🇧 UK Passport</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">35×45 mm</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">600×750 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">10 MB</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇮🇳 India Passport</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">2×2 inches</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">600×600 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">1 MB</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇨🇦 Canada PR</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">50×70 mm</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">420×540 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">4 MB</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇨🇳 China Passport</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">33×48 mm</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">390×567 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">500 KB</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">🇺🇸 DV Lottery</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">2×2 inches</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">600×600 px</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;color:#475569;">240 KB</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:14px;color:#475569;line-height:1.7;">Select your country from the presets and the tool automatically resizes and compresses your photo to meet the exact requirements. No manual calculations needed.</p>
+    </div>
+
+    <div class="tool-card" style="margin-top:16px;">
+      <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:12px;">Convert JPG to PNG, PNG to JPG, WebP to JPG</h2>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin-bottom:12px;">Some government portals only accept JPEG files. Others require PNG. This tool converts between all common image formats:</p>
+      <ul style="font-size:14px;color:#475569;line-height:1.8;padding-left:20px;margin-bottom:12px;">
+        <li><strong>JPG to PNG</strong> — when you need transparency or lossless quality</li>
+        <li><strong>PNG to JPG</strong> — when the portal requires JPEG format (most common for visa applications)</li>
+        <li><strong>WebP to JPG</strong> — when your phone saves photos in WebP but the portal needs JPEG</li>
+        <li><strong>BMP to JPG</strong> — when you have a scanned document in BMP format</li>
+        <li><strong>Any format to WebP</strong> — for smaller file sizes with good quality</li>
+      </ul>
+      <p style="font-size:14px;color:#475569;line-height:1.7;">All conversions happen instantly in your browser. The quality slider lets you control the output — higher quality means larger file size, lower quality means smaller files.</p>
+    </div>
+
+    <div class="tool-card" style="margin-top:16px;">
+      <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:12px;">Common File Size Requirements for Government Uploads</h2>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin-bottom:12px;">Here are the most common file size limits people search for when applying for passports, visas, and government IDs:</p>
+      <ul style="font-size:14px;color:#475569;line-height:1.8;padding-left:20px;margin-bottom:12px;">
+        <li><strong>Reduce photo to 200KB</strong> — common for Indian government portals (Aadhaar, PAN card, passport)</li>
+        <li><strong>Reduce photo to 240KB</strong> — required for US passport and DS-160 visa applications</li>
+        <li><strong>Reduce photo to 500KB</strong> — Schengen visa photo uploads, many EU portals</li>
+        <li><strong>Reduce photo to 100KB</strong> — some university and job application portals</li>
+        <li><strong>Reduce photo to 50KB</strong> — Indian competitive exam applications (SSC, UPSC, banking)</li>
+        <li><strong>Reduce photo to 20KB</strong> — signature file uploads for Indian government forms</li>
+        <li><strong>Resize photo to 600×600 pixels</strong> — US passport and visa photo digital requirement</li>
+        <li><strong>Resize photo to 413×531 pixels</strong> — Schengen/EU biometric photo requirement</li>
+        <li><strong>Resize photo to 350×350 pixels</strong> — Indian passport online application</li>
+      </ul>
+      <p style="font-size:14px;color:#475569;line-height:1.7;">Use the Compress tab with your target size, or pick a Country Preset for automatic handling. The tool uses smart compression to preserve maximum quality at your target file size.</p>
+    </div>
+
+    <div class="tool-card" style="margin-top:16px;">
+      <h2 style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:12px;">Frequently Asked Questions</h2>
+      <div style="margin-bottom:16px;">
+        <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:6px;">Is this tool really free?</h3>
+        <p style="font-size:14px;color:#475569;line-height:1.7;">Yes, completely free with no limits. No sign-up, no watermarks, no hidden fees. Use it as many times as you need.</p>
+      </div>
+      <div style="margin-bottom:16px;">
+        <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:6px;">Are my files uploaded to a server?</h3>
+        <p style="font-size:14px;color:#475569;line-height:1.7;">No. All processing happens inside your browser using the HTML5 Canvas API. Your photos and documents never leave your device. This is safer than online converters that upload your sensitive passport photos and ID scans to their servers.</p>
+      </div>
+      <div style="margin-bottom:16px;">
+        <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:6px;">How do I reduce my photo to exactly 200KB?</h3>
+        <p style="font-size:14px;color:#475569;line-height:1.7;">Click the Compress tab, enter "200" in the target size field, select "KB", and click Compress. The tool uses binary search compression — it tries multiple quality levels to find the highest quality that fits under 200KB.</p>
+      </div>
+      <div style="margin-bottom:16px;">
+        <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:6px;">Can I resize and compress at the same time?</h3>
+        <p style="font-size:14px;color:#475569;line-height:1.7;">Yes — use the Country Presets tab. Each preset resizes to the exact pixel dimensions AND compresses to the maximum file size required by that country's government portal. One click does both.</p>
+      </div>
+      <div style="margin-bottom:16px;">
+        <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:6px;">Does this work on mobile?</h3>
+        <p style="font-size:14px;color:#475569;line-height:1.7;">Yes. The tool is fully responsive and works on iPhone, Android, iPad, and any mobile browser. Take a photo with your phone camera and convert it right there — no app download needed.</p>
+      </div>
+      <div>
+        <h3 style="font-size:15px;font-weight:600;color:#1e293b;margin-bottom:6px;">What image formats are supported?</h3>
+        <p style="font-size:14px;color:#475569;line-height:1.7;">JPG/JPEG, PNG, WebP, BMP, and GIF. You can convert between any of these formats. Most government portals require JPEG — use the Convert tab to switch formats.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="tool-footer">
+  <p>© 2026 WithSwag. All rights reserved.</p>
+  <nav><a href="/">Home</a><a href="/guides/">Guides</a><a href="/tools/">Tools</a><a href="/passport-photo-maker/">Photo Tool</a><a href="/about.html">About</a></nav>
+</footer>
+
+<script>
+// ── Country presets ──
+var PRESETS = [
+  { id:'us-passport', flag:'🇺🇸', name:'US Passport', spec:'2×2 in, 600×600px, <240KB', w:600, h:600, maxKB:240, format:'image/jpeg' },
+  { id:'us-visa', flag:'🇺🇸', name:'US Visa (DS-160)', spec:'600×600px JPEG, <240KB', w:600, h:600, maxKB:240, format:'image/jpeg' },
+  { id:'schengen', flag:'🇪🇺', name:'Schengen Visa', spec:'35×45mm, 413×531px, <500KB', w:413, h:531, maxKB:500, format:'image/jpeg' },
+  { id:'uk-passport', flag:'🇬🇧', name:'UK Passport', spec:'35×45mm, 600×750px, <10MB', w:600, h:750, maxKB:10240, format:'image/jpeg' },
+  { id:'india-passport', flag:'🇮🇳', name:'India Passport', spec:'2×2 in, 600×600px, <1MB', w:600, h:600, maxKB:1024, format:'image/jpeg' },
+  { id:'canada-pr', flag:'🇨🇦', name:'Canada PR', spec:'50×70mm, 420×540px, <4MB', w:420, h:540, maxKB:4096, format:'image/jpeg' },
+  { id:'australia', flag:'🇦🇺', name:'Australia Passport', spec:'35×45mm, 413×531px, <2MB', w:413, h:531, maxKB:2048, format:'image/jpeg' },
+  { id:'germany', flag:'🇩🇪', name:'Germany Passport', spec:'35×45mm, 413×531px, <500KB', w:413, h:531, maxKB:500, format:'image/jpeg' },
+  { id:'france', flag:'🇫🇷', name:'France Passport', spec:'35×45mm, 413×531px, <500KB', w:413, h:531, maxKB:500, format:'image/jpeg' },
+  { id:'china', flag:'🇨🇳', name:'China Passport', spec:'33×48mm, 390×567px, <500KB', w:390, h:567, maxKB:500, format:'image/jpeg' },
+  { id:'japan', flag:'🇯🇵', name:'Japan Passport', spec:'35×45mm, 413×531px, <500KB', w:413, h:531, maxKB:500, format:'image/jpeg' },
+  { id:'dv-lottery', flag:'🇺🇸', name:'DV Lottery', spec:'600×600px JPEG, 54–240KB', w:600, h:600, maxKB:240, format:'image/jpeg' },
+];
+
+var selectedPreset = null;
+var originalFile = null;
+var originalImg = null;
+var resultBlob = null;
+var resultFilename = '';
+
+// ── Init presets ──
+(function() {
+  var grid = document.getElementById('presetGrid');
+  PRESETS.forEach(function(p) {
+    var btn = document.createElement('button');
+    btn.className = 'preset-btn';
+    btn.setAttribute('data-preset', p.id);
+    btn.innerHTML = '<span class="preset-flag">' + p.flag + '</span><div class="preset-info"><div class="preset-name">' + p.name + '</div><div class="preset-spec">' + p.spec + '</div></div>';
+    btn.onclick = function() {
+      document.querySelectorAll('.preset-btn').forEach(function(b) { b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      selectedPreset = p;
+      document.getElementById('presetGoBtn').disabled = false;
+    };
+    grid.appendChild(btn);
+  });
+})();
+
+// ── Tab switching ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.toggle('active', b.getAttribute('data-tab') === tab); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.toggle('active', p.id === 'panel-' + tab); });
+}
+
+// ── Drop zone ──
+var dropZone = document.getElementById('dropZone');
+var fileInput = document.getElementById('fileInput');
+
+dropZone.addEventListener('click', function() { fileInput.click(); });
+dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', function() { dropZone.classList.remove('dragover'); });
+dropZone.addEventListener('drop', function(e) {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', function() { if (fileInput.files.length) handleFile(fileInput.files[0]); });
+
+function handleFile(file) {
+  if (!file.type.startsWith('image/')) { alert('Please select an image file (JPG, PNG, WebP, BMP, GIF).'); return; }
+  if (file.size > 50 * 1024 * 1024) { alert('File too large. Maximum 50MB.'); return; }
+  originalFile = file;
+  // Load image
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      originalImg = img;
+      showFileInfo(file, img);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function showFileInfo(file, img) {
+  document.getElementById('dropZone').style.display = 'none';
+  var info = document.getElementById('fileInfo');
+  info.style.display = 'flex';
+  document.getElementById('fileName').textContent = file.name;
+  document.getElementById('fileMeta').textContent = img.width + '×' + img.height + 'px · ' + formatSize(file.size) + ' · ' + file.type.split('/')[1].toUpperCase();
+  document.getElementById('currentFormat').value = file.type.split('/')[1].toUpperCase();
+  // Pre-fill resize fields
+  document.getElementById('resizeWidth').value = img.width;
+  document.getElementById('resizeHeight').value = img.height;
+  // Set original preview
+  document.getElementById('previewOriginal').src = URL.createObjectURL(file);
+}
+
+function clearFile() {
+  originalFile = null;
+  originalImg = null;
+  resultBlob = null;
+  fileInput.value = '';
+  document.getElementById('dropZone').style.display = '';
+  document.getElementById('fileInfo').style.display = 'none';
+  document.getElementById('previewArea').style.display = 'none';
+  document.getElementById('resultSummary').style.display = 'none';
+  document.getElementById('downloadRow').style.display = 'none';
+  document.getElementById('progressBar').classList.remove('active');
+}
+
+// ── Aspect ratio lock ──
+(function() {
+  var wInput = document.getElementById('resizeWidth');
+  var hInput = document.getElementById('resizeHeight');
+  var lock = document.getElementById('lockAspect');
+  wInput.addEventListener('input', function() {
+    if (lock.checked && originalImg) {
+      var ratio = originalImg.height / originalImg.width;
+      hInput.value = Math.round(wInput.value * ratio);
+    }
+  });
+  hInput.addEventListener('input', function() {
+    if (lock.checked && originalImg) {
+      var ratio = originalImg.width / originalImg.height;
+      wInput.value = Math.round(hInput.value * ratio);
+    }
+  });
+})();
+
+// ── Processing functions ──
+function processResize() {
+  if (!originalFile) { alert('Please select a file first.'); return; }
+  var w = parseInt(document.getElementById('resizeWidth').value);
+  var h = parseInt(document.getElementById('resizeHeight').value);
+  if (!w || !h || w < 1 || h < 1) { alert('Please enter valid dimensions.'); return; }
+  var quality = parseInt(document.getElementById('resizeQuality').value) / 100;
+  showProgress();
+  setTimeout(function() {
+    var canvas = resizeImage(originalImg, w, h);
+    canvasToBlob(canvas, originalFile.type, quality, function(blob) {
+      showResult(blob, getResizedName(originalFile.name, w, h));
+    });
+  }, 100);
+}
+
+function processCompress() {
+  if (!originalFile) { alert('Please select a file first.'); return; }
+  var targetKB = parseInt(document.getElementById('targetSize').value);
+  var targetUnit = document.getElementById('targetUnit').value;
+  var quality = parseInt(document.getElementById('compressQuality').value) / 100;
+  showProgress();
+  setTimeout(function() {
+    if (targetKB && targetKB > 0) {
+      var targetBytes = targetUnit === 'MB' ? targetKB * 1024 * 1024 : targetKB * 1024;
+      compressToSize(originalImg, originalFile.type, targetBytes, function(blob) {
+        showResult(blob, getCompressedName(originalFile.name));
+      });
+    } else {
+      var canvas = resizeImage(originalImg, originalImg.width, originalImg.height);
+      canvasToBlob(canvas, originalFile.type, quality, function(blob) {
+        showResult(blob, getCompressedName(originalFile.name));
+      });
+    }
+  }, 100);
+}
+
+function processConvert() {
+  if (!originalFile) { alert('Please select a file first.'); return; }
+  var targetFormat = document.getElementById('targetFormat').value;
+  var quality = parseInt(document.getElementById('convertQuality').value) / 100;
+  showProgress();
+  setTimeout(function() {
+    var canvas = resizeImage(originalImg, originalImg.width, originalImg.height);
+    canvasToBlob(canvas, targetFormat, quality, function(blob) {
+      var ext = targetFormat.split('/')[1];
+      if (ext === 'jpeg') ext = 'jpg';
+      var name = originalFile.name.replace(/\.[^.]+$/, '') + '.' + ext;
+      showResult(blob, name);
+    });
+  }, 100);
+}
+
+function processPreset() {
+  if (!originalFile || !selectedPreset) { alert('Please select a file and a preset.'); return; }
+  var p = selectedPreset;
+  showProgress();
+  setTimeout(function() {
+    if (p.maxKB < 10240) {
+      // Resize then compress to target
+      var canvas = resizeImage(originalImg, p.w, p.h);
+      compressCanvasToSize(canvas, p.format, p.maxKB * 1024, function(blob) {
+        var ext = p.format.split('/')[1];
+        if (ext === 'jpeg') ext = 'jpg';
+        var name = originalFile.name.replace(/\.[^.]+$/, '') + '-' + p.id + '.' + ext;
+        showResult(blob, name);
+      });
+    } else {
+      var canvas = resizeImage(originalImg, p.w, p.h);
+      canvasToBlob(canvas, p.format, 0.92, function(blob) {
+        var ext = p.format.split('/')[1];
+        if (ext === 'jpeg') ext = 'jpg';
+        var name = originalFile.name.replace(/\.[^.]+$/, '') + '-' + p.id + '.' + ext;
+        showResult(blob, name);
+      });
+    }
+  }, 100);
+}
+
+// ── Canvas helpers ──
+function resizeImage(img, w, h) {
+  var canvas = document.createElement('canvas');
+  canvas.width = w;
+  canvas.height = h;
+  var ctx = canvas.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, w, h);
+  return canvas;
+}
+
+function canvasToBlob(canvas, type, quality, cb) {
+  canvas.toBlob(function(blob) { cb(blob); }, type, quality);
+}
+
+function compressToSize(img, type, targetBytes, cb) {
+  var canvas = resizeImage(img, img.width, img.height);
+  compressCanvasToSize(canvas, type, targetBytes, cb);
+}
+
+function compressCanvasToSize(canvas, type, targetBytes, cb) {
+  var lo = 0.01, hi = 1.0, best = null, attempts = 0, maxAttempts = 15;
+  function tryQuality() {
+    var mid = (lo + hi) / 2;
+    canvas.toBlob(function(blob) {
+      attempts++;
+      if (blob.size <= targetBytes) {
+        best = blob;
+        lo = mid;
+      } else {
+        hi = mid;
+      }
+      if (attempts >= maxAttempts || (hi - lo) < 0.01) {
+        if (!best) {
+          // Even lowest quality is too big — try scaling down
+          var scale = Math.sqrt(targetBytes / blob.size) * 0.9;
+          var newW = Math.round(canvas.width * scale);
+          var newH = Math.round(canvas.height * scale);
+          var smaller = resizeImage(originalImg, newW, newH);
+          smaller.toBlob(function(b) { cb(b); }, type, 0.7);
+        } else {
+          cb(best);
+        }
+      } else {
+        tryQuality();
+      }
+    }, type, mid);
+  }
+  tryQuality();
+}
+
+// ── UI helpers ──
+function showProgress() {
+  var bar = document.getElementById('progressBar');
+  var fill = document.getElementById('progressFill');
+  bar.classList.add('active');
+  fill.style.width = '0%';
+  var w = 0;
+  var interval = setInterval(function() {
+    w += Math.random() * 15 + 5;
+    if (w > 90) w = 90;
+    fill.style.width = w + '%';
+    if (w >= 90) clearInterval(interval);
+  }, 100);
+  bar._interval = interval;
+}
+
+function showResult(blob, filename) {
+  clearInterval(document.getElementById('progressBar')._interval);
+  document.getElementById('progressFill').style.width = '100%';
+  setTimeout(function() { document.getElementById('progressBar').classList.remove('active'); }, 500);
+
+  resultBlob = blob;
+  resultFilename = filename;
+
+  // Preview
+  document.getElementById('previewResult').src = URL.createObjectURL(blob);
+  document.getElementById('previewArea').style.display = '';
+  document.getElementById('originalSize').textContent = formatSize(originalFile.size);
+  document.getElementById('resultSize').textContent = formatSize(blob.size);
+
+  // Stats
+  document.getElementById('resultSummary').style.display = '';
+  document.getElementById('statOriginal').textContent = formatSize(originalFile.size);
+  document.getElementById('statResult').textContent = formatSize(blob.size);
+  var reduction = ((1 - blob.size / originalFile.size) * 100);
+  document.getElementById('statReduction').textContent = (reduction > 0 ? '-' : '+') + Math.abs(reduction).toFixed(1) + '%';
+
+  // Download
+  document.getElementById('downloadRow').style.display = '';
+}
+
+function downloadResult() {
+  if (!resultBlob) return;
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(resultBlob);
+  a.download = resultFilename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+function getResizedName(name, w, h) {
+  return name.replace(/\.[^.]+$/, '') + '-' + w + 'x' + h + name.match(/\.[^.]+$/)[0];
+}
+
+function getCompressedName(name) {
+  return name.replace(/\.[^.]+$/, '') + '-compressed' + name.match(/\.[^.]+$/)[0];
+}
+</script>
+</body>
+</html>
