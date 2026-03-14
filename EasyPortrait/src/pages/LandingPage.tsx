@@ -191,8 +191,8 @@ export const LandingPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 dark:bg-slate-900 dark:from-slate-900 dark:to-slate-900">
       <AppSwitcher />
 
-      {/* Right-side red ribbons */}
-      <div className="fixed right-0 top-1/3 z-40 hidden lg:flex flex-col gap-2">
+      {/* Left-side red ribbons */}
+      <div className="fixed left-0 top-1/3 z-40 hidden lg:flex flex-col gap-2">
         {[
           'Instant Passport Photo',
           '50+ Countries Supported',
@@ -202,15 +202,57 @@ export const LandingPage: React.FC = () => {
         ].map((text, i) => (
           <div
             key={i}
-            className="relative bg-red-600 text-white text-xs font-semibold px-4 py-2 pr-3 pl-5 shadow-lg"
+            className="relative bg-red-600 text-white text-xs font-semibold px-4 py-2 pl-3 pr-5 shadow-lg"
             style={{
-              clipPath: 'polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%)',
+              clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%)',
             }}
           >
             {text}
           </div>
         ))}
       </div>
+
+      {/* Right-side affiliate sidebar (desktop only) */}
+      <aside
+        className="fixed top-[120px] right-4 z-40 hidden xl:flex flex-col gap-3.5"
+        style={{ width: '200px' }}
+        aria-label="Recommended services"
+      >
+        <a
+          href="https://safetywing.com/?referenceID=26486258&utm_source=26486258&utm_medium=Ambassador"
+          target="_blank"
+          rel="noopener sponsored"
+          className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all no-underline"
+        >
+          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-green-100 text-green-800 mb-2">Recommended</span>
+          <div className="text-[28px] mb-1.5">🛡️</div>
+          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">SafetyWing Travel Insurance</div>
+          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">From $45/month. Meets Schengen €30K requirement.</div>
+          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-green-600">Get a Quote →</span>
+        </a>
+        <a
+          href="https://www.jdoqocy.com/click-101699316-15029505"
+          target="_blank"
+          rel="noopener sponsored"
+          className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all no-underline"
+        >
+          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-amber-100 text-amber-800 mb-2">Travel</span>
+          <div className="text-[28px] mb-1.5">✈️</div>
+          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">Book Flights on Expedia</div>
+          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">Compare prices across airlines. Find the best deals.</div>
+          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-orange-600">Search Flights →</span>
+        </a>
+        <a
+          href="/guides/best-passport-photo-printers/"
+          className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all no-underline"
+        >
+          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 mb-2">Guide</span>
+          <div className="text-[28px] mb-1.5">🖨️</div>
+          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">Best Passport Photo Printers</div>
+          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">Print at home for under $0.25 per set.</div>
+          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-indigo-600">Read Guide →</span>
+        </a>
+      </aside>
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 dark:bg-slate-900/80 dark:border-slate-700">
