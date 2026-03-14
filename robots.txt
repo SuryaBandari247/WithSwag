@@ -1,9 +1,10 @@
 User-agent: *
 Allow: /
-Allow: /portrait/
-Allow: /guides/
-Disallow: /portrait/assets/
-Disallow: /.git/
-Disallow: /_moved-out/
 
 Sitemap: https://withswag.org/sitemap.xml
+
+# Block internal assets
+Disallow: /EasyPortrait/
+Disallow: /_moved-out/
+Disallow: /.kiro/
+Disallow: /.vscode/

@@ -283,6 +283,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://withswag.org/guides/baby-passport-photo/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://withswag.org/guides/passport-photo-sizes/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://withswag.org/guides/japan-passport-photo/</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://withswag.org/tools/</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>weekly</changefreq>
