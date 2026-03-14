@@ -213,44 +213,35 @@ export const LandingPage: React.FC = () => {
       </div>
 
       {/* Right-side affiliate sidebar (desktop only) */}
+      {/* Right-side affiliate sidebar (desktop only) */}
       <aside
         className="fixed top-[120px] right-4 z-40 hidden xl:flex flex-col gap-3.5"
         style={{ width: '200px' }}
-        aria-label="Recommended services"
+        aria-label="Recommended gear"
       >
         <a
-          href="https://safetywing.com/?referenceID=26486258&utm_source=26486258&utm_medium=Ambassador"
+          href="https://www.amazon.com/s?k=phone+tripod+ring+light+passport+photo&tag=withswag-20"
           target="_blank"
           rel="noopener sponsored"
           className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all no-underline"
         >
-          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-green-100 text-green-800 mb-2">Recommended</span>
-          <div className="text-[28px] mb-1.5">🛡️</div>
-          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">SafetyWing Travel Insurance</div>
-          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">From $45/month. Meets Schengen €30K requirement.</div>
-          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-green-600">Get a Quote →</span>
+          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-amber-100 text-amber-800 mb-2">Best Setup</span>
+          <div className="text-[28px] mb-1.5">📷</div>
+          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">Tripod + Ring Light</div>
+          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">Even lighting, steady shot. Perfect for passport photos at home. ~$25</div>
+          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-[#FF9900]">View on Amazon →</span>
         </a>
         <a
-          href="https://www.jdoqocy.com/click-101699316-15029505"
+          href="https://www.amazon.com/Canon-SELPHY-CP1500-Compact-Printer/dp/B0BF6T86WD?tag=withswag-20"
           target="_blank"
           rel="noopener sponsored"
           className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all no-underline"
         >
-          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-amber-100 text-amber-800 mb-2">Travel</span>
-          <div className="text-[28px] mb-1.5">✈️</div>
-          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">Book Flights on Expedia</div>
-          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">Compare prices across airlines. Find the best deals.</div>
-          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-orange-600">Search Flights →</span>
-        </a>
-        <a
-          href="/guides/best-passport-photo-printers/"
-          className="block bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl p-4 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all no-underline"
-        >
-          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 mb-2">Guide</span>
+          <span className="inline-block text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-green-100 text-green-800 mb-2">⭐ Best Printer</span>
           <div className="text-[28px] mb-1.5">🖨️</div>
-          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">Best Passport Photo Printers</div>
-          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">Print at home for under $0.25 per set.</div>
-          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-indigo-600">Read Guide →</span>
+          <div className="text-[13px] font-bold text-gray-900 dark:text-slate-100 leading-tight mb-1">Canon SELPHY CP1500</div>
+          <div className="text-[11px] text-gray-500 dark:text-slate-400 leading-snug mb-2">Photo-lab quality. Prints 4×6 in ~47s. ~$130</div>
+          <span className="inline-block text-[11px] font-semibold px-3.5 py-1.5 rounded-md text-white bg-[#FF9900]">View on Amazon →</span>
         </a>
       </aside>
 
