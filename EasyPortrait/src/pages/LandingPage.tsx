@@ -219,7 +219,7 @@ export const LandingPage: React.FC = () => {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <Camera className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold text-gray-900 dark:text-slate-100">EasyPortrait</span>
+              <span className="text-xl font-bold text-gray-900 dark:text-slate-100">WithSwag</span>
             </div>
             <div className="hidden sm:flex items-center gap-1 text-lg" title="Supports 50+ countries">
               <span>🇺🇸</span><span>🇪🇺</span><span>🇬🇧</span><span>🇮🇳</span><span>🇨🇦</span><span>🇦🇺</span><span>🇨🇳</span><span>🇯🇵</span>
@@ -583,7 +583,7 @@ export const LandingPage: React.FC = () => {
             <Shield className="h-10 w-10 text-green-600 mx-auto mb-4" />
             <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4">Official Compliance Standards</h2>
             <p className="text-gray-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Passport photos are rejected for small mistakes. EasyPortrait helps you meet every requirement.
+              Passport photos are rejected for small mistakes. Our tool helps you meet every requirement.
             </p>
           </div>
 
@@ -859,7 +859,7 @@ export const LandingPage: React.FC = () => {
                 { step: '3', title: 'Position your camera at eye level', desc: 'Hold your phone at arm\'s length or use a tripod. The camera should be level with your eyes, not angled up or down.' },
                 { step: '4', title: 'Keep a neutral expression', desc: 'Look directly at the camera. Keep your mouth closed, eyes open, and face relaxed. No smiling or frowning.' },
                 { step: '5', title: 'Remove glasses and hats', desc: 'Most countries require no eyewear or head coverings (religious exceptions apply). Remove any accessories that obscure your face.' },
-                { step: '6', title: 'Upload to EasyPortrait', desc: 'Our tool handles the rest — crop, resize, background removal, and compliance checks. Download your print-ready photo in seconds.' },
+                { step: '6', title: 'Upload to WithSwag', desc: 'Our tool handles the rest — crop, resize, background removal, and compliance checks. Download your print-ready photo in seconds.' },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 bg-white dark:bg-slate-800 rounded-xl p-4 border border-gray-200 dark:border-slate-700">
                   <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
@@ -880,18 +880,18 @@ export const LandingPage: React.FC = () => {
       <section id="faq" className="bg-white dark:bg-slate-900 py-20 border-t border-gray-100 dark:border-slate-700">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-4 text-center">Frequently Asked Questions</h2>
-          <p className="text-gray-600 dark:text-slate-400 text-center mb-10">Everything you need to know about passport photos and EasyPortrait.</p>
+          <p className="text-gray-600 dark:text-slate-400 text-center mb-10">Everything you need to know about passport photos and WithSwag.</p>
 
           <div className="space-y-3">
             {[
               { q: 'What size is a US passport photo?', a: 'A US passport photo must be 2×2 inches (51×51 mm). The head must be between 1 and 1⅜ inches (25–35 mm) from the bottom of the chin to the top of the head. The background must be plain white.' },
-              { q: 'Can I take my own passport photo at home?', a: 'Yes. Use a smartphone or digital camera with good lighting. Stand in front of a plain white or light-colored wall. Upload your photo to EasyPortrait and we\'ll crop, resize, and replace the background to meet official requirements.' },
-              { q: 'What background color is required for passport photos?', a: 'Most countries require a plain white or off-white background. Some countries like India accept a light-colored background. EasyPortrait\'s AI background removal lets you replace any background with the correct color instantly.' },
-              { q: 'Is EasyPortrait free to use?', a: 'You can upload, crop, and preview your passport photo for free. High-resolution downloads with AI background removal start at €3 for a single photo or €8 for a print-ready collage sheet.' },
+              { q: 'Can I take my own passport photo at home?', a: 'Yes. Use a smartphone or digital camera with good lighting. Stand in front of a plain white or light-colored wall. Upload your photo to WithSwag and we\'ll crop, resize, and replace the background to meet official requirements.' },
+              { q: 'What background color is required for passport photos?', a: 'Most countries require a plain white or off-white background. Some countries like India accept a light-colored background. Our AI background removal lets you replace any background with the correct color instantly.' },
+              { q: 'Is WithSwag free to use?', a: 'You can upload, crop, and preview your passport photo for free. High-resolution downloads with AI background removal start at €3 for a single photo or €8 for a print-ready collage sheet.' },
               { q: 'Are my photos uploaded to a server?', a: 'No. All image processing happens locally in your browser using on-device AI. Your photos are never uploaded to any server. This is a privacy-first tool — your data stays on your device.' },
-              { q: 'What countries does EasyPortrait support?', a: 'We support passport photo standards for 50+ countries including the US, EU, UK, India, Canada, Australia, China, Malaysia, Singapore, Japan, South Korea, Brazil, and many more.' },
+              { q: 'What countries does WithSwag support?', a: 'We support passport photo standards for 50+ countries including the US, EU, UK, India, Canada, Australia, China, Malaysia, Singapore, Japan, South Korea, Brazil, and many more.' },
               { q: 'Can I print the photos at home?', a: 'Yes. Use the collage feature to create a print-ready sheet (A4, 4×6", or 5×7") with multiple photos. Print on glossy photo paper at 300 DPI for best results.' },
-              { q: 'How is this different from a photo studio?', a: 'Photo studios charge $10–$20 per set. EasyPortrait gives you the same compliant result for €3 (single) or €8 (collage), and you can retake as many times as you want from home.' },
+              { q: 'How is this different from a photo studio?', a: 'Photo studios charge $10–$20 per set. WithSwag gives you the same compliant result for €3 (single) or €8 (collage), and you can retake as many times as you want from home.' },
             ].map((item, i) => (
               <FaqItem
                 key={i}
@@ -908,7 +908,7 @@ export const LandingPage: React.FC = () => {
       {/* Trust Signals */}
       <section className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-900 dark:to-slate-900 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-12 text-center">Why Choose EasyPortrait</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-12 text-center">Why Choose WithSwag</h2>
 
           <div className="grid md:grid-cols-4 gap-6">
             {[
@@ -963,13 +963,13 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 mb-8">
             <Camera className="h-6 w-6 text-primary" />
-            <span className="text-lg font-bold text-white">EasyPortrait</span>
+            <span className="text-lg font-bold text-white">WithSwag</span>
           </div>
           <p className="text-sm mb-4">
             Create professional passport photos that meet international standards.
           </p>
           <p className="text-xs text-gray-500">
-            © {new Date().getFullYear()} EasyPortrait. All rights reserved.
+            © {new Date().getFullYear()} WithSwag. All rights reserved.
           </p>
         </div>
       </footer>

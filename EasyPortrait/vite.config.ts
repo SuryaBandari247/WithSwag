@@ -3,13 +3,13 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/portrait/',
+  base: '/passport-photo-maker/',
   server: {
     port: 5173,
     open: true,
   },
   build: {
-    outDir: '../portrait',
+    outDir: '../passport-photo-maker',
     sourcemap: false,
     rollupOptions: {
       output: {
